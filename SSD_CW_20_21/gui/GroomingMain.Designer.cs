@@ -1,0 +1,118 @@
+﻿namespace SSD_CW_20_21.gui
+{
+    partial class GroomingMain
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnDogs = new System.Windows.Forms.Button();
+            this.btnBooking = new System.Windows.Forms.Button();
+            this.panel2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.vScrollBar1);
+            this.panel2.Location = new System.Drawing.Point(686, 323);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(272, 178);
+            this.panel2.TabIndex = 7;
+            // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Location = new System.Drawing.Point(257, 0);
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(21, 178);
+            this.vScrollBar1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(113, 25);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Grooming";
+            // 
+            // btnDogs
+            // 
+            this.btnDogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDogs.Location = new System.Drawing.Point(12, 119);
+            this.btnDogs.Name = "btnDogs";
+            this.btnDogs.Size = new System.Drawing.Size(162, 80);
+            this.btnDogs.TabIndex = 10;
+            this.btnDogs.Text = "Manage Dogs";
+            this.btnDogs.UseVisualStyleBackColor = true;
+            this.btnDogs.Click += new System.EventHandler(this.btnDogs_Click);
+            // 
+            // btnBooking
+            // 
+            this.btnBooking.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBooking.Location = new System.Drawing.Point(12, 218);
+            this.btnBooking.Name = "btnBooking";
+            this.btnBooking.Size = new System.Drawing.Size(162, 80);
+            this.btnBooking.TabIndex = 12;
+            this.btnBooking.Text = "Manage Bookings";
+            this.btnBooking.UseVisualStyleBackColor = true;
+            this.btnBooking.Click += new System.EventHandler(this.btnBooking_Click);
+            // 
+            // GroomingMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(970, 612);
+            this.Controls.Add(this.btnBooking);
+            this.Controls.Add(this.btnDogs);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel2);
+            this.Name = "GroomingMain";
+            this.Text = "GroomingMain";
+            this.Controls.SetChildIndex(this.panel2, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.btnDogs, 0);
+            this.Controls.SetChildIndex(this.btnBooking, 0);
+            this.panel2.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnDogs;
+        private System.Windows.Forms.Button btnBooking;
+    }
+}

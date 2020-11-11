@@ -1,0 +1,2 @@
+﻿INSERT INTO CUSTOMER(CustomerID, Forename, Surname, Address, Town, Postcode, TelNo, Email, Deleted) VALUES(1, 'Jim', 'Browning', '21 Old Town Road', 'Belfast', 'BT29 0QY', '07845927654', 'jim.browning@outlook.com', 0)
+INSERT INTO DOG(DogID, OwnerID, Name, Breed, Deleted) VALUES(1, 1, 'Sky', 'Husky', 0)
