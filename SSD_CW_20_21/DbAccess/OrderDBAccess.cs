@@ -17,7 +17,7 @@ namespace SSD_CW_20_21.DbAccess
         public Orders getOrderById(int id)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"SELECT * FROM ORDER WHERE OrderID = {id}";
+            Db.Command.CommandText = $"SELECT * FROM ORDERS WHERE OrderID = {id}";
             Db.Reader = Db.Command.ExecuteReader();
             Db.Reader.Read();
             Orders dog = getOrderFromReader(Db.Reader);
@@ -28,7 +28,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool updateOrder(Orders order)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"UPDATE ORDER SET Cancelled = {order.Cancelled}, DogID = {order.DogId}, StaffID = {order.StaffId}, Date = '{order.Date}', Time = '{order.Time}', Paid = {order.Paid} WHERE OrderID = {order.Id}";
+            Db.Command.CommandText = $"UPDATE ORDERS SET Cancelled = {order.Cancelled}, DogID = {order.DogId}, StaffID = {order.StaffId}, Date = '{order.Date}', Time = '{order.Time}', Paid = {order.Paid} WHERE OrderID = {order.Id}";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -44,7 +44,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool insertOrder(Orders order)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"INSERT INTO ORDER (OrderID, DogID, StaffID, Date, Time, Paid, Cancelled) VALUES ({order.Id}, {order.DogId}, {order.StaffId}, '{order.Date}', '{order.Time}', {order.Paid}, {order.Cancelled})";
+            Db.Command.CommandText = $"INSERT INTO ORDERS (OrderID, DogID, StaffID, Date, Time, Paid, Cancelled) VALUES ({order.Id}, {order.DogId}, {order.StaffId}, '{order.Date}', '{order.Time}', {order.Paid}, {order.Cancelled})";
             try
             {
                 Db.Command.ExecuteNonQuery();
