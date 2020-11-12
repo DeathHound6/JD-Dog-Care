@@ -119,7 +119,7 @@
             this.lblDbConn.AutoSize = true;
             this.lblDbConn.BackColor = System.Drawing.Color.Transparent;
             this.lblDbConn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDbConn.ForeColor = System.Drawing.Color.Red;
+            this.lblDbConn.ForeColor = System.Drawing.Color.Green;
             this.lblDbConn.Location = new System.Drawing.Point(9, 17);
             this.lblDbConn.Name = "lblDbConn";
             this.lblDbConn.Size = new System.Drawing.Size(175, 16);

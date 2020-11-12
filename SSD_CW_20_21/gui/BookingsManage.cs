@@ -188,7 +188,6 @@ namespace SSD_CW_20_21.gui
                 serv.OrderID = Convert.ToInt32(lblOrderId.Text.Replace("#", ""));
                 serv.Teeth = checkTeeth.Checked ? 1 : 0;
                 serv.Option = Convert.ToInt32(cboxServices.Text.Replace(" ", "").Split('-')[0]);
-                serviceAccess.insertService(serv);
 
                 Orders order = new Orders();
                 order.Id = serv.OrderID;
@@ -202,6 +201,7 @@ namespace SSD_CW_20_21.gui
                 DialogResult opt = MessageBox.Show("Are you sure these details are correct?", "Add Order?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (opt == DialogResult.Yes)
                 {
+                    if (!serviceAccess.insertService(serv)) MessageBox.Show("Something went wrong wehn adding the service. Please try again in a few minutes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     if (orderAccess.insertOrder(order))
                     {
                         populateListBox();
