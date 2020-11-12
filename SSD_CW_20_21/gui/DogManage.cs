@@ -102,7 +102,7 @@ namespace SSD_CW_20_21.gui
                     }
                     else
                     {
-                        MessageBox.Show("Something went wrong when recorded the dog's details. Please try again in a few minutes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Something went wrong when recording the dog's details. Please try again in a few minutes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace SSD_CW_20_21.gui
 {
@@ -92,6 +93,9 @@ namespace SSD_CW_20_21.gui
                 btnCancel.Enabled = false;
                 btnDelete.Enabled = false;
                 btnUpdate.Enabled = true;
+                checkEars.Enabled = false;
+                checkNails.Enabled = false;
+                checkTeeth.Enabled = false;
 
                 cboxDog.Enabled = false;
                 cboxServices.Enabled = false;
@@ -123,6 +127,9 @@ namespace SSD_CW_20_21.gui
                 btnDelete.Enabled = false;
                 btnCancel.Enabled = true;
                 btnAdd.Enabled = true;
+                checkTeeth.Enabled = true;
+                checkNails.Enabled = true;
+                checkEars.Enabled = true;
 
                 cboxDog.Enabled = true;
                 cboxServices.Enabled = true;
@@ -146,6 +153,9 @@ namespace SSD_CW_20_21.gui
                 btnCancel.Enabled = true;
                 btnDelete.Enabled = true;
                 btnUpdate.Enabled = true;
+                checkTeeth.Enabled = true;
+                checkNails.Enabled = true;
+                checkEars.Enabled = true;
 
                 cboxDog.Enabled = true;
                 cboxServices.Enabled = true;
@@ -188,7 +198,22 @@ namespace SSD_CW_20_21.gui
                 order.Paid = 0;
                 order.Date = $"{dtDateTime.Value.Day}/{dtDateTime.Value.Month}/{dtDateTime.Value.Year}";
                 order.Time = $"{dtDateTime.Value.Hour}:{dtDateTime.Value.Minute}";
-                orderAccess.insertOrder(order);
+
+                DialogResult opt = MessageBox.Show("Are you sure these details are correct?", "Add Order?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (opt == DialogResult.Yes)
+                {
+                    if (orderAccess.insertOrder(order))
+                    {
+                        populateListBox();
+                        changeMode("view");
+                        MessageBox.Show("The order has been recorded successfully", "Order Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Something went wrong when recording the order. Please try again in a few minutes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
             }
         }
 
