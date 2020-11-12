@@ -13,6 +13,17 @@ namespace SSD_CW_20_21.DbAccess
             Db = db;
         }
 
+        public Staff getStaffById(int id)
+        {
+            Db.Command = Db.Connection.CreateCommand();
+            Db.Command.CommandText = $"SELECT * FROM STAFF WHERE StaffID = {id}";
+            Db.Reader = Db.Command.ExecuteReader();
+            Db.Reader.Read();
+            Staff staff = getStaffFromReader(Db.Reader);
+            Db.Reader.Close();
+            return staff;
+        }
+
         public List<Staff> getAllStaff()
         {
             List<Staff> result = new List<Staff>();
@@ -29,7 +40,7 @@ namespace SSD_CW_20_21.DbAccess
 
         private Staff getStaffFromReader(SqlDataReader rdr)
         {
-            return new Staff(rdr.GetInt32(0), rdr.GetString(1), rdr.GetInt32(2));
+            return new Staff(rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2));
         }
     }
 }

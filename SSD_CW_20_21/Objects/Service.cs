@@ -17,6 +17,7 @@
         {
             OrderID = orderID;
             Option = option;
+            Option = option;
             Nails = nails;
             Ears = ears;
         }

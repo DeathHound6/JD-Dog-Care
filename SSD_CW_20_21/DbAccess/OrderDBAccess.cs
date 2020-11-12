@@ -61,7 +61,7 @@ namespace SSD_CW_20_21.DbAccess
         {
             List<Orders> result = new List<Orders>();
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = "SELECT * FROM ORDER";
+            Db.Command.CommandText = "SELECT * FROM ORDERS";
             Db.Reader = Db.Command.ExecuteReader();
             while (Db.Reader.Read())
             {

@@ -4,16 +4,16 @@
     {
         private int id;
         private string name;
-        private int workingHours;
+        private string workingDays;
         private int deleted;
 
         public Staff() { }
 
-        public Staff(int id, string name, int workingHours)
+        public Staff(int id, string name, string workingDays)
         {
             Id = id;
             Name = name;
-            WorkingHours = workingHours;
+            WorkingDays = workingDays;
             Deleted = 0;
         }
 
@@ -29,10 +29,10 @@
             set { name = value; }
         }
 
-        public int WorkingHours
+        public string WorkingDays
         {
-            get { return workingHours; }
-            set { workingHours = value; }
+            get { return workingDays; }
+            set { workingDays = value; }
         }
 
         public int Deleted

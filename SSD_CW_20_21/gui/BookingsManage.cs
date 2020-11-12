@@ -1,9 +1,9 @@
-﻿using System;
+﻿using SSD_CW_20_21.DbAccess;
+using SSD_CW_20_21.Objects;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text.RegularExpressions;
-using SSD_CW_20_21.DbAccess;
-using SSD_CW_20_21.Objects;
 
 namespace SSD_CW_20_21.gui
 {
@@ -13,7 +13,9 @@ namespace SSD_CW_20_21.gui
         private DogDBAccess dogAccess = Globals.dogAccess;
         private StaffDBAccess staffAccess = Globals.staffAccess;
         private ServiceDBAccess serviceAccess = Globals.servAccess;
+        private List<Orders> orders;
         private Orders order;
+        private Service service;
         private string mode = "view";
 
         private string[] services = { "Wash, shampoo, brush", "Wash, shampoo, brush, trim", "Wash, shampoo, brush, full-trim" };
@@ -21,19 +23,20 @@ namespace SSD_CW_20_21.gui
         public BookingsManage() : base()
         {
             InitializeComponent();
-            order = orderAccess.getAllOrders().ToArray()[0];
+            orders = orderAccess.getAllOrders();
+            if (orders.Count > 0) order = orders.ToArray()[0];
+            else order = new Orders(1, 1, 1, $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year}", $"{DateTime.Now.Hour}:{DateTime.Now.Minute}", 0);
 
             Text = "JD Dog Care - Bookings";
-
-            dtDateTime.Value = DateTime.Now;
+            
             populateListBox();
             populateComboBox();
+            changeMode("view");
         }
 
         private void populateListBox()
         {
             DataTable data = new DataTable();
-            List<Orders> orders = orderAccess.getAllOrders();
 
             data.Columns.Add("OrderID");
             data.Columns.Add("Dog");
@@ -85,33 +88,41 @@ namespace SSD_CW_20_21.gui
             {
                 mode = newMode;
 
+                btnAdd.Enabled = true;
+                btnCancel.Enabled = false;
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = true;
+
                 cboxDog.Enabled = false;
                 cboxServices.Enabled = false;
                 cboxStaff.Enabled = false;
                 checkEars.Enabled = false;
                 checkNails.Enabled = false;
                 checkTeeth.Enabled = false;
-                if (order.Cancelled == 1) lblOrderCancelled.Visible = true;
-                else lblOrderCancelled.Visible = false;
+                lblOrderCancelled.Visible = order.Cancelled == 0 ? false : true;
 
                 lblOrderId.Text = $"#{order.Id}";
                 cboxDog.Text = $"{dogAccess.getDogById(order.DogId).Id} - {dogAccess.getDogById(order.DogId).Name}";
                 int servIndex = serviceAccess.getAllServices().FindIndex(e => e.OrderID == order.Id);
+                if (servIndex == -1) servIndex = 0;
                 cboxServices.Text = $"{servIndex + 1} - {services[servIndex]}";
                 cboxStaff.Text = $"{order.StaffId} - {staffAccess.getAllStaff().ToArray()[order.StaffId - 1].Name}";
                 dtDateTime.Value = DateTime.Now;
 
-                Service serv = serviceAccess.getAllServices().Find(e => e.OrderID == order.Id);
-                if (serv.Nails == 1) checkNails.Checked = true;
-                else checkNails.Checked = false;
-                if (serv.Teeth == 1) checkTeeth.Checked = true;
-                else checkTeeth.Checked = false;
-                if (serv.Ears == 1) checkEars.Checked = true;
-                else checkEars.Checked = false;
+                service = serviceAccess.getAllServices().Find(e => e.OrderID == order.Id);
+                if (service == null) service = new Service(order.Id, Convert.ToInt32(cboxServices.Text.Replace(" ", "").Split('-')[0]), 0, 0, 0);
+                checkEars.Checked = service.Ears == 0 ? false : true;
+                checkNails.Checked = service.Nails == 0 ? false : true;
+                checkTeeth.Checked = service.Teeth == 0 ? false : true;
             }
             else if (newMode == "add")
             {
                 mode = newMode;
+
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+                btnCancel.Enabled = true;
+                btnAdd.Enabled = true;
 
                 cboxDog.Enabled = true;
                 cboxServices.Enabled = true;
@@ -130,6 +141,31 @@ namespace SSD_CW_20_21.gui
             else if(newMode == "edit")
             {
                 mode = newMode;
+
+                btnAdd.Enabled = false;
+                btnCancel.Enabled = true;
+                btnDelete.Enabled = true;
+                btnUpdate.Enabled = true;
+
+                cboxDog.Enabled = true;
+                cboxServices.Enabled = true;
+                cboxStaff.Enabled = true;
+                lblOrderCancelled.Visible = order.Cancelled == 0 ? false : true;
+
+                checkEars.Checked = service.Ears == 0 ? false : true;
+                checkNails.Checked = service.Nails == 0 ? false : true;
+                checkTeeth.Checked = service.Teeth == 0 ? false : true;
+
+                int servIndex = serviceAccess.getAllServices().FindIndex(e => e.OrderID == order.Id);
+                if (servIndex == -1) servIndex = 0;
+                cboxDog.Text = $"{order.DogId} - {dogAccess.getDogById(order.DogId).Name}";
+                cboxServices.Text = $"{servIndex + 1} - {services[servIndex]}";
+                cboxStaff.Text = $"{order.StaffId} - {staffAccess.getStaffById(order.StaffId).Name}";
+                lblOrderId.Text = $"#{order.Id}";
+
+                string[] dayArr = order.Date.Split('/');
+                string[] timeArr = order.Time.Split(':');
+                dtDateTime.Value = new DateTime(Convert.ToInt32(dayArr[2]), Convert.ToInt32(dayArr[1]), Convert.ToInt32(dayArr[0]), Convert.ToInt32(timeArr[0]), Convert.ToInt32(timeArr[1]), 00);
             }
         }
 
