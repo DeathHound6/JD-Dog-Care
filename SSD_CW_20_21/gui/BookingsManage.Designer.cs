@@ -56,6 +56,8 @@
             this.lblOrderCancelled = new System.Windows.Forms.Label();
             this.txtStaff = new System.Windows.Forms.TextBox();
             this.btnSelectStaff = new System.Windows.Forms.Button();
+            this.checkDelDog = new System.Windows.Forms.CheckBox();
+            this.dtpDateTime = new System.Windows.Forms.DateTimePicker();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDateTime)).BeginInit();
@@ -65,6 +67,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Controls.Add(this.checkDelDog);
             this.panel2.Controls.Add(this.btnSelectStaff);
             this.panel2.Controls.Add(this.txtStaff);
             this.panel2.Controls.Add(this.btnSelectTime);
@@ -195,7 +198,7 @@
             this.cboxDog.FormattingEnabled = true;
             this.cboxDog.Location = new System.Drawing.Point(124, 12);
             this.cboxDog.Name = "cboxDog";
-            this.cboxDog.Size = new System.Drawing.Size(278, 28);
+            this.cboxDog.Size = new System.Drawing.Size(210, 28);
             this.cboxDog.TabIndex = 27;
             // 
             // label3
@@ -288,9 +291,9 @@
             // 
             this.btnDelete.Enabled = false;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(319, 3);
+            this.btnDelete.Location = new System.Drawing.Point(304, 3);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(148, 49);
+            this.btnDelete.Size = new System.Drawing.Size(136, 49);
             this.btnDelete.TabIndex = 18;
             this.btnDelete.Text = "Cancel Order";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -302,7 +305,7 @@
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.Location = new System.Drawing.Point(157, 3);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(156, 49);
+            this.btnUpdate.Size = new System.Drawing.Size(141, 49);
             this.btnUpdate.TabIndex = 17;
             this.btnUpdate.Text = "Edit Order";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -333,6 +336,7 @@
             this.btnSelectDate.TabIndex = 41;
             this.btnSelectDate.Text = "Select";
             this.btnSelectDate.UseVisualStyleBackColor = true;
+            this.btnSelectDate.Click += new System.EventHandler(this.btnSelectDate_Click);
             // 
             // btnSelectTime
             // 
@@ -374,11 +378,33 @@
             this.btnSelectStaff.Text = "Select";
             this.btnSelectStaff.UseVisualStyleBackColor = true;
             // 
+            // checkDelDog
+            // 
+            this.checkDelDog.AutoSize = true;
+            this.checkDelDog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkDelDog.Location = new System.Drawing.Point(340, 19);
+            this.checkDelDog.Name = "checkDelDog";
+            this.checkDelDog.Size = new System.Drawing.Size(100, 17);
+            this.checkDelDog.TabIndex = 45;
+            this.checkDelDog.Text = "Hide Deleted";
+            this.checkDelDog.UseVisualStyleBackColor = true;
+            // 
+            // dtpDateTime
+            // 
+            this.dtpDateTime.Location = new System.Drawing.Point(543, 507);
+            this.dtpDateTime.MaxDate = new System.DateTime(2021, 12, 31, 0, 0, 0, 0);
+            this.dtpDateTime.MinDate = new System.DateTime(2020, 11, 13, 0, 0, 0, 0);
+            this.dtpDateTime.Name = "dtpDateTime";
+            this.dtpDateTime.Size = new System.Drawing.Size(200, 20);
+            this.dtpDateTime.TabIndex = 25;
+            this.dtpDateTime.Visible = false;
+            // 
             // BookingsManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(970, 612);
+            this.Controls.Add(this.dtpDateTime);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel4);
@@ -391,6 +417,7 @@
             this.Controls.SetChildIndex(this.panel4, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.panel3, 0);
+            this.Controls.SetChildIndex(this.dtpDateTime, 0);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -431,5 +458,7 @@
         private System.Windows.Forms.Label lblOrderCancelled;
         private System.Windows.Forms.Button btnSelectStaff;
         private System.Windows.Forms.TextBox txtStaff;
+        private System.Windows.Forms.CheckBox checkDelDog;
+        private System.Windows.Forms.DateTimePicker dtpDateTime;
     }
 }

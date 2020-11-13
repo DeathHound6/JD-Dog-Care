@@ -6,6 +6,8 @@ using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Drawing;
+using Nager.Date;
+using System.Linq;
 
 namespace SSD_CW_20_21.gui
 {
@@ -15,6 +17,7 @@ namespace SSD_CW_20_21.gui
         private OrderDBAccess orderAccess = Globals.orderAccess;
         private DogDBAccess dogAccess = Globals.dogAccess;
         private StaffDBAccess staffAccess = Globals.staffAccess;
+        private List<Dog> dogs;
         private List<Orders> orders;
         private Orders order;
         private string mode = "view";
@@ -42,7 +45,17 @@ namespace SSD_CW_20_21.gui
         #region Custom Methods
         private void populateListBoxes()
         {
+            dogs = dogAccess.getAllDogs();
+            if (checkDelDog.Checked) dogs = dogs.FindAll(e => e.Deleted == 0);
+            foreach (Dog dog in dogs)
+            {
+                cboxDog.Items.Add($"{dog.Id} - {dog.Name}");
+            }
 
+            for (int i = 0; i < services.Length; i++)
+            {
+                cboxServices.Items.Add($"{i + 1} - {services[i]}");
+            }
         }
 
         private void populateComboBox()
@@ -58,12 +71,6 @@ namespace SSD_CW_20_21.gui
             foreach(Dog dog in dogs)
             {
                 cboxDog.Items.Add($"{dog.Id} - {dog.Name}");
-            }
-
-            List<Staff> staffs = staffAccess.getAllStaff();
-            foreach(Staff staff in staffs)
-            {
-                cboxStaff.Items.Add($"{staff.Id} - {staff.Name}");
             }
         }
 
@@ -82,7 +89,6 @@ namespace SSD_CW_20_21.gui
 
                 cboxDog.Enabled = false;
                 cboxServices.Enabled = false;
-                cboxStaff.Enabled = false;
                 checkEars.Enabled = false;
                 checkNails.Enabled = false;
                 checkTeeth.Enabled = false;
@@ -91,7 +97,6 @@ namespace SSD_CW_20_21.gui
                 cboxDog.Text = $"{dogAccess.getDogById(order.DogId).Id} - {dogAccess.getDogById(order.DogId).Name}";
 
                 cboxServices.Text = $"{order.ServiceOption} - {services[order.ServiceOption - 1]}";
-                cboxStaff.Text = $"{order.StaffId} - {staffAccess.getAllStaff().ToArray()[order.StaffId - 1].Name}";
 
                 checkEars.Checked = order.Ears == 0 ? false : true;
                 checkNails.Checked = order.Nails == 0 ? false : true;
@@ -110,7 +115,6 @@ namespace SSD_CW_20_21.gui
 
                 cboxDog.Enabled = true;
                 cboxServices.Enabled = true;
-                cboxStaff.Enabled = true;
                 checkEars.Checked = false;
                 checkNails.Checked = false;
                 checkTeeth.Checked = false;
@@ -118,7 +122,6 @@ namespace SSD_CW_20_21.gui
 
                 cboxDog.Text = "";
                 cboxServices.Text = "";
-                cboxStaff.Text = "";
             }
             else if (newMode == "edit")
             {
@@ -133,7 +136,6 @@ namespace SSD_CW_20_21.gui
 
                 cboxDog.Enabled = true;
                 cboxServices.Enabled = true;
-                cboxStaff.Enabled = true;
                 lblOrderCancelled.Visible = order.Cancelled == 0 ? false : true;
 
                 checkEars.Checked = order.Ears == 0 ? false : true;
@@ -142,7 +144,6 @@ namespace SSD_CW_20_21.gui
 
                 cboxDog.Text = $"{order.DogId} - {dogAccess.getDogById(order.DogId).Name}";
                 cboxServices.Text = $"{order.ServiceOption} - {services[order.ServiceOption - 1]}";
-                cboxStaff.Text = $"{order.StaffId} - {staffAccess.getStaffById(order.StaffId).Name}";
             }
         }
 
@@ -155,7 +156,9 @@ namespace SSD_CW_20_21.gui
         {
             if (type == "time")
             {
-
+                dgvDateTime.ColumnCount = 2;
+                dgvDateTime.Columns[0].Name = "Time";
+                dgvDateTime.Columns[1].Name = "Availabilty";
             }
             else if (type == "date")
             {
@@ -163,11 +166,51 @@ namespace SSD_CW_20_21.gui
                 dgvDateTime.Columns[0].Name = "Date";
                 dgvDateTime.Columns[1].Name = "Availabilty";
 
+                DateTime date = dtpDateTime.Value.Date;
+                DateTime min = dtpDateTime.MinDate;
+                DateTime max = dtpDateTime.MaxDate;
 
+                string[] rows = new string[2];
+
+                while (min < max)
+                {
+                    rows[0] = date.ToString("dd/MM/yyyy");
+                    if (DateSystem.IsPublicHoliday(date, CountryCode.GB)) rows[1] = "No - Public Holiday";
+                    if (DateSystem.IsWeekend(date, CountryCode.GB)) rows[1] = "No - Weekend";
+                    else
+                    {
+                        foreach (Orders order in orders)
+                        {
+                            if (date.ToString("dd/MM/yyyy") == order.Date && getIdFromString(cboxDog.Text) == order.DogId)
+                            {
+                                rows[1] = $"No - {dogAccess.getDogById(order.DogId).Name} is already booked in for this day";
+                                break;
+                            }
+                            else rows[1] = "Yes";
+                        }
+                    }
+                    dgvDateTime.Rows.Add(rows);
+                    date = date.AddDays(1);
+                    min = min.AddDays(1);
+                    foreach (DataGridViewRow row in dgvDateTime.Rows)
+                    {
+                        string rowStr = row.Cells[1].Value == null ? "" : row.Cells[1].Value.ToString();
+                        if (rowStr.Contains("No"))
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Red;
+                        }
+                        else
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Green;
+                        }
+                    }
+                }
             }
             else if (type == "staff")
             {
-
+                dgvDateTime.ColumnCount = 2;
+                dgvDateTime.Columns[0].Name = "Staff Member";
+                dgvDateTime.Columns[1].Name = "Availabilty";
             }
             else
             {
@@ -194,7 +237,6 @@ namespace SSD_CW_20_21.gui
             {
                 Orders order = new Orders();
                 order.DogId = Convert.ToInt32(cboxDog.Text.Replace(" ", "").Split('-')[0]);
-                order.StaffId = Convert.ToInt32(cboxStaff.Text.Replace(" ", "").Split('-')[0]);
                 order.Cancelled = 0;
                 order.ServiceOption = Convert.ToInt32(cboxServices.Text.Replace(" ", "").Split('-')[0]);
                 order.Paid = checkPaid.Checked ? 1 : 0;
@@ -247,5 +289,11 @@ namespace SSD_CW_20_21.gui
             }
         }
         #endregion
+
+        private void btnSelectDate_Click(object sender, EventArgs e)
+        {
+            type = "date";
+            populateDataGrid();
+        }
     }
 }
