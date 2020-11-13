@@ -1,37 +1,43 @@
-﻿namespace SSD_CW_20_21.Objects
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SSD_CW_20_21.Objects
 {
     class Service
     {
-        private int orderID;
-        private int option;
+        private int serviceID;
+        private int serviceOption;
+        private int nails;
         private int teeth;
         private int ears;
-        private int nails;
 
         public Service()
         {
 
         }
 
-        public Service(int orderID, int option, int nails, int ears, int teeth)
+        public Service(int id, int option, int nails, int teeth, int ears)
         {
-            OrderID = orderID;
-            Option = option;
-            Option = option;
+            ServiceID = id;
+            ServiceOption = option;
             Nails = nails;
+            Teeth = teeth;
             Ears = ears;
         }
 
-        public int OrderID
+        public int ServiceID
         {
-            get { return orderID; }
-            set { orderID = value; }
+            get { return serviceID; }
+            set { serviceID = value; }
         }
 
-        public int Option
+        public int ServiceOption
         {
-            get { return option; }
-            set { option = value; }
+            get { return serviceOption; }
+            set { serviceOption = value; }
         }
 
         public int Nails

@@ -24,7 +24,6 @@ namespace SSD_CW_20_21.gui
             showDbConn();
             if (DB.Connected)
             {
-                Globals.initDBAccess();
                 MessageBox.Show("The database successfully connected", "Connection Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 lastForm = currentForm;
                 new GroomingMain().Show();

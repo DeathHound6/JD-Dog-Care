@@ -28,7 +28,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool updateOrder(Orders order)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"UPDATE ORDERS SET Cancelled = {order.Cancelled}, DogID = {order.DogId}, StaffID = {order.StaffId}, Date = '{order.Date}', Time = '{order.Time}', Paid = {order.Paid} WHERE OrderID = {order.Id}";
+            Db.Command.CommandText = $"UPDATE ORDERS SET Cancelled = {order.Cancelled}, DogID = {order.DogId}, StaffID = {order.StaffId}, Date = '{order.Date}', StartTime = '{order.StartTime}', EndTime = '{order.EndTime}', Paid = {order.Paid} WHERE OrderID = {order.Id}";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -43,9 +43,8 @@ namespace SSD_CW_20_21.DbAccess
 
         public bool insertOrder(Orders order)
         {
-            // method is failing
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"INSERT INTO ORDERS (OrderID, DogID, StaffID, Date, Time, Paid, Cancelled) VALUES ({order.Id}, {order.DogId}, {order.StaffId}, '{order.Date}', '{order.Time}', {order.Paid}, {order.Cancelled})";
+            Db.Command.CommandText = $"INSERT INTO ORDERS (OrderID, DogID, StaffID, Date, StartTime, EndTime, Paid, Cancelled) VALUES ({order.Id}, {order.DogId}, {order.StaffId}, '{order.Date}', '{order.StartTime}', '{order.EndTime}', {order.Paid}, {order.Cancelled})";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -74,7 +73,7 @@ namespace SSD_CW_20_21.DbAccess
 
         private Orders getOrderFromReader(SqlDataReader rdr)
         {
-            return new Orders(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetInt32(2), rdr.GetString(4), rdr.GetString(5), rdr.GetInt32(6));
+            return new Orders(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetInt32(2), rdr.GetString(3), rdr.GetString(4), rdr.GetString(5), rdr.GetInt32(6), rdr.GetInt32(7), rdr.GetInt32(8), rdr.GetInt32(9), rdr.GetInt32(10));
         }
     }
 }
