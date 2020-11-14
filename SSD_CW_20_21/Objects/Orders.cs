@@ -8,10 +8,6 @@
         private string date;
         private string startTime;
         private string endTime;
-        private int serviceOption;
-        private int nails;
-        private int ears;
-        private int teeth;
         private int paid;
         private int cancelled;
 
@@ -20,7 +16,7 @@
 
         }
 
-        public Orders(int id, int dogId, int staffId, string date, string startTime, string endTime, int serviceOption, int nails, int ears, int teeth, int paid)
+        public Orders(int id, int dogId, int staffId, string date, string startTime, string endTime, int paid)
         {
             Id = id;
             DogId = dogId;
@@ -28,10 +24,6 @@
             Date = date;
             StartTime = startTime;
             EndTime = endTime;
-            ServiceOption = serviceOption;
-            Nails = nails;
-            Ears = ears;
-            Teeth = teeth;
             Paid = paid;
             Cancelled = 0;
         }
@@ -70,30 +62,6 @@
         {
             get { return endTime; }
             set { endTime = value; }
-        }
-
-        public int ServiceOption
-        {
-            get { return serviceOption; }
-            set { serviceOption = value; }
-        }
-
-        public int Nails
-        {
-            get { return nails; }
-            set { nails = value; }
-        }
-
-        public int Ears
-        {
-            get { return ears; }
-            set { ears = value; }
-        }
-
-        public int Teeth
-        {
-            get { return teeth; }
-            set { teeth = value; }
         }
 
         public int Paid

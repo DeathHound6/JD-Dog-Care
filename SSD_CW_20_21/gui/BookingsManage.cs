@@ -17,9 +17,13 @@ namespace SSD_CW_20_21.gui
         private OrderDBAccess orderAccess = Globals.orderAccess;
         private DogDBAccess dogAccess = Globals.dogAccess;
         private StaffDBAccess staffAccess = Globals.staffAccess;
+        private CustomerDBAccess custAccess = Globals.custAccess;
+        private ServiceDBAccess serviceAccess = Globals.serviceAccess;
+        private ServiceOrderDBAccess servOrderAccess = Globals.serviceOrderAccess;
         private List<Dog> dogs;
         private List<Orders> orders;
         private Orders order;
+        private Service serv;
         private string mode = "view";
 
         private string type = "";
@@ -33,8 +37,6 @@ namespace SSD_CW_20_21.gui
         {
             InitializeComponent();
             orders = orderAccess.getAllOrders();
-            if (orders.Count > 0) order = orders.ToArray()[0];
-            else order = new Orders(1, 1, 1, $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year}", $"{DateTime.Now.Hour}:{DateTime.Now.Minute}", $"{DateTime.Now.AddHours(1.0).Hour}:{DateTime.Now.Minute}", 1, 0, 0, 0, 0);
 
             Text = "JD Dog Care - Add Bookings";
             
@@ -88,25 +90,20 @@ namespace SSD_CW_20_21.gui
                 checkTeeth.Enabled = false;
 
                 cboxDog.Enabled = false;
+                dgvDateTime.Enabled = false;
                 cboxServices.Enabled = false;
                 checkEars.Enabled = false;
                 checkNails.Enabled = false;
                 checkTeeth.Enabled = false;
-                lblOrderCancelled.Visible = order.Cancelled == 0 ? false : true;
 
-                cboxDog.Text = $"{dogAccess.getDogById(order.DogId).Id} - {dogAccess.getDogById(order.DogId).Name}";
-
-                cboxServices.Text = $"{order.ServiceOption} - {services[order.ServiceOption - 1]}";
-
-                checkEars.Checked = order.Ears == 0 ? false : true;
-                checkNails.Checked = order.Nails == 0 ? false : true;
-                checkTeeth.Checked = order.Teeth == 0 ? false : true;
+                type = "orders";
+                populateDataGrid();
             }
             else if (newMode == "add")
             {
                 mode = newMode;
 
-                btnUpdate.Enabled = false;
+                btnUpdate.Enabled = true;
                 btnDelete.Enabled = false;
                 btnAdd.Enabled = true;
                 checkTeeth.Enabled = true;
@@ -127,7 +124,7 @@ namespace SSD_CW_20_21.gui
             {
                 mode = newMode;
 
-                btnAdd.Enabled = false;
+                btnAdd.Enabled = true;
                 btnDelete.Enabled = true;
                 btnUpdate.Enabled = true;
                 checkTeeth.Enabled = true;
@@ -138,12 +135,12 @@ namespace SSD_CW_20_21.gui
                 cboxServices.Enabled = true;
                 lblOrderCancelled.Visible = order.Cancelled == 0 ? false : true;
 
-                checkEars.Checked = order.Ears == 0 ? false : true;
-                checkNails.Checked = order.Nails == 0 ? false : true;
-                checkTeeth.Checked = order.Teeth == 0 ? false : true;
+                checkEars.Checked = serv.Ears == 0 ? false : true;
+                checkNails.Checked = serv.Nails == 0 ? false : true;
+                checkTeeth.Checked = serv.Teeth == 0 ? false : true;
 
                 cboxDog.Text = $"{order.DogId} - {dogAccess.getDogById(order.DogId).Name}";
-                cboxServices.Text = $"{order.ServiceOption} - {services[order.ServiceOption - 1]}";
+                cboxServices.Text = $"{serv.ServiceOption} - {services[serv.ServiceOption - 1]}";
             }
         }
 
@@ -159,6 +156,9 @@ namespace SSD_CW_20_21.gui
                 dgvDateTime.ColumnCount = 2;
                 dgvDateTime.Columns[0].Name = "Time";
                 dgvDateTime.Columns[1].Name = "Availabilty";
+
+                dtpDateTime.Value = DateTime.Now;
+                TimeSpan time = dtpDateTime.Value.TimeOfDay;
             }
             else if (type == "date")
             {
@@ -169,12 +169,12 @@ namespace SSD_CW_20_21.gui
                 DateTime date = dtpDateTime.Value.Date;
                 DateTime min = dtpDateTime.MinDate;
                 DateTime max = dtpDateTime.MaxDate;
-
                 string[] rows = new string[2];
 
                 while (min < max)
                 {
                     rows[0] = date.ToString("dd/MM/yyyy");
+                    if (!orders.Any()) rows[1] = "Yes";
                     if (DateSystem.IsPublicHoliday(date, CountryCode.GB)) rows[1] = "No - Public Holiday";
                     if (DateSystem.IsWeekend(date, CountryCode.GB)) rows[1] = "No - Weekend";
                     else
@@ -189,6 +189,7 @@ namespace SSD_CW_20_21.gui
                             else rows[1] = "Yes";
                         }
                     }
+                    rows[0] += $"({date.DayOfWeek})";
                     dgvDateTime.Rows.Add(rows);
                     date = date.AddDays(1);
                     min = min.AddDays(1);
@@ -211,6 +212,51 @@ namespace SSD_CW_20_21.gui
                 dgvDateTime.ColumnCount = 2;
                 dgvDateTime.Columns[0].Name = "Staff Member";
                 dgvDateTime.Columns[1].Name = "Availabilty";
+
+                string[] rows = new string[2];
+                foreach (Staff staff in staffAccess.getAllStaff().FindAll(e=>e.Deleted == 0))
+                {
+                    rows[0] = $"{staff.Name}";
+                    rows[1] = "Available";
+                    if (order.StaffId == staff.Id)
+                    {
+                        
+                    }
+                    else rows[1] = "Available";
+                }
+            }
+            else if (type == "orders")
+            {
+                string[] rows = new string[10];
+                dgvDateTime.ColumnCount = 10;
+                dgvDateTime.Columns[0].Name = "Dog";
+                dgvDateTime.Columns[1].Name = "Dog Owner";
+                dgvDateTime.Columns[2].Name = "Date";
+                dgvDateTime.Columns[3].Name = "Starting Time";
+                dgvDateTime.Columns[4].Name = "Staff Assigned";
+                dgvDateTime.Columns[5].Name = "Service";
+                dgvDateTime.Columns[6].Name = "Extra Ears";
+                dgvDateTime.Columns[7].Name = "Extra Nails";
+                dgvDateTime.Columns[8].Name = "Extra Teeth";
+                dgvDateTime.Columns[9].Name = "Customer has Paid?";
+                
+                foreach(Orders order in orders.FindAll(e => e.Cancelled == 0))
+                {
+                    Dog dog = dogAccess.getDogById(order.DogId);
+                    rows[0] = dog.Name;
+                    Customer cust = custAccess.getOwnerById(dog.OwnerId);
+                    rows[1] = $"{cust.Forename} {cust.Surname}";
+                    rows[2] = order.Date;
+                    rows[3] = order.StartTime;
+                    rows[4] = staffAccess.getStaffById(order.StaffId).Name;
+                    Service serv = serviceAccess.getServiceById(servOrderAccess.getObjectByOrderID(order.Id).ServiceID);
+                    rows[5] = services[serv.ServiceOption - 1];
+                    rows[6] = serv.Ears == 0 ? "No" : "Yes";
+                    rows[7] = serv.Nails == 0 ? "No" : "Yes";
+                    rows[8] = serv.Teeth == 0 ? "No" : "Yes";
+                    rows[9] = order.Paid == 0 ? "No" : "Yes";
+                    dgvDateTime.Rows.Add(rows);
+                }
             }
             else
             {
@@ -238,7 +284,7 @@ namespace SSD_CW_20_21.gui
                 Orders order = new Orders();
                 order.DogId = Convert.ToInt32(cboxDog.Text.Replace(" ", "").Split('-')[0]);
                 order.Cancelled = 0;
-                order.ServiceOption = Convert.ToInt32(cboxServices.Text.Replace(" ", "").Split('-')[0]);
+                serv.ServiceOption = Convert.ToInt32(cboxServices.Text.Replace(" ", "").Split('-')[0]);
                 order.Paid = checkPaid.Checked ? 1 : 0;
 
                 DialogResult opt = MessageBox.Show("Are you sure these details are correct?", "Add Order?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -288,12 +334,12 @@ namespace SSD_CW_20_21.gui
                     MessageBox.Show("This order has been cancelled. It will now be refunded the amount that has already been paid for", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        #endregion
 
         private void btnSelectDate_Click(object sender, EventArgs e)
         {
             type = "date";
             populateDataGrid();
         }
+        #endregion
     }
 }

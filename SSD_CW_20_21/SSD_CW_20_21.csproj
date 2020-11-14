@@ -111,6 +111,7 @@
     <Compile Include="Objects\Dog.cs" />
     <Compile Include="Objects\Orders.cs" />
     <Compile Include="Objects\Service.cs" />
+    <Compile Include="Objects\ServiceOrder.cs" />
     <Compile Include="Objects\Staff.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

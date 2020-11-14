@@ -73,7 +73,7 @@ namespace SSD_CW_20_21.DbAccess
 
         private Orders getOrderFromReader(SqlDataReader rdr)
         {
-            return new Orders(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetInt32(2), rdr.GetString(3), rdr.GetString(4), rdr.GetString(5), rdr.GetInt32(6), rdr.GetInt32(7), rdr.GetInt32(8), rdr.GetInt32(9), rdr.GetInt32(10));
+            return new Orders(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetInt32(2), rdr.GetString(3), rdr.GetString(4), rdr.GetString(5), rdr.GetInt32(6));
         }
     }
 }
