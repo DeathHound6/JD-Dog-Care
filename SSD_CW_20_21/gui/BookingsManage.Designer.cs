@@ -53,6 +53,7 @@
             this.dgvDateTime = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnView = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -102,6 +103,7 @@
             this.checkDelDog.TabIndex = 45;
             this.checkDelDog.Text = "Hide Deleted";
             this.checkDelDog.UseVisualStyleBackColor = true;
+            this.checkDelDog.CheckedChanged += new System.EventHandler(this.checkDelDog_CheckedChanged);
             // 
             // btnSelectStaff
             // 
@@ -112,6 +114,7 @@
             this.btnSelectStaff.TabIndex = 44;
             this.btnSelectStaff.Text = "Select";
             this.btnSelectStaff.UseVisualStyleBackColor = true;
+            this.btnSelectStaff.Click += new System.EventHandler(this.btnSelectStaff_Click);
             // 
             // txtStaff
             // 
@@ -318,6 +321,7 @@
             this.dgvDateTime.ReadOnly = true;
             this.dgvDateTime.Size = new System.Drawing.Size(491, 456);
             this.dgvDateTime.TabIndex = 0;
+            this.dgvDateTime.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDateTime_CellClick);
             // 
             // label1
             // 
@@ -333,6 +337,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.DarkRed;
+            this.panel3.Controls.Add(this.btnView);
             this.panel3.Controls.Add(this.btnAdd);
             this.panel3.Controls.Add(this.btnDelete);
             this.panel3.Controls.Add(this.btnUpdate);
@@ -341,13 +346,25 @@
             this.panel3.Size = new System.Drawing.Size(443, 55);
             this.panel3.TabIndex = 23;
             // 
+            // btnView
+            // 
+            this.btnView.Enabled = false;
+            this.btnView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnView.Location = new System.Drawing.Point(325, 3);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(115, 49);
+            this.btnView.TabIndex = 21;
+            this.btnView.Text = "View Orders";
+            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            // 
             // btnAdd
             // 
             this.btnAdd.Enabled = false;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(3, 3);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(148, 49);
+            this.btnAdd.Size = new System.Drawing.Size(113, 49);
             this.btnAdd.TabIndex = 20;
             this.btnAdd.Text = "Add Order";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -357,9 +374,9 @@
             // 
             this.btnDelete.Enabled = false;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(304, 3);
+            this.btnDelete.Location = new System.Drawing.Point(219, 3);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(136, 49);
+            this.btnDelete.Size = new System.Drawing.Size(115, 49);
             this.btnDelete.TabIndex = 18;
             this.btnDelete.Text = "Cancel Order";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -369,9 +386,9 @@
             // 
             this.btnUpdate.Enabled = false;
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(157, 3);
+            this.btnUpdate.Location = new System.Drawing.Point(112, 3);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(141, 49);
+            this.btnUpdate.Size = new System.Drawing.Size(106, 49);
             this.btnUpdate.TabIndex = 17;
             this.btnUpdate.Text = "Edit Order";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -460,5 +477,6 @@
         private System.Windows.Forms.TextBox txtStaff;
         private System.Windows.Forms.CheckBox checkDelDog;
         private System.Windows.Forms.DateTimePicker dtpDateTime;
+        private System.Windows.Forms.Button btnView;
     }
 }

@@ -16,11 +16,25 @@ namespace SSD_CW_20_21.DbAccess
         {
             database = db;
         }
+        public List<Service> getAllServices()
+        {
+            List<Service> result = new List<Service>();
+            database.Command = database.Connection.CreateCommand();
+            database.Command.CommandText = "SELECT * FROM SERVICE";
+            database.Reader = database.Command.ExecuteReader();
+            while (database.Reader.Read())
+            {
+                result.Add(getserviceFromReader(database.Reader));
+            }
+            database.Reader.Close();
+            return result;
+        }
+
 
         public Service getServiceById(int id)
         {
             database.Command = database.Connection.CreateCommand();
-            database.Command.CommandText = $"SELECT * FROM DOG WHERE DogID = {id}";
+            database.Command.CommandText = $"SELECT * FROM SERVICE WHERE ServiceID = {id}";
             database.Reader = database.Command.ExecuteReader();
             database.Reader.Read();
             Service serv = getserviceFromReader(database.Reader);
