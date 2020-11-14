@@ -67,8 +67,9 @@ namespace SSD_CW_20_21.gui
             }
         }
 
-        private void populateComboBox()
+        private void populateComboBox(bool del = false)
         {
+            cboxServices.Items.Clear();
             int optionNo = 1;
             foreach(string option in services)
             {
@@ -76,7 +77,9 @@ namespace SSD_CW_20_21.gui
                 optionNo++;
             }
 
+            cboxDog.Items.Clear();
             List<Dog> dogs = dogAccess.getAllDogs();
+            if (del) dogs = dogs.FindAll(e => e.Deleted == 0);
             foreach(Dog dog in dogs)
             {
                 cboxDog.Items.Add($"{dog.Id} - {dog.Name}");
@@ -96,10 +99,11 @@ namespace SSD_CW_20_21.gui
                 btnSelectDate.Enabled = true;
                 btnSelectStaff.Enabled = true;
                 btnSelectTime.Enabled = true;
-
+                checkDelDog.Enabled = true;
                 checkTeeth.Enabled = true;
                 checkNails.Enabled = true;
                 checkEars.Enabled = true;
+                checkPaid.Enabled = true;
 
                 cboxDog.Enabled = true;
                 cboxServices.Enabled = true;
@@ -122,10 +126,11 @@ namespace SSD_CW_20_21.gui
                 btnSelectDate.Enabled = true;
                 btnSelectStaff.Enabled = true;
                 btnSelectTime.Enabled = true;
-
+                checkDelDog.Enabled = true;
                 checkTeeth.Enabled = true;
                 checkNails.Enabled = true;
                 checkEars.Enabled = true;
+                checkPaid.Enabled = true;
 
                 cboxDog.Enabled = true;
                 cboxServices.Enabled = true;
@@ -471,7 +476,7 @@ namespace SSD_CW_20_21.gui
 
         private void checkDelDog_CheckedChanged(object sender, EventArgs e)
         {
-            populateComboBox();
+            populateComboBox(true);
         }
 
         private void btnView_Click(object sender, EventArgs e)
@@ -482,8 +487,11 @@ namespace SSD_CW_20_21.gui
         private void dgvDateTime_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1) return;
-            btnUpdate.Enabled = true;
-            order = orderAccess.getOrderById(Convert.ToInt32(dgvDateTime.Rows[e.RowIndex].Cells[0].Value));
+            if (type == "orders")
+            {
+                btnUpdate.Enabled = true;
+                order = orderAccess.getOrderById(Convert.ToInt32(dgvDateTime.Rows[e.RowIndex].Cells[0].Value));
+            }
         }
         #endregion
     }
