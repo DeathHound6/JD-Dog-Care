@@ -12,6 +12,7 @@ namespace SSD_CW_20_21.gui
     {
         private DogDBAccess dogAccess = Globals.dogAccess;
         private CustomerDBAccess custAccess = Globals.custAccess;
+        private OrderDBAccess orderAccess = Globals.orderAccess;
         private Dog dog;
         private string mode = "view";
         // view, edit, add
@@ -51,14 +52,19 @@ namespace SSD_CW_20_21.gui
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs ev)
         {
-            DialogResult opt = MessageBox.Show("Are you sure you want to delete this dog? This is permanent and cannot be reversed", "Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult opt = MessageBox.Show("Are you sure you want to delete this dog? This is permanent and cannot be reversed. Any future bookings for this dog will also be deleted", "Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (opt == DialogResult.Yes)
             {
+                foreach (Orders order in orderAccess.getAllOrders().FindAll(e => e.DogId == dog.Id))
+                {
+                    order.Cancelled = 1;
+                    orderAccess.updateOrder(order);
+                }
                 dog.Deleted = 1;
                 if (dogAccess.updateDog(dog))
-                    MessageBox.Show("That dog has been deleted. Any future bookings for this dog will also be deleted", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("That dog has been deleted", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

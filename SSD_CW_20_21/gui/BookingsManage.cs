@@ -53,7 +53,7 @@ namespace SSD_CW_20_21.gui
 
         #region Custom Methods
         private void populateListBoxes()
-        {
+        { 
             dogs = dogAccess.getAllDogs();
             if (checkDelDog.Checked) dogs = dogs.FindAll(e => e.Deleted == 0);
             foreach (Dog dog in dogs)
@@ -195,7 +195,10 @@ namespace SSD_CW_20_21.gui
                 dgvDateTime.Columns[1].Name = "Availabilty";
 
                 dtpDateTime.Value = DateTime.Now;
-                TimeSpan time = dtpDateTime.Value.TimeOfDay;
+                string startTimeString = "09:00:00";
+                DateTime startTimedateTime = Convert.ToDateTime(startTimeString);
+
+
             }
             else if (type == "date")
             {
@@ -204,6 +207,7 @@ namespace SSD_CW_20_21.gui
                 dgvDateTime.Columns[0].Name = "Date";
                 dgvDateTime.Columns[1].Name = "Availabilty";
 
+                dtpDateTime.Value = DateTime.Now;
                 DateTime date = dtpDateTime.Value;
                 DateTime min = dtpDateTime.MinDate;
                 DateTime max = dtpDateTime.MaxDate;
@@ -258,7 +262,7 @@ namespace SSD_CW_20_21.gui
                 string start = $"{dtpDateTime.Value.Hour}:{dtpDateTime.Value.Minute}";
                 string date = dtpDateTime.Value.ToShortTimeString();
                 dtpDateTime.Value = new DateTime(Convert.ToInt32(day[2]), Convert.ToInt32(day[1]), Convert.ToInt32(day[0]), Convert.ToInt32(et[0]), Convert.ToInt32(et[1]), 00); // endTime 
-                string end = $"{dtpDateTime.Value.Hour}:{dtpDateTime.Value.Minute}";
+                string end = dtpDateTime.Value.ToShortTimeString();
 
                 foreach (Staff staff in staffAccess.getAllStaff().FindAll(e => e.Deleted == 0))
                 {
@@ -297,36 +301,33 @@ namespace SSD_CW_20_21.gui
             }
             else if (type == "orders")
             {
-                dgvDateTime.ColumnCount = 11;
+                dgvDateTime.ColumnCount = 10;
                 string[] rows = new string[dgvDateTime.ColumnCount];
                 dgvDateTime.Columns[0].Name = "Order ID";
                 dgvDateTime.Columns[1].Name = "Dog";
-                dgvDateTime.Columns[2].Name = "Dog Owner";
-                dgvDateTime.Columns[3].Name = "Date";
-                dgvDateTime.Columns[4].Name = "Starting Time";
-                dgvDateTime.Columns[5].Name = "Staff Assigned";
-                dgvDateTime.Columns[6].Name = "Service";
-                dgvDateTime.Columns[7].Name = "Extra Ears";
-                dgvDateTime.Columns[8].Name = "Extra Nails";
-                dgvDateTime.Columns[9].Name = "Extra Teeth";
-                dgvDateTime.Columns[10].Name = "Customer has Paid?";
+                dgvDateTime.Columns[2].Name = "Date";
+                dgvDateTime.Columns[3].Name = "Starting Time";
+                dgvDateTime.Columns[4].Name = "Staff Assigned";
+                dgvDateTime.Columns[5].Name = "Service";
+                dgvDateTime.Columns[6].Name = "Extra Ears";
+                dgvDateTime.Columns[7].Name = "Extra Nails";
+                dgvDateTime.Columns[8].Name = "Extra Teeth";
+                dgvDateTime.Columns[9].Name = "Customer has Paid?";
 
                 foreach (Orders order in orders.FindAll(e => e.Cancelled == 0))
                 {
                     rows[0] = order.Id.ToString();
                     Dog dog = dogAccess.getDogById(order.DogId);
                     rows[1] = dog.Name;
-                    Customer cust = custAccess.getOwnerById(dog.OwnerId);
-                    rows[2] = $"{cust.Forename} {cust.Surname}";
-                    rows[3] = order.Date;
-                    rows[4] = order.StartTime;
-                    rows[5] = staffAccess.getStaffById(order.StaffId).Name;
+                    rows[2] = order.Date;
+                    rows[3] = order.StartTime;
+                    rows[4] = staffAccess.getStaffById(order.StaffId).Name;
                     Service serv = serviceAccess.getServiceById(servOrderAccess.getObjectByOrderID(order.Id).ServiceID);
-                    rows[6] = services[serv.ServiceOption - 1];
-                    rows[7] = serv.Ears == 0 ? "No" : "Yes";
-                    rows[8] = serv.Nails == 0 ? "No" : "Yes";
-                    rows[9] = serv.Teeth == 0 ? "No" : "Yes";
-                    rows[10] = order.Paid == 0 ? "No" : "Yes";
+                    rows[5] = services[serv.ServiceOption - 1];
+                    rows[6] = serv.Ears == 0 ? "No" : "Yes";
+                    rows[7] = serv.Nails == 0 ? "No" : "Yes";
+                    rows[8] = serv.Teeth == 0 ? "No" : "Yes";
+                    rows[9] = order.Paid == 0 ? "No" : "Yes";
                     dgvDateTime.Rows.Add(rows);
                 }
             }

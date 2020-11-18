@@ -5,15 +5,21 @@
         private int id;
         private string name;
         private string workingDays;
+        private string startLunch;
+        private string endLunch;
+        private int partial;
         private int deleted;
 
         public Staff() { }
 
-        public Staff(int id, string name, string workingDays)
+        public Staff(int id, string name, string workingDays, string startLunch, string endLunch, int partial)
         {
             Id = id;
             Name = name;
             WorkingDays = workingDays;
+            StartLunch = startLunch;
+            EndLunch = endLunch;
+            Partial = partial;
             Deleted = 0;
         }
 
@@ -33,6 +39,24 @@
         {
             get { return workingDays; }
             set { workingDays = value; }
+        }
+
+        public string StartLunch
+        {
+            get { return startLunch; }
+            set { startLunch = value; }
+        }
+
+        public string EndLunch
+        {
+            get { return endLunch; }
+            set { endLunch = value; }
+        }
+
+        public int Partial
+        {
+            get { return partial; }
+            set { partial = value; }
         }
 
         public int Deleted
