@@ -13,6 +13,17 @@ namespace SSD_CW_20_21.DbAccess
             Db = db;
         }
 
+        public Staff getStaffByName(string name)
+        {
+            Db.Command = Db.Connection.CreateCommand();
+            Db.Command.CommandText = $"SELECT * FROM STAFF WHERE Name = '{name}'";
+            Db.Reader = Db.Command.ExecuteReader();
+            Db.Reader.Read();
+            Staff staff = getStaffFromReader(Db.Reader);
+            Db.Reader.Close();
+            return staff;
+        }
+
         public Staff getStaffById(int id)
         {
             Db.Command = Db.Connection.CreateCommand();

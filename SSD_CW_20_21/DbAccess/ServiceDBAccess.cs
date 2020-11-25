@@ -45,7 +45,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool insertService(Service serv)
         {
             database.Command = database.Connection.CreateCommand();
-            database.Command.CommandText = $"INSERT INTO SERVICE(ServiceID, ServiceOption, Nails, Ears, Teeth) VALUES({serv.ServiceID}, {serv.ServiceOption}, {serv.Nails}, {serv.Ears}, {serv.Teeth})";
+            database.Command.CommandText = $"INSERT INTO SERVICE(ServiceID, Description, Time) VALUES({serv.ServiceID}, '{serv.Description}', {serv.Time})";
             try
             {
                 database.Command.ExecuteNonQuery();
@@ -61,7 +61,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool updateService(Service serv)
         {
             database.Command = database.Connection.CreateCommand();
-            database.Command.CommandText = $"UPDATE SERVICE SET ServiceOption = {serv.ServiceOption}, Nails = {serv.Nails}, Teeth = {serv.Teeth}, Ears = {serv.Ears} WHERE ServiceID = {serv.ServiceID}";
+            database.Command.CommandText = $"UPDATE SERVICE SET Description = '{serv.Description}', Time = {serv.Time} WHERE ServiceID = {serv.ServiceID}";
             try
             {
                 database.Command.ExecuteNonQuery();
@@ -78,10 +78,8 @@ namespace SSD_CW_20_21.DbAccess
         {
             Service serv = new Service();
             serv.ServiceID = rdr.GetInt32(0);
-            serv.ServiceOption = rdr.GetInt32(1);
-            serv.Nails = rdr.GetInt32(2);
-            serv.Ears = rdr.GetInt32(3);
-            serv.Teeth = rdr.GetInt32(4);
+            serv.Description = rdr.GetString(1);
+            serv.Time = rdr.GetInt32(2);
             return serv;
         }
     }

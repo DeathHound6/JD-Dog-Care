@@ -133,6 +133,7 @@
             this.btnSelectTime.TabIndex = 42;
             this.btnSelectTime.Text = "Select";
             this.btnSelectTime.UseVisualStyleBackColor = true;
+            this.btnSelectTime.Click += new System.EventHandler(this.btnSelectTime_Click);
             // 
             // btnSelectDate
             // 

@@ -9,23 +9,18 @@ namespace SSD_CW_20_21.Objects
     class Service
     {
         private int serviceID;
-        private int serviceOption;
-        private int nails;
-        private int teeth;
-        private int ears;
+        private string description;
+        private int time;
 
         public Service()
         {
 
         }
 
-        public Service(int id, int option, int nails, int teeth, int ears)
+        public Service(int id, string description, int time)
         {
             ServiceID = id;
-            ServiceOption = option;
-            Nails = nails;
-            Teeth = teeth;
-            Ears = ears;
+            Description = description;
         }
 
         public int ServiceID
@@ -34,28 +29,16 @@ namespace SSD_CW_20_21.Objects
             set { serviceID = value; }
         }
 
-        public int ServiceOption
+        public string Description
         {
-            get { return serviceOption; }
-            set { serviceOption = value; }
+            get { return description; }
+            set { description = value; }
         }
 
-        public int Nails
+        public int Time
         {
-            get { return nails; }
-            set { nails = value; }
-        }
-
-        public int Ears
-        {
-            get { return ears; }
-            set { ears = value; }
-        }
-
-        public int Teeth
-        {
-            get { return teeth; }
-            set { teeth = value; }
+            get { return time; }
+            set { time = value; }
         }
     }
 }
