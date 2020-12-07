@@ -44,7 +44,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool insertOrder(Orders order)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"INSERT INTO ORDERS (OrderID, DogID, StaffID, Date, StartTime, EndTime, RoomID, Paid, Cancelled) VALUES ({order.Id}, {order.DogId}, {order.StaffId}, '{order.Date}', '{order.StartTime}', '{order.EndTime}', {order.RoomID}, {order.Paid}, {order.Cancelled})";
+            Db.Command.CommandText = $"INSERT INTO ORDERS (OrderID, DogID, StaffID, Date, StartTime, EndTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES ({order.Id}, {order.DogId}, {order.StaffId}, '{order.Date}', '{order.StartTime}', '{order.EndTime}', {order.Ears}, {order.Teeth}, {order.Nails} {order.RoomID}, {order.Paid}, {order.Cancelled})";
             try
             {
                 Db.Command.ExecuteNonQuery();
