@@ -45,7 +45,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool insertService(Service serv)
         {
             database.Command = database.Connection.CreateCommand();
-            database.Command.CommandText = $"INSERT INTO SERVICE(ServiceID, Description, Time) VALUES({serv.ServiceID}, '{serv.Description}', {serv.Time})";
+            database.Command.CommandText = $"INSERT INTO SERVICE(ServiceId, Description, Time) VALUES({serv.ServiceID}, '{serv.Description}', '{serv.Time}')";
             try
             {
                 database.Command.ExecuteNonQuery();
@@ -61,7 +61,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool updateService(Service serv)
         {
             database.Command = database.Connection.CreateCommand();
-            database.Command.CommandText = $"UPDATE SERVICE SET Description = '{serv.Description}', Time = {serv.Time} WHERE ServiceID = {serv.ServiceID}";
+            database.Command.CommandText = $"UPDATE SERVICE SET Description = '{serv.Description}', Time = '{serv.Time}' WHERE ServiceID = {serv.ServiceID}";
             try
             {
                 database.Command.ExecuteNonQuery();

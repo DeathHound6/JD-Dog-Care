@@ -438,7 +438,7 @@ namespace SSD_CW_20_21.gui
                 DialogResult opt = MessageBox.Show("Are you sure these details are correct?", "Add Order?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (opt == DialogResult.Yes)
                 {
-                    if (orderAccess.insertOrder(order) && serviceAccess.insertService(serv) && servOrderAccess.insertServiceOrder(so))
+                    if (orderAccess.insertOrder(order) && servOrderAccess.insertServiceOrder(so))
                     {
                         changeMode("view");
                         MessageBox.Show("The order has been recorded successfully", "Order Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
