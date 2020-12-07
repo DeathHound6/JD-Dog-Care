@@ -74,6 +74,7 @@ namespace SSD_CW_20_21.gui
 
         private void populateDogCbox(bool del = false)
         {
+            List<Dog> dogs = dogAccess.getAllDogs();
             cboxDog.Items.Clear();
             if (del) dogs = dogs.FindAll(e => e.Deleted == 0);
             dogs = dogs.FindAll(e => e.OwnerId == Convert.ToInt32(cboxCust.Text.Replace(" ", "").Split('-')[0]));
@@ -319,7 +320,7 @@ namespace SSD_CW_20_21.gui
                 foreach (Staff staff in staffAccess.getAllStaff().FindAll(e => e.Deleted == 0))
                 {
                     rows[0] = $"{staff.Name}";
-                    rows[1] = "No";
+                    rows[1] = "Yes";
                     foreach (Orders order in orders.FindAll(e => e.Cancelled == 0))
                     {
                         if (order.StaffId == staff.Id)
@@ -418,7 +419,6 @@ namespace SSD_CW_20_21.gui
             if (mode != "add") changeMode("add");
             else
             {
-                order = new Orders();
                 order.Id = orderAccess.getAllOrders().Count + 1;
                 order.DogId = Convert.ToInt32(cboxDog.Text.Replace(" ", "").Split('-')[0]);
                 order.StaffId = staffAccess.getStaffByName(txtStaff.Text.Replace(" ", "").Split('-')[0]).Id;
@@ -438,7 +438,7 @@ namespace SSD_CW_20_21.gui
                 DialogResult opt = MessageBox.Show("Are you sure these details are correct?", "Add Order?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (opt == DialogResult.Yes)
                 {
-                    if (servOrderAccess.insertServiceOrder(so) && orderAccess.insertOrder(order) && serviceAccess.insertService(serv))
+                    if (orderAccess.insertOrder(order) && serviceAccess.insertService(serv) && servOrderAccess.insertServiceOrder(so))
                     {
                         changeMode("view");
                         MessageBox.Show("The order has been recorded successfully", "Order Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
