@@ -20,7 +20,6 @@ namespace SSD_CW_20_21.gui
 
         protected void toolstripTxtGrooming_Click(object sender, EventArgs e)
         {
-            DB.Connect();
             showDbConn();
             if (DB.Connected)
             {

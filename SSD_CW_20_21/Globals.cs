@@ -13,10 +13,10 @@ namespace SSD_CW_20_21
         public static ServiceDBAccess serviceAccess { get; } = new ServiceDBAccess(database);
         public static ServiceOrderDBAccess serviceOrderAccess { get; } = new ServiceOrderDBAccess(database);
         
-        public static double extraNailsMinute { get; } = 10.0;
-        public static double extraTeethMinute { get; } = 10.0;
-        public static double extraEarsMinute { get; } = 5.0;
-        public static double firstTimeMinute { get; } = 15.0;
+        public static int extraNailsMinute { get; } = 10;
+        public static int extraTeethMinute { get; } = 10;
+        public static int extraEarsMinute { get; } = 5;
+        public static int firstTimeMinute { get; } = 15;
 
         public static double extraNailsPrice { get; } = 2.50;
         public static double extraTeethPrice { get; } = 3.00;

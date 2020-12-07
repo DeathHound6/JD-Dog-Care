@@ -6,16 +6,18 @@
         private int ownerId;
         private string name;
         private string breed;
+        private string size;
         private int deleted;
 
         public Dog() { }
 
-        public Dog(int id, int ownerId, string name, string breed)
+        public Dog(int id, int ownerId, string name, string breed, string size)
         {
             Id = id;
             OwnerId = ownerId;
             Name = name;
             Breed = breed;
+            Size = size;
             Deleted = 0;
         }
 
@@ -41,6 +43,12 @@
         {
             get { return breed; }
             set { breed = value; }
+        }
+
+        public string Size
+        {
+            get { return size; }
+            set { size = value; }
         }
 
         public int Deleted

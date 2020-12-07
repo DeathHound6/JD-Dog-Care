@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cboxCust = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.checkDelDog = new System.Windows.Forms.CheckBox();
             this.btnSelectStaff = new System.Windows.Forms.Button();
             this.txtStaff = new System.Windows.Forms.TextBox();
@@ -68,6 +71,9 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Controls.Add(this.cboxCust);
+            this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.checkDelDog);
             this.panel2.Controls.Add(this.btnSelectStaff);
             this.panel2.Controls.Add(this.txtStaff);
@@ -93,11 +99,44 @@
             this.panel2.Size = new System.Drawing.Size(443, 323);
             this.panel2.TabIndex = 13;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(340, 15);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(100, 17);
+            this.checkBox1.TabIndex = 48;
+            this.checkBox1.Text = "Hide Deleted";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // cboxCust
+            // 
+            this.cboxCust.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxCust.FormattingEnabled = true;
+            this.cboxCust.Location = new System.Drawing.Point(124, 8);
+            this.cboxCust.Name = "cboxCust";
+            this.cboxCust.Size = new System.Drawing.Size(210, 28);
+            this.cboxCust.TabIndex = 47;
+            this.cboxCust.SelectedIndexChanged += new System.EventHandler(this.cboxCust_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label6.Location = new System.Drawing.Point(7, 8);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 20);
+            this.label6.TabIndex = 46;
+            this.label6.Text = "Owner:";
+            // 
             // checkDelDog
             // 
             this.checkDelDog.AutoSize = true;
             this.checkDelDog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkDelDog.Location = new System.Drawing.Point(340, 19);
+            this.checkDelDog.Location = new System.Drawing.Point(340, 49);
             this.checkDelDog.Name = "checkDelDog";
             this.checkDelDog.Size = new System.Drawing.Size(100, 17);
             this.checkDelDog.TabIndex = 45;
@@ -108,7 +147,7 @@
             // btnSelectStaff
             // 
             this.btnSelectStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectStaff.Location = new System.Drawing.Point(320, 233);
+            this.btnSelectStaff.Location = new System.Drawing.Point(320, 263);
             this.btnSelectStaff.Name = "btnSelectStaff";
             this.btnSelectStaff.Size = new System.Drawing.Size(75, 23);
             this.btnSelectStaff.TabIndex = 44;
@@ -119,7 +158,7 @@
             // txtStaff
             // 
             this.txtStaff.Enabled = false;
-            this.txtStaff.Location = new System.Drawing.Point(124, 235);
+            this.txtStaff.Location = new System.Drawing.Point(124, 265);
             this.txtStaff.Name = "txtStaff";
             this.txtStaff.Size = new System.Drawing.Size(189, 20);
             this.txtStaff.TabIndex = 43;
@@ -127,7 +166,7 @@
             // btnSelectTime
             // 
             this.btnSelectTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectTime.Location = new System.Drawing.Point(320, 178);
+            this.btnSelectTime.Location = new System.Drawing.Point(320, 208);
             this.btnSelectTime.Name = "btnSelectTime";
             this.btnSelectTime.Size = new System.Drawing.Size(75, 23);
             this.btnSelectTime.TabIndex = 42;
@@ -138,7 +177,7 @@
             // btnSelectDate
             // 
             this.btnSelectDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectDate.Location = new System.Drawing.Point(320, 134);
+            this.btnSelectDate.Location = new System.Drawing.Point(320, 164);
             this.btnSelectDate.Name = "btnSelectDate";
             this.btnSelectDate.Size = new System.Drawing.Size(75, 23);
             this.btnSelectDate.TabIndex = 41;
@@ -149,7 +188,7 @@
             // txtTime
             // 
             this.txtTime.Enabled = false;
-            this.txtTime.Location = new System.Drawing.Point(124, 180);
+            this.txtTime.Location = new System.Drawing.Point(124, 210);
             this.txtTime.Name = "txtTime";
             this.txtTime.Size = new System.Drawing.Size(189, 20);
             this.txtTime.TabIndex = 40;
@@ -157,7 +196,7 @@
             // txtDate
             // 
             this.txtDate.Enabled = false;
-            this.txtDate.Location = new System.Drawing.Point(124, 137);
+            this.txtDate.Location = new System.Drawing.Point(124, 167);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(189, 20);
             this.txtDate.TabIndex = 39;
@@ -167,7 +206,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label9.Location = new System.Drawing.Point(8, 180);
+            this.label9.Location = new System.Drawing.Point(8, 210);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(97, 20);
             this.label9.TabIndex = 38;
@@ -178,7 +217,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label8.Location = new System.Drawing.Point(8, 280);
+            this.label8.Location = new System.Drawing.Point(8, 292);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 20);
             this.label8.TabIndex = 37;
@@ -188,7 +227,7 @@
             // 
             this.checkPaid.AutoSize = true;
             this.checkPaid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkPaid.Location = new System.Drawing.Point(124, 280);
+            this.checkPaid.Location = new System.Drawing.Point(124, 292);
             this.checkPaid.Name = "checkPaid";
             this.checkPaid.Size = new System.Drawing.Size(63, 24);
             this.checkPaid.TabIndex = 36;
@@ -200,7 +239,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label7.Location = new System.Drawing.Point(7, 138);
+            this.label7.Location = new System.Drawing.Point(7, 168);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 20);
             this.label7.TabIndex = 35;
@@ -211,7 +250,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label5.Location = new System.Drawing.Point(8, 233);
+            this.label5.Location = new System.Drawing.Point(8, 263);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 20);
             this.label5.TabIndex = 32;
@@ -221,7 +260,7 @@
             // 
             this.checkEars.AutoSize = true;
             this.checkEars.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkEars.Location = new System.Drawing.Point(361, 92);
+            this.checkEars.Location = new System.Drawing.Point(361, 122);
             this.checkEars.Name = "checkEars";
             this.checkEars.Size = new System.Drawing.Size(65, 24);
             this.checkEars.TabIndex = 31;
@@ -232,7 +271,7 @@
             // 
             this.checkTeeth.AutoSize = true;
             this.checkTeeth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkTeeth.Location = new System.Drawing.Point(239, 97);
+            this.checkTeeth.Location = new System.Drawing.Point(239, 127);
             this.checkTeeth.Name = "checkTeeth";
             this.checkTeeth.Size = new System.Drawing.Size(74, 24);
             this.checkTeeth.TabIndex = 30;
@@ -243,7 +282,7 @@
             // 
             this.checkNails.AutoSize = true;
             this.checkNails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkNails.Location = new System.Drawing.Point(124, 98);
+            this.checkNails.Location = new System.Drawing.Point(124, 128);
             this.checkNails.Name = "checkNails";
             this.checkNails.Size = new System.Drawing.Size(67, 24);
             this.checkNails.TabIndex = 29;
@@ -255,7 +294,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(8, 97);
+            this.label4.Location = new System.Drawing.Point(8, 127);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 20);
             this.label4.TabIndex = 28;
@@ -266,7 +305,7 @@
             this.cboxDog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxDog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxDog.FormattingEnabled = true;
-            this.cboxDog.Location = new System.Drawing.Point(124, 12);
+            this.cboxDog.Location = new System.Drawing.Point(124, 42);
             this.cboxDog.Name = "cboxDog";
             this.cboxDog.Size = new System.Drawing.Size(210, 28);
             this.cboxDog.TabIndex = 27;
@@ -276,7 +315,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(7, 12);
+            this.label3.Location = new System.Drawing.Point(7, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 20);
             this.label3.TabIndex = 26;
@@ -287,7 +326,7 @@
             this.cboxServices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxServices.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxServices.FormattingEnabled = true;
-            this.cboxServices.Location = new System.Drawing.Point(124, 58);
+            this.cboxServices.Location = new System.Drawing.Point(124, 88);
             this.cboxServices.Name = "cboxServices";
             this.cboxServices.Size = new System.Drawing.Size(278, 28);
             this.cboxServices.TabIndex = 25;
@@ -297,7 +336,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(8, 58);
+            this.label2.Location = new System.Drawing.Point(8, 88);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 20);
             this.label2.TabIndex = 11;
@@ -479,5 +518,8 @@
         private System.Windows.Forms.CheckBox checkDelDog;
         private System.Windows.Forms.DateTimePicker dtpDateTime;
         private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox cboxCust;
+        private System.Windows.Forms.Label label6;
     }
 }

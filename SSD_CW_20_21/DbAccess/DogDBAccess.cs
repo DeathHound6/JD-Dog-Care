@@ -44,7 +44,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool insertDog(Dog dog)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"INSERT INTO DOG (DogID, OwnerID, Name, Breed, Deleted) VALUES ({dog.Id}, {dog.OwnerId}, '{dog.Name}', '{dog.Breed}', {dog.Deleted})";
+            Db.Command.CommandText = $"INSERT INTO DOG (DogID, OwnerID, Name, Breed, Size, Deleted) VALUES ({dog.Id}, {dog.OwnerId}, '{dog.Name}', '{dog.Breed}', '{dog.Size}', {dog.Deleted})";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -73,7 +73,7 @@ namespace SSD_CW_20_21.DbAccess
 
         private Dog getDogFromReader(SqlDataReader rdr)
         {
-            return new Dog(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetString(2), rdr.GetString(3));
+            return new Dog(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(4));
         }
     }
 }

@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblDogDeleted = new System.Windows.Forms.Label();
             this.cboxDogBreed = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cboxDogOwner = new System.Windows.Forms.ComboBox();
@@ -39,6 +38,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblDogId = new System.Windows.Forms.Label();
+            this.lblDogDeleted = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -46,6 +46,8 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbSelectDog = new System.Windows.Forms.ListBox();
+            this.cboxSize = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -76,6 +78,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Controls.Add(this.cboxSize);
+            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.cboxDogBreed);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.cboxDogOwner);
@@ -89,23 +93,11 @@
             this.panel2.Size = new System.Drawing.Size(613, 323);
             this.panel2.TabIndex = 12;
             // 
-            // lblDogDeleted
-            // 
-            this.lblDogDeleted.AutoSize = true;
-            this.lblDogDeleted.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDogDeleted.ForeColor = System.Drawing.Color.Red;
-            this.lblDogDeleted.Location = new System.Drawing.Point(524, 65);
-            this.lblDogDeleted.Name = "lblDogDeleted";
-            this.lblDogDeleted.Size = new System.Drawing.Size(215, 18);
-            this.lblDogDeleted.TabIndex = 24;
-            this.lblDogDeleted.Text = "DOG HAS BEEN DELETED";
-            this.lblDogDeleted.Visible = false;
-            // 
             // cboxDogBreed
             // 
             this.cboxDogBreed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxDogBreed.FormattingEnabled = true;
-            this.cboxDogBreed.Location = new System.Drawing.Point(116, 171);
+            this.cboxDogBreed.Location = new System.Drawing.Point(116, 202);
             this.cboxDogBreed.Name = "cboxDogBreed";
             this.cboxDogBreed.Size = new System.Drawing.Size(278, 21);
             this.cboxDogBreed.TabIndex = 23;
@@ -143,7 +135,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(8, 172);
+            this.label4.Location = new System.Drawing.Point(8, 203);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 20);
             this.label4.TabIndex = 15;
@@ -169,6 +161,18 @@
             this.lblDogId.Size = new System.Drawing.Size(19, 20);
             this.lblDogId.TabIndex = 12;
             this.lblDogId.Text = "#";
+            // 
+            // lblDogDeleted
+            // 
+            this.lblDogDeleted.AutoSize = true;
+            this.lblDogDeleted.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDogDeleted.ForeColor = System.Drawing.Color.Red;
+            this.lblDogDeleted.Location = new System.Drawing.Point(524, 65);
+            this.lblDogDeleted.Name = "lblDogDeleted";
+            this.lblDogDeleted.Size = new System.Drawing.Size(215, 18);
+            this.lblDogDeleted.TabIndex = 24;
+            this.lblDogDeleted.Text = "DOG HAS BEEN DELETED";
+            this.lblDogDeleted.Visible = false;
             // 
             // btnUpdate
             // 
@@ -250,6 +254,26 @@
             this.lbSelectDog.TabIndex = 0;
             this.lbSelectDog.SelectedIndexChanged += new System.EventHandler(this.lbSelectDog_SelectedIndexChanged);
             // 
+            // cboxSize
+            // 
+            this.cboxSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxSize.FormattingEnabled = true;
+            this.cboxSize.Location = new System.Drawing.Point(116, 151);
+            this.cboxSize.Name = "cboxSize";
+            this.cboxSize.Size = new System.Drawing.Size(278, 21);
+            this.cboxSize.TabIndex = 25;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label5.Location = new System.Drawing.Point(8, 152);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(49, 20);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Size:";
+            // 
             // DogManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,5 +319,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ListBox lbSelectDog;
         private System.Windows.Forms.Label lblDogDeleted;
+        private System.Windows.Forms.ComboBox cboxSize;
+        private System.Windows.Forms.Label label5;
     }
 }

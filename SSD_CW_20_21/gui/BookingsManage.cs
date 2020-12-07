@@ -20,15 +20,14 @@ namespace SSD_CW_20_21.gui
         private CustomerDBAccess custAccess = Globals.custAccess;
         private ServiceDBAccess serviceAccess = Globals.serviceAccess;
         private ServiceOrderDBAccess servOrderAccess = Globals.serviceOrderAccess;
-        //private List<Dog> dogs;
+        private List<Dog> dogs;
         private List<Orders> orders;
+        private List<Staff> staffs;
+        private List<Customer> custs;
         private Orders order;
         private Service serv;
         private string mode = "";
         private string type = "";
-
-        private DataTable datasource = new DataTable();
-
         private List<Service> services;
         #endregion
 
@@ -36,9 +35,12 @@ namespace SSD_CW_20_21.gui
         {
             InitializeComponent();
             dtpDateTime.Value = DateTime.Now;
+            staffs = staffAccess.getAllStaff().FindAll(e => e.Deleted == 0);
             orders = orderAccess.getAllOrders().FindAll(e => Convert.ToDateTime(e.Date) > DateTime.Now);
-            serv = services.ToArray()[0];
             services = serviceAccess.getAllServices();
+            serv = services.ToArray()[0];
+            dogs = dogAccess.getAllDogs();
+            custs = custAccess.getAllCustomers().FindAll(e => e.Deleted == 0);
             if (orders.Count > 0) order = orders.ToArray()[0];
             else order = new Orders(1, 1, 1, dtpDateTime.Value.ToShortDateString(), dtpDateTime.Value.ToShortTimeString(), dtpDateTime.Value.AddMinutes(serv.Time).ToShortTimeString(), 0, 0, 0, 1, 0);
 
@@ -52,23 +54,52 @@ namespace SSD_CW_20_21.gui
         }
 
         #region Custom Methods
-        private void populateComboBox(bool del = false)
+        private void populateComboBox()
+        {
+            populateServCbox();
+            populateCustCbox();
+            populateDogCbox();
+        }
+
+        private void populateCustCbox(bool del = false)
+        {
+            cboxCust.Items.Clear();
+            if (del) custs = custs.FindAll(e => e.Deleted == 0);
+            foreach (Customer cust in custs)
+            {
+                cboxCust.Items.Add($"{cust.Id} - {cust.Forename} {cust.Surname}");
+            }
+            cboxCust.Text = cboxCust.Items[0].ToString();
+        }
+
+        private void populateDogCbox(bool del = false)
+        {
+            cboxDog.Items.Clear();
+            if (del) dogs = dogs.FindAll(e => e.Deleted == 0);
+            dogs = dogs.FindAll(e => e.OwnerId == Convert.ToInt32(cboxCust.Text.Replace(" ", "").Split('-')[0]));
+            foreach (Dog dog in dogs)
+            {
+                cboxDog.Items.Add($"{dog.Id} - {dog.Name}");
+            }
+            try
+            {
+                cboxDog.Text = cboxDog.Items[0].ToString();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                cboxDog.Items.Add("None Available");
+                cboxDog.Text = cboxDog.Items[0].ToString();
+            }
+        }
+
+        private void populateServCbox()
         {
             cboxServices.Items.Clear();
-            foreach(Service srv in services)
+            foreach (Service srv in services)
             {
                 cboxServices.Items.Add($"{srv.ServiceID} - {srv.Description}");
             }
             cboxServices.Text = cboxServices.Items[0].ToString();
-
-            cboxDog.Items.Clear();
-            List<Dog> dogs = dogAccess.getAllDogs();
-            if (del) dogs = dogs.FindAll(e => e.Deleted == 0);
-            foreach(Dog dog in dogs)
-            {
-                cboxDog.Items.Add($"{dog.Id} - {dog.Name}");
-            }
-            cboxDog.Text = cboxDog.Items[0].ToString();
         }
 
         private void changeMode(string newMode)
@@ -93,6 +124,7 @@ namespace SSD_CW_20_21.gui
                 checkEars.Enabled = true;
                 checkPaid.Enabled = true;
 
+                cboxCust.Enabled = true;
                 cboxDog.Enabled = true;
                 cboxServices.Enabled = true;
                 checkEars.Checked = false;
@@ -100,6 +132,7 @@ namespace SSD_CW_20_21.gui
                 checkTeeth.Checked = false;
                 lblOrderCancelled.Visible = false;
 
+                cboxCust.Text = "";
                 cboxDog.Text = "";
                 cboxServices.Text = "";
             }
@@ -120,6 +153,7 @@ namespace SSD_CW_20_21.gui
                 checkEars.Enabled = true;
                 checkPaid.Enabled = true;
 
+                cboxCust.Enabled = true;
                 cboxDog.Enabled = true;
                 cboxServices.Enabled = true;
                 lblOrderCancelled.Visible = order.Cancelled == 0 ? false : true;
@@ -128,6 +162,7 @@ namespace SSD_CW_20_21.gui
                 checkNails.Checked = order.Nails == 0 ? false : true;
                 checkTeeth.Checked = order.Teeth == 0 ? false : true;
 
+                cboxCust.Text = $"{dogAccess.getDogById(order.DogId).OwnerId} - {custAccess.getOwnerById(dogAccess.getDogById(order.DogId).OwnerId).Forename} {custAccess.getOwnerById(dogAccess.getDogById(order.DogId).OwnerId).Surname}";
                 cboxDog.Text = $"{order.DogId} - {dogAccess.getDogById(order.DogId).Name}";
                 cboxServices.Text = $"{serv.ServiceID} - {serv.Description}";
             }
@@ -144,6 +179,7 @@ namespace SSD_CW_20_21.gui
                 btnSelectStaff.Enabled = false;
                 btnSelectTime.Enabled = false;
 
+                cboxCust.Enabled = false;
                 cboxDog.Enabled = false;
                 cboxServices.Enabled = false;
                 checkDelDog.Enabled = false;
@@ -152,6 +188,7 @@ namespace SSD_CW_20_21.gui
                 checkPaid.Enabled = false;
                 checkTeeth.Enabled = false;
 
+                cboxCust.Text = $"{dogAccess.getDogById(order.DogId).OwnerId} - {custAccess.getOwnerById(dogAccess.getDogById(order.DogId).OwnerId).Forename} {custAccess.getOwnerById(dogAccess.getDogById(order.DogId).OwnerId).Surname}";
                 cboxDog.Text = $"{order.DogId} - {dogAccess.getDogById(order.DogId).Name}";
                 cboxServices.Text = $"{serv.ServiceID} - {serv.Description}";
                 checkDelDog.Checked = false;
@@ -184,25 +221,28 @@ namespace SSD_CW_20_21.gui
 
                 dtpDateTime.Value = DateTime.Now;
                 DateTime startTimedateTime = Convert.ToDateTime("09:00:00");
-                DateTime endTime = startTimedateTime.AddMinutes(serv.Time);
+                int time = serv.Time;
+                if (checkEars.Checked) time += Globals.extraEarsMinute;
+                if (checkNails.Checked) time += Globals.extraNailsMinute;
+                if (checkTeeth.Checked) time += Globals.extraTeethMinute;
+                DateTime endTime = startTimedateTime.AddMinutes(time);
 
-
-                while (startTimedateTime.Hour < 17)
+                while (startTimedateTime.Hour < 17 && endTime.Hour <= 17)
                 {
-                    rows[0] = $"{startTimedateTime.ToShortTimeString()}";
-                    if (!orders.Any()) rows[1] = "Yes";
-                    else
+                    rows[0] = startTimedateTime.ToShortTimeString();
+                    rows[1] = "Yes";
+                    foreach (Orders odr in orders)
                     {
-                        foreach (Orders odr in orders)
+                        if (odr.Date == order.Date)
                         {
-                            if (odr.Date == order.Date)
-                            {
-
-                            }
+                            if (Convert.ToDateTime(odr.StartTime) >= startTimedateTime && Convert.ToDateTime(odr.EndTime) >= endTime) rows[1] = "No (Another booking is taking place)";
+                            else continue;
                         }
+                        else continue;
                     }
                     dgvDateTime.Rows.Add(rows);
                     startTimedateTime = startTimedateTime.AddMinutes(15.0);
+                    endTime = startTimedateTime.AddMinutes(serv.Time);
                 }
                 foreach(DataGridViewRow row in dgvDateTime.Rows)
                 {
@@ -272,41 +312,36 @@ namespace SSD_CW_20_21.gui
                 dgvDateTime.Columns[0].Name = "Staff Member";
                 dgvDateTime.Columns[1].Name = "Availabilty";
 
-                string[] day = order.Date.Split('/'); // order date
-                string[] st = order.StartTime.Split(':'); // order start time
-                string[] et = order.EndTime.Split(':'); // order endtime
-                dtpDateTime.Value = new DateTime(Convert.ToInt32(day[2]), Convert.ToInt32(day[1]), Convert.ToInt32(day[0]), Convert.ToInt32(st[0]), Convert.ToInt32(st[1]), 00); // startTime
-                string start = $"{dtpDateTime.Value.Hour}:{dtpDateTime.Value.Minute}";
-                string date = dtpDateTime.Value.ToShortTimeString();
-                dtpDateTime.Value = new DateTime(Convert.ToInt32(day[2]), Convert.ToInt32(day[1]), Convert.ToInt32(day[0]), Convert.ToInt32(et[0]), Convert.ToInt32(et[1]), 00); // endTime 
-                string end = dtpDateTime.Value.ToShortTimeString();
+                DateTime date = Convert.ToDateTime(order.Date);
+                DateTime start = Convert.ToDateTime(order.StartTime);
+                DateTime end = getEndTime(start);
 
                 foreach (Staff staff in staffAccess.getAllStaff().FindAll(e => e.Deleted == 0))
                 {
                     rows[0] = $"{staff.Name}";
-                    rows[1] = "Available";
+                    rows[1] = "No";
                     foreach (Orders order in orders.FindAll(e => e.Cancelled == 0))
                     {
                         if (order.StaffId == staff.Id)
                         {
-                            if (order.Date == date)
+                            if (Convert.ToDateTime(order.Date) == date)
                             {
-                                if (order.StartTime == start && order.EndTime == end)
+                                if (Convert.ToDateTime(order.StartTime) == start && Convert.ToDateTime(order.EndTime) == end)
                                 {
-                                    rows[1] = $"Unavailable - Booking with {dogAccess.getDogById(order.DogId).Name}";
+                                    rows[1] = $"No - Booking with {dogAccess.getDogById(order.DogId).Name}";
                                 }
-                                else rows[1] = "Available";
+                                else rows[1] = "Yes";
                             }
-                            else rows[1] = "Available";
+                            else rows[1] = "Yes";
                         }
-                        else rows[1] = "Available";
+                        else rows[1] = "Yes";
                     }
                     dgvDateTime.Rows.Add(rows);
                 }
                 foreach (DataGridViewRow row in dgvDateTime.Rows)
                 {
                     string rowStr = row.Cells[1].Value == null ? "" : row.Cells[1].Value.ToString();
-                    if (rowStr == "Unavailable")
+                    if (rowStr.Contains("No"))
                     {
                         row.DefaultCellStyle.BackColor = Color.Red;
                     }
@@ -350,7 +385,7 @@ namespace SSD_CW_20_21.gui
             }
         }
 
-        private string getEndTime(bool add = false)
+        private DateTime getEndTime(DateTime start = new DateTime(), bool add = false)
         {
             string[] date = txtDate.Text.Split('/');
             string[] time = txtTime.Text.Split(':');
@@ -365,7 +400,7 @@ namespace SSD_CW_20_21.gui
                 List<Orders> tempOrders = orderAccess.getAllOrders().FindAll(e => e.DogId == order.DogId);
                 if (tempOrders.Count >= 1) min = min.AddMinutes(Globals.firstTimeMinute);
             }
-            return min.ToShortTimeString();
+            return min;
         }
         #endregion
 
@@ -396,7 +431,7 @@ namespace SSD_CW_20_21.gui
                 order.Ears = checkEars.Checked ? 1 : 0;
                 order.Nails = checkNails.Checked ? 1 : 0;
                 order.Teeth = checkTeeth.Checked ? 1 : 0;
-                order.EndTime = getEndTime(true);
+                order.EndTime = getEndTime().ToShortTimeString();
 
                 ServiceOrder so = new ServiceOrder(order.Id, serv.ServiceID);
 
@@ -450,7 +485,7 @@ namespace SSD_CW_20_21.gui
 
                 order.Date = txtDate.Text;
                 order.StartTime = txtTime.Text;
-                order.EndTime = getEndTime();
+                order.EndTime = getEndTime().ToShortTimeString();
 
                 DialogResult res = MessageBox.Show("Are you sure you want to update this order's details?", "Update Order?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
@@ -499,7 +534,7 @@ namespace SSD_CW_20_21.gui
 
         private void checkDelDog_CheckedChanged(object sender, EventArgs e)
         {
-            populateComboBox(true);
+            populateDogCbox(true);
         }
 
         private void btnView_Click(object sender, EventArgs e)
@@ -539,7 +574,7 @@ namespace SSD_CW_20_21.gui
                 string time = Convert.ToString(dgvDateTime.Rows[e.RowIndex].Cells[0].Value);
                 txtTime.Text = time;
                 order.StartTime = time;
-                order.EndTime = getEndTime(true);
+                order.EndTime = getEndTime().ToShortTimeString();
                 type = "";
                 populateDataGrid();
                 btnSelectStaff.Enabled = true;
@@ -558,6 +593,13 @@ namespace SSD_CW_20_21.gui
                 populateDataGrid();
             }
         }
+
+        private void cboxCust_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            populateDogCbox();
+        }
         #endregion
+
+
     }
 }

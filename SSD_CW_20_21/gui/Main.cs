@@ -16,7 +16,6 @@ namespace SSD_CW_20_21.gui
         public Main() : base()
         {
             InitializeComponent();
-            DB.Disconnect();
             showDbConn();
             Text = "JD Dog Care - Main Menu";
         }

@@ -12,6 +12,7 @@ namespace SSD_CW_20_21
         [STAThread]
         static void Main()
         {
+            Globals.database.Connect();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());

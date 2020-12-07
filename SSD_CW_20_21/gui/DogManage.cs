@@ -100,7 +100,7 @@ namespace SSD_CW_20_21.gui
                 DialogResult opt = MessageBox.Show("Are you sure these details are correct?", "Add Dog?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (opt == DialogResult.Yes)
                 {
-                    if (dogAccess.insertDog(new Dog(Convert.ToInt32(lblDogId.Text.Replace("#", string.Empty)), Convert.ToInt32(cboxDogOwner.Text.Replace(" ", string.Empty).Split('-')[1]), txtDogName.Text, cboxDogBreed.Text)))
+                    if (dogAccess.insertDog(new Dog(Convert.ToInt32(lblDogId.Text.Replace("#", string.Empty)), Convert.ToInt32(cboxDogOwner.Text.Replace(" ", string.Empty).Split('-')[1]), txtDogName.Text, cboxDogBreed.Text, cboxSize.Text)))
                     {
                         populateListBox();
                         changeMode("view");
