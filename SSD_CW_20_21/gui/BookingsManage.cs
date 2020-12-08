@@ -34,23 +34,22 @@ namespace SSD_CW_20_21.gui
         public BookingsManage() : base()
         {
             InitializeComponent();
-            dtpDateTime.Value = DateTime.Now;
             staffs = staffAccess.getAllStaff().FindAll(e => e.Deleted == 0);
             orders = orderAccess.getAllOrders().FindAll(e => Convert.ToDateTime(e.Date) > DateTime.Now);
             services = serviceAccess.getAllServices();
             serv = services.ToArray()[0];
             dogs = dogAccess.getAllDogs();
             custs = custAccess.getAllCustomers().FindAll(e => e.Deleted == 0);
-            if (orders.Count > 0) order = orders.ToArray()[0];
-            else order = new Orders(1, 1, 1, dtpDateTime.Value.ToShortDateString(), dtpDateTime.Value.ToShortTimeString(), dtpDateTime.Value.AddMinutes(serv.Time).ToShortTimeString(), 0, 0, 0, 1, 0);
+
+            dtpDateTime.Value = DateTime.Now;
 
             Text = "JD Dog Care - Add Bookings";
-            
+
+            changeMode("view");
             populateComboBox();
             txtStaff.Enabled = false;
             txtTime.Enabled = false;
             txtDate.Enabled = false;
-            changeMode("view");
         }
 
         #region Custom Methods
@@ -95,6 +94,7 @@ namespace SSD_CW_20_21.gui
 
         private void populateServCbox()
         {
+            List<Service> services = serviceAccess.getAllServices();
             cboxServices.Items.Clear();
             foreach (Service srv in services)
             {
@@ -107,6 +107,7 @@ namespace SSD_CW_20_21.gui
         {
             if (newMode == "add")
             {
+                order = new Orders();
                 mode = newMode;
 
                 dgvDateTime.Columns.Clear();
@@ -169,6 +170,8 @@ namespace SSD_CW_20_21.gui
             }
             else if (newMode == "view")
             {
+                if (orders.Count > 0) order = orders.ToArray()[0];
+                else order = new Orders(1, 1, 1, dtpDateTime.Value.ToShortDateString(), dtpDateTime.Value.ToShortTimeString(), dtpDateTime.Value.AddMinutes(serv.Time).ToShortTimeString(), 0, 0, 0, 1, 0);
                 mode = newMode;
 
                 dgvDateTime.Enabled = true;
@@ -236,7 +239,7 @@ namespace SSD_CW_20_21.gui
                     {
                         if (odr.Date == order.Date)
                         {
-                            if (Convert.ToDateTime(odr.StartTime) >= startTimedateTime && Convert.ToDateTime(odr.EndTime) >= endTime) rows[1] = "No (Another booking is taking place)";
+                            if (Convert.ToDateTime(odr.StartTime) >= startTimedateTime && Convert.ToDateTime(odr.EndTime) <= endTime) rows[1] = "No (Another booking is taking place)";
                             else continue;
                         }
                         else continue;
@@ -354,6 +357,7 @@ namespace SSD_CW_20_21.gui
             }
             else if (type == "orders")
             {
+                List<Orders> orders = orderAccess.getAllOrders();
                 dgvDateTime.ColumnCount = 10;
                 string[] rows = new string[dgvDateTime.ColumnCount];
                 dgvDateTime.Columns[0].Name = "Order ID";
@@ -600,6 +604,61 @@ namespace SSD_CW_20_21.gui
         }
         #endregion
 
+        private void checkNails_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkNails.Checked)
+            {
+                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
+                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
+                {
+                    MessageBox.Show("You cannot add the Extra Nails as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    checkNails.Checked = false;
+                    order.Nails = 0;
+                }
+                else
+                {
+                    order.EndTime = end.ToString();
+                    order.Nails = 1;
+                }
+            }
+        }
 
+        private void checkTeeth_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkTeeth.Checked)
+            {
+                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
+                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
+                {
+                    MessageBox.Show("You cannot add the Extra Teeth as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    checkTeeth.Checked = false;
+                    order.Teeth = 0;
+                }
+                else
+                {
+                    order.EndTime = end.ToString();
+                    order.Teeth = 1;
+                }
+            }
+        }
+
+        private void checkEars_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkEars.Checked)
+            {
+                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
+                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
+                {
+                    MessageBox.Show("You cannot add the Extra Ears as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    checkEars.Checked = false;
+                    order.Ears = 0;
+                }
+                else
+                {
+                    order.EndTime = end.ToString();
+                    order.Ears = 1;
+                }
+            }
+        }
     }
 }

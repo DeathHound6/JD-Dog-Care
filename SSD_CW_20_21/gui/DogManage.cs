@@ -10,12 +10,14 @@ namespace SSD_CW_20_21.gui
 {
     public partial class DogManage : Template
     {
+        #region Local Variables
         private DogDBAccess dogAccess = Globals.dogAccess;
         private CustomerDBAccess custAccess = Globals.custAccess;
         private OrderDBAccess orderAccess = Globals.orderAccess;
         private Dog dog;
         private string mode = "view";
         // view, edit, add
+        #endregion
 
         public DogManage() : base()
         {
@@ -29,6 +31,7 @@ namespace SSD_CW_20_21.gui
             changeMode("view");
         }
 
+        #region Events
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (mode != "edit")
@@ -122,7 +125,9 @@ namespace SSD_CW_20_21.gui
                 changeMode("view");
             }
         }
+        #endregion
 
+        #region Custom Methods
         private void changeMode(string newMode)
         {
             if (newMode == "view")
@@ -208,6 +213,7 @@ namespace SSD_CW_20_21.gui
 
             }
         }
+        #endregion
 
         private void lbSelectDog_SelectedIndexChanged(object sender, EventArgs e)
         {

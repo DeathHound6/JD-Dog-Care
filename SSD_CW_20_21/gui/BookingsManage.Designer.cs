@@ -266,6 +266,7 @@
             this.checkEars.TabIndex = 31;
             this.checkEars.Text = "Ears";
             this.checkEars.UseVisualStyleBackColor = true;
+            this.checkEars.CheckedChanged += new System.EventHandler(this.checkEars_CheckedChanged);
             // 
             // checkTeeth
             // 
@@ -277,6 +278,7 @@
             this.checkTeeth.TabIndex = 30;
             this.checkTeeth.Text = "Teeth";
             this.checkTeeth.UseVisualStyleBackColor = true;
+            this.checkTeeth.CheckedChanged += new System.EventHandler(this.checkTeeth_CheckedChanged);
             // 
             // checkNails
             // 
@@ -288,6 +290,7 @@
             this.checkNails.TabIndex = 29;
             this.checkNails.Text = "Nails";
             this.checkNails.UseVisualStyleBackColor = true;
+            this.checkNails.CheckedChanged += new System.EventHandler(this.checkNails_CheckedChanged);
             // 
             // label4
             // 
