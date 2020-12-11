@@ -26,9 +26,10 @@ namespace SSD_CW_20_21.gui
             InitializeComponent();
             dogs = dogAccess.getAllDogs().FindAll(e => e.Deleted == 0);
             Text = "JD Dog Care - Dogs";
-            
+
             populateListBox();
             populateComboBox();
+            cboxSearch.SelectedIndex = 0;
             
             changeMode("view");
         }
@@ -44,7 +45,8 @@ namespace SSD_CW_20_21.gui
             {
                 dog.Name = txtDogName.Text;
                 dog.Breed = cboxDogBreed.Text;
-                dog.OwnerId = Convert.ToInt32(cboxDogOwner.Text.Replace(" ", string.Empty).Split('-')[1]);
+                dog.HairLength = cboxHair.Text;
+                dog.OwnerId = Convert.ToInt32(cboxDogOwner.Text.Replace(" ", "").Split('-')[1]);
 
                 DialogResult opt = MessageBox.Show("Are you sure you want to update these details? They cannot be reversed", "Update dog", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (opt == DialogResult.Yes)
@@ -91,32 +93,45 @@ namespace SSD_CW_20_21.gui
             }
             else
             {
-                if (txtDogName.Text == string.Empty && cboxDogOwner.Text == string.Empty && cboxDogBreed.Text == string.Empty)
+                if (txtDogName.Text == "" && cboxDogOwner.Text == "" && cboxDogBreed.Text == "" && cboxHair.Text == "" && cboxAggression.Text == "")
                 {
                     throwDogException("The values of the input boxes must not be empty", "Empty Details");
                     return;
                 }
-                if (txtDogName.Text == string.Empty)
+                if (txtDogName.Text == "")
                 {
                     throwDogException("Enter the dog's name", "Dog Name");
                     return;
                 }
-                if (cboxDogOwner.Text == string.Empty)
+                if (cboxDogOwner.Text == "")
                 {
-                    MessageBox.Show("Select the dog's owner", "Dog Owner", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    throwDogException("Select the dog's owner", "Dog Owner");
                     return;
                 }
-                if (cboxDogBreed.Text == string.Empty)
+                if (cboxDogBreed.Text == "")
                 {
-                    MessageBox.Show("Select the dog's breed", "Dog Breed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    throwDogException("Select the dog's breed", "Dog Breed");
                     return;
                 }
+                if (dtpDOB.Value > dtpDOB.MaxDate)
+                {
+                    throwDogException("The dog is too young", "Dog too young");
+                    return;
+                }
+                if (dtpDOB.Value < dtpDOB.MinDate)
+                {
+                    throwDogException("The dog is too old", "Dog too old");
+                    return;
+                }
+
                 dog.Name = txtDogName.Text;
                 dog.OwnerId = getIdFromString(cboxDogOwner.Text);
                 dog.Breed = cboxDogBreed.Text;
                 dog.Aggression = cboxAggression.Text;
                 dog.Deleted = 0;
                 dog.Id = getIdFromString(lblDogId.Text);
+                dog.DOB = dtpDOB.Value.ToShortDateString();
+                dog.HairLength = cboxHair.Text;
 
                 DialogResult opt = MessageBox.Show("Are you sure these details are correct?", "Add Dog?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (opt == DialogResult.Yes)
@@ -154,17 +169,32 @@ namespace SSD_CW_20_21.gui
             }
         }
 
-        private void txtDogName_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
         private void dtpDOB_ValueChanged(object sender, EventArgs e)
         {
             dog.DOB = dtpDOB.Value.ToShortDateString();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs ev)
+        {
+            if (cboxSearch.Text.ToLower() == "dog")
+            {
+                dogs = dogAccess.getAllDogs().FindAll(e => e.Deleted == 0 && e.Name.ToLower().Contains(txtSearch.Text.ToLower()));
+            }
+            else
+            {
+                dogs = dogAccess.getAllDogs().FindAll(e => {
+                    Customer cust = custAccess.getOwnerById(e.OwnerId);
+                    return e.Deleted == 0 && $"{cust.Forename} {cust.Surname}".ToLower().Contains(txtSearch.Text.ToLower());
+                });
+            }
+            populateListBox();
+        }
+
+        private void cboxSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtSearch.Text = "";
+            if (cboxSearch.Text == "") txtSearch.Enabled = false;
+            else txtSearch.Enabled = true;
         }
         #endregion
 
@@ -173,27 +203,49 @@ namespace SSD_CW_20_21.gui
         {
             if (newMode == "view")
             {
+                if (dog == null)
+                {
+                    if (dogs.Count > 0) dog = dogs.ToArray()[0];
+                    else
+                    {
+                        dog = new Dog();
+                        dog.Id = dogs.Count + 1;
+                        dog.OwnerId = 1;
+                        dog.Aggression = "";
+                        dog.Breed = "";
+                        dog.DOB = "";
+                        dog.HairLength = "";
+                        dog.Name = "";
+                        dog.Deleted = 0;
+                    }
+                }
                 mode = newMode;
+
+                dtpDOB.MaxDate = DateTime.Now.AddDays(7 * -8); // 7 days per week * -8 weeks (8 weeks subtracted)
+                dtpDOB.MinDate = dtpDOB.MaxDate.AddYears(-20); // dogs usually live 15-20 years
 
                 txtDogName.Enabled = false;
                 cboxDogBreed.Enabled = false;
                 cboxDogOwner.Enabled = false;
                 cboxAggression.Enabled = false;
-
                 btnCancel.Enabled = false;
                 btnAdd.Enabled = true;
                 btnDelete.Enabled = false;
-                btnUpdate.Enabled = true;
+                if (dogs.Count > 0) btnUpdate.Enabled = true;
+                else btnUpdate.Enabled = false;
                 lbSelectDog.Enabled = true;
+                dtpDOB.Enabled = false;
+                cboxHair.Enabled = false;
+                cboxSearch.Enabled = true;
+                //txtSearch.Enabled = true;
 
                 lblDogId.Text = $"#{dog.Id}";
                 txtDogName.Text = dog.Name;
                 cboxDogBreed.Text = dog.Breed;
+
                 Customer cust = custAccess.getOwnerById(dog.OwnerId);
-                cboxDogOwner.Text = $"{cust.Forename} {cust.Surname} - {cust.Id}";
-                if (cust.Deleted == 1) cboxDogOwner.Text += " [Deleted]";
-                if (dog.Deleted == 1) lblDogDeleted.Visible = true;
-                else lblDogDeleted.Visible = false;
+                cboxDogOwner.Text = $"{cust.Forename} {cust.Surname}";
+
                 cboxAggression.Text = dog.Aggression;
                 btnAdd.Text = "Add New Dog";
                 btnUpdate.Text = "Edit Current Dog";
@@ -211,23 +263,28 @@ namespace SSD_CW_20_21.gui
                 cboxDogBreed.Enabled = true;
                 cboxDogOwner.Enabled = true;
                 cboxAggression.Enabled = true;
-
-                txtDogName.Text = "";
-                cboxDogBreed.Text = "";
-                cboxDogOwner.Text = "";
-                lblDogId.Text = $"#{dog.Id}";
-                lblDogDeleted.Visible = false;
-                cboxAggression.Text = "";
-                btnAdd.Text = "Save New Dog";
-                btnCancel.Text = "Cancel New Dog";
-                btnDelete.Text = "";
-                btnUpdate.Text = "";
-
+                cboxHair.Enabled = true;
+                dtpDOB.Enabled = true;
                 btnCancel.Enabled = true;
                 btnAdd.Enabled = true;
                 btnDelete.Enabled = false;
                 btnUpdate.Enabled = false;
                 lbSelectDog.Enabled = false;
+                txtSearch.Enabled = false;
+                cboxSearch.Enabled = false;
+
+                txtSearch.Text = "";
+                cboxSearch.Text = "";
+                txtDogName.Text = "";
+                cboxDogBreed.Text = "";
+                cboxDogOwner.Text = "";
+                lblDogId.Text = $"#{dog.Id}";
+                cboxHair.Text = "";
+                cboxAggression.Text = "";
+                btnAdd.Text = "Save New Dog";
+                btnCancel.Text = "Cancel New Dog";
+                btnDelete.Text = "";
+                btnUpdate.Text = "";
             }
             else if (newMode == "edit")
             {
@@ -236,17 +293,6 @@ namespace SSD_CW_20_21.gui
                     MessageBox.Show("Select a dog to edit first", "Select a dog", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     changeMode("view");
                     return;
-                }
-
-                if (dog.Deleted == 1)
-                {
-                    lblDogDeleted.Visible = true;
-                    changeMode("view");
-                    return;
-                }
-                else
-                {
-                    lblDogDeleted.Visible = false;
                 }
                 mode = newMode;
 
@@ -260,12 +306,19 @@ namespace SSD_CW_20_21.gui
                 btnCancel.Text = "Cancel Edit Dog";
                 btnDelete.Text = "Delete Dog";
                 btnUpdate.Text = "Save Changes";
+                dtpDOB.Value = Convert.ToDateTime(dog.DOB);
+                cboxHair.Text = dog.HairLength;
+                txtSearch.Text = "";
+                cboxSearch.Text = "";
 
+                cboxSearch.Enabled = false;
+                txtSearch.Enabled = false;
+                cboxHair.Enabled = true;
                 txtDogName.Enabled = true;
                 cboxDogBreed.Enabled = true;
                 cboxDogOwner.Enabled = true;
                 cboxAggression.Enabled = true;
-
+                dtpDOB.Enabled = true;
                 btnCancel.Enabled = true;
                 btnAdd.Enabled = false;
                 btnDelete.Enabled = true;
@@ -294,6 +347,8 @@ namespace SSD_CW_20_21.gui
             cboxDogBreed.Items.Clear();
             cboxDogOwner.Items.Clear();
             cboxAggression.Items.Clear();
+            cboxHair.Items.Clear();
+            cboxSearch.Items.Clear();
 
             List<Customer> owners = custAccess.getAllCustomers().FindAll(e => e.Deleted == 0);
             foreach (Customer owner in owners)
@@ -307,12 +362,23 @@ namespace SSD_CW_20_21.gui
                 cboxDogBreed.Items.Add(breed);
             }
 
-            string[] arr = { "Low", "Medium", "High" };
-            foreach (string a in arr)
+            string[] aggressions = { "Low", "Medium", "High" };
+            foreach (string aggression in aggressions)
             {
-                cboxAggression.Items.Add(a);
+                cboxAggression.Items.Add(aggression);
             }
-            cboxAggression.Text = "";
+
+            string[] lengths = { "Short", "Medium", "Long" };
+            foreach (string length in lengths)
+            {
+                cboxHair.Items.Add(length);
+            }
+
+            string[] search = { "Owner", "Dog" };
+            foreach (string txt in search)
+            {
+                cboxSearch.Items.Add(txt);
+            }
         }
 
         private int getIdFromString(string str)
@@ -332,7 +398,5 @@ namespace SSD_CW_20_21.gui
             }
         }
         #endregion
-
-        
     }
 }

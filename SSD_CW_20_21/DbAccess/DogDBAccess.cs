@@ -28,7 +28,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool updateDog(Dog dog)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"UPDATE DOG SET Name = '{dog.Name}', Deleted = {dog.Deleted}, OwnerID = {dog.OwnerId}, Breed = '{dog.Breed}', Aggression = '{dog.Aggression}' WHERE DogID = {dog.Id}";
+            Db.Command.CommandText = $"UPDATE DOG SET Name = '{dog.Name}', Deleted = {dog.Deleted}, OwnerID = {dog.OwnerId}, Breed = '{dog.Breed}', Aggression = '{dog.Aggression}', DOB = '{dog.DOB}', HairLength = '{dog.HairLength}' WHERE DogID = {dog.Id}";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -44,7 +44,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool insertDog(Dog dog)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"INSERT INTO DOG (DogID, OwnerID, Name, Breed, Agression, Deleted) VALUES ({dog.Id}, {dog.OwnerId}, '{dog.Name}', '{dog.Breed}', '{dog.Aggression}', {dog.Deleted})";
+            Db.Command.CommandText = $"INSERT INTO DOG (DogID, OwnerID, Name, Breed, Aggression, DOB, HairLength, Deleted) VALUES ({dog.Id}, {dog.OwnerId}, '{dog.Name}', '{dog.Breed}', '{dog.Aggression}', '{dog.DOB}', '{dog.HairLength}', {dog.Deleted})";
             try
             {
                 Db.Command.ExecuteNonQuery();
