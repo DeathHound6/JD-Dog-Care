@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Custom\Exceptions\DogException.cs" />
     <Compile Include="DbAccess\CustomerDBAccess.cs" />
     <Compile Include="DbAccess\DogDBAccess.cs" />
     <Compile Include="DbAccess\OrderDBAccess.cs" />

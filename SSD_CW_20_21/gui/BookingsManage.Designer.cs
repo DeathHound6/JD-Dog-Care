@@ -333,6 +333,7 @@
             this.cboxServices.Name = "cboxServices";
             this.cboxServices.Size = new System.Drawing.Size(278, 28);
             this.cboxServices.TabIndex = 25;
+            this.cboxServices.SelectedIndexChanged += new System.EventHandler(this.cboxServices_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -463,13 +464,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(970, 612);
+            this.ClientSize = new System.Drawing.Size(800, 577);
             this.Controls.Add(this.dtpDateTime);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.lblOrderCancelled);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "BookingsManage";
             this.Text = "BookingsManage";
             this.Controls.SetChildIndex(this.lblOrderCancelled, 0);

@@ -28,7 +28,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool updateDog(Dog dog)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"UPDATE DOG SET Name = '{dog.Name}', Deleted = {dog.Deleted}, OwnerID = {dog.OwnerId}, Breed = '{dog.Breed}' WHERE DogID = {dog.Id}";
+            Db.Command.CommandText = $"UPDATE DOG SET Name = '{dog.Name}', Deleted = {dog.Deleted}, OwnerID = {dog.OwnerId}, Breed = '{dog.Breed}', Aggression = '{dog.Aggression}' WHERE DogID = {dog.Id}";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -44,7 +44,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool insertDog(Dog dog)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"INSERT INTO DOG (DogID, OwnerID, Name, Breed, Size, Deleted) VALUES ({dog.Id}, {dog.OwnerId}, '{dog.Name}', '{dog.Breed}', '{dog.Size}', {dog.Deleted})";
+            Db.Command.CommandText = $"INSERT INTO DOG (DogID, OwnerID, Name, Breed, Agression, Deleted) VALUES ({dog.Id}, {dog.OwnerId}, '{dog.Name}', '{dog.Breed}', '{dog.Aggression}', {dog.Deleted})";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -73,7 +73,16 @@ namespace SSD_CW_20_21.DbAccess
 
         private Dog getDogFromReader(SqlDataReader rdr)
         {
-            return new Dog(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(4));
+            Dog dog = new Dog();
+            dog.Id = rdr.GetInt32(0);
+            dog.OwnerId = rdr.GetInt32(1);
+            dog.Name = rdr.GetString(2);
+            dog.Breed = rdr.GetString(3);
+            dog.Aggression = rdr.GetString(4);
+            dog.DOB = rdr.GetString(5);
+            dog.HairLength = rdr.GetString(6);
+            dog.Deleted = rdr.GetInt32(7);
+            return dog;
         }
     }
 }

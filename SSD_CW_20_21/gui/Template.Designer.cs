@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Template));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolstripMenuMain = new System.Windows.Forms.ToolStripTextBox();
             this.toolstripMenuSubsystems = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,28 +46,25 @@
             // 
             // menuStrip1
             // 
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.BackColor = System.Drawing.Color.Cyan;
             this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolstripMenuMain,
             this.toolstripMenuSubsystems});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(970, 27);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // toolstripMenuMain
             // 
-            this.toolstripMenuMain.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.toolstripMenuMain, "toolstripMenuMain");
             this.toolstripMenuMain.Name = "toolstripMenuMain";
-            this.toolstripMenuMain.Size = new System.Drawing.Size(73, 23);
-            this.toolstripMenuMain.Text = "Main Menu";
+            this.toolstripMenuMain.ReadOnly = true;
             this.toolstripMenuMain.Click += new System.EventHandler(this.toolstripMenuMain_Click);
             // 
             // toolstripMenuSubsystems
             // 
+            resources.ApplyResources(this.toolstripMenuSubsystems, "toolstripMenuSubsystems");
             this.toolstripMenuSubsystems.BackColor = System.Drawing.SystemColors.Control;
             this.toolstripMenuSubsystems.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolstripTxtGrooming,
@@ -74,90 +72,73 @@
             this.toolstripTxtTraining,
             this.toolstripTxtDaycare,
             this.toolstripTxtMobile});
-            this.toolstripMenuSubsystems.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolstripMenuSubsystems.Name = "toolstripMenuSubsystems";
-            this.toolstripMenuSubsystems.Size = new System.Drawing.Size(89, 23);
-            this.toolstripMenuSubsystems.Text = "Sub Systems";
             // 
             // toolstripTxtGrooming
             // 
+            resources.ApplyResources(this.toolstripTxtGrooming, "toolstripTxtGrooming");
             this.toolstripTxtGrooming.Name = "toolstripTxtGrooming";
-            this.toolstripTxtGrooming.Size = new System.Drawing.Size(100, 23);
-            this.toolstripTxtGrooming.Text = "Grooming";
+            this.toolstripTxtGrooming.ReadOnly = true;
             this.toolstripTxtGrooming.Click += new System.EventHandler(this.toolstripTxtGrooming_Click);
             // 
             // toolstripTxtWalking
             // 
+            resources.ApplyResources(this.toolstripTxtWalking, "toolstripTxtWalking");
             this.toolstripTxtWalking.Name = "toolstripTxtWalking";
-            this.toolstripTxtWalking.Size = new System.Drawing.Size(100, 23);
-            this.toolstripTxtWalking.Text = "Dog Walking";
+            this.toolstripTxtWalking.ReadOnly = true;
             this.toolstripTxtWalking.Click += new System.EventHandler(this.toolstripTxtWalking_Click);
             // 
             // toolstripTxtTraining
             // 
+            resources.ApplyResources(this.toolstripTxtTraining, "toolstripTxtTraining");
             this.toolstripTxtTraining.Name = "toolstripTxtTraining";
-            this.toolstripTxtTraining.Size = new System.Drawing.Size(160, 23);
-            this.toolstripTxtTraining.Text = "Dog Training";
+            this.toolstripTxtTraining.ReadOnly = true;
             this.toolstripTxtTraining.Click += new System.EventHandler(this.toolstripTxtTraining_Click);
             // 
             // toolstripTxtDaycare
             // 
+            resources.ApplyResources(this.toolstripTxtDaycare, "toolstripTxtDaycare");
             this.toolstripTxtDaycare.Name = "toolstripTxtDaycare";
-            this.toolstripTxtDaycare.Size = new System.Drawing.Size(100, 23);
-            this.toolstripTxtDaycare.Text = "Day Care";
+            this.toolstripTxtDaycare.ReadOnly = true;
             this.toolstripTxtDaycare.Click += new System.EventHandler(this.toolstripTxtDaycare_Click);
             // 
             // toolstripTxtMobile
             // 
+            resources.ApplyResources(this.toolstripTxtMobile, "toolstripTxtMobile");
             this.toolstripTxtMobile.Name = "toolstripTxtMobile";
-            this.toolstripTxtMobile.Size = new System.Drawing.Size(305, 23);
-            this.toolstripTxtMobile.Text = "Collection, Delivery and Mobile Grooming";
+            this.toolstripTxtMobile.ReadOnly = true;
             this.toolstripTxtMobile.Click += new System.EventHandler(this.toolstripTxtMobile_Click);
             // 
             // lblDbConn
             // 
-            this.lblDbConn.AutoSize = true;
+            resources.ApplyResources(this.lblDbConn, "lblDbConn");
             this.lblDbConn.BackColor = System.Drawing.Color.Transparent;
-            this.lblDbConn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDbConn.ForeColor = System.Drawing.Color.Green;
-            this.lblDbConn.Location = new System.Drawing.Point(9, 17);
             this.lblDbConn.Name = "lblDbConn";
-            this.lblDbConn.Size = new System.Drawing.Size(175, 16);
-            this.lblDbConn.TabIndex = 3;
-            this.lblDbConn.Text = "Database Disconnected";
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.Cyan;
             this.panel1.Controls.Add(this.lblDbConn);
-            this.panel1.Location = new System.Drawing.Point(0, 570);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(970, 42);
-            this.panel1.TabIndex = 4;
             // 
             // btnExit
             // 
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(825, 507);
+            resources.ApplyResources(this.btnExit, "btnExit");
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(133, 57);
-            this.btnExit.TabIndex = 5;
-            this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // Template
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(970, 612);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Template";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Template";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Template_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Template_FormClosed);
             this.menuStrip1.ResumeLayout(false);

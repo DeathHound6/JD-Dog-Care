@@ -2,6 +2,7 @@
 using SSD_CW_20_21.DbAccess;
 using SSD_CW_20_21.Objects;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace SSD_CW_20_21.gui
 {
@@ -40,6 +41,11 @@ namespace SSD_CW_20_21.gui
                 rows[2] = order.Date;
                 rows[3] = order.StartTime;
                 dgvOrders.Rows.Add(rows);
+            }
+            
+            foreach (DataGridViewColumn col in dgvOrders.Columns)
+            {
+                col.Width = dgvOrders.Size.Width / dgvOrders.Columns.Count;
             }
         }
 

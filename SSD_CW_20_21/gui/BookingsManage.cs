@@ -2,7 +2,6 @@
 using SSD_CW_20_21.Objects;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Drawing;
@@ -269,21 +268,25 @@ namespace SSD_CW_20_21.gui
                 dgvDateTime.Columns[1].Name = "Availabilty";
 
                 dtpDateTime.Value = DateTime.Now;
-                DateTime date = dtpDateTime.Value;
-                DateTime min = dtpDateTime.MinDate;
-                DateTime max = dtpDateTime.MaxDate;
+                DateTime min = dtpDateTime.Value;
+                DateTime max = min.AddYears(1);
 
                 while (min < max)
                 {
-                    rows[0] = date.ToShortDateString();
+                    if (dtpDateTime.Value.AddDays(3) >= min)
+                    {
+                        min = min.AddDays(1);
+                        continue;
+                    }
+                    rows[0] = min.ToShortDateString();
                     if (!orders.Any()) rows[1] = "Yes";
-                    if (DateSystem.IsPublicHoliday(date, CountryCode.GB)) rows[1] = "No - Public Holiday";
-                    if (DateSystem.IsWeekend(date, CountryCode.GB)) rows[1] = "No - Weekend";
+                    if (DateSystem.IsPublicHoliday(min, CountryCode.GB)) rows[1] = "No - Public Holiday";
+                    else if (DateSystem.IsWeekend(min, CountryCode.GB)) rows[1] = "No - Weekend";
                     else
                     {
                         foreach (Orders order in orders)
                         {
-                            if (date.ToShortDateString() == order.Date && getIdFromString(cboxDog.Text) == order.DogId)
+                            if (min.ToShortDateString() == order.Date && getIdFromString(cboxDog.Text) == order.DogId)
                             {
                                 rows[1] = $"No - {dogAccess.getDogById(order.DogId).Name} is already booked in for this day";
                                 break;
@@ -291,9 +294,8 @@ namespace SSD_CW_20_21.gui
                             else rows[1] = "Yes";
                         }
                     }
-                    rows[0] += $"({date.DayOfWeek})";
+                    rows[0] += $"({min.DayOfWeek})";
                     dgvDateTime.Rows.Add(rows);
-                    date = date.AddDays(1);
                     min = min.AddDays(1);
                 }
                 foreach (DataGridViewRow row in dgvDateTime.Rows)
@@ -324,22 +326,35 @@ namespace SSD_CW_20_21.gui
                 {
                     rows[0] = $"{staff.Name}";
                     rows[1] = "Yes";
-                    foreach (Orders order in orders.FindAll(e => e.Cancelled == 0))
+                    bool staffAvailableOnOrderDay = false;
+                    foreach (string day in staff.WorkingDays.Split(','))
                     {
-                        if (order.StaffId == staff.Id)
+                        if (date.DayOfWeek.ToString().Contains(day))
                         {
-                            if (Convert.ToDateTime(order.Date) == date)
+                            staffAvailableOnOrderDay = true;
+                            break;
+                        }
+                    }
+                    if (staffAvailableOnOrderDay)
+                    {
+                        foreach (Orders order in orders.FindAll(e => e.Cancelled == 0))
+                        {
+                            if (order.StaffId == staff.Id)
                             {
-                                if (Convert.ToDateTime(order.StartTime) == start && Convert.ToDateTime(order.EndTime) == end)
+                                if (Convert.ToDateTime(order.Date) == date)
                                 {
-                                    rows[1] = $"No - Booking with {dogAccess.getDogById(order.DogId).Name}";
+                                    if (Convert.ToDateTime(order.StartTime) == start && Convert.ToDateTime(order.EndTime) == end)
+                                    {
+                                        rows[1] = $"No - Booking with {dogAccess.getDogById(order.DogId).Name}";
+                                    }
+                                    else rows[1] = "Yes";
                                 }
                                 else rows[1] = "Yes";
                             }
                             else rows[1] = "Yes";
                         }
-                        else rows[1] = "Yes";
                     }
+                    else rows[1] = "No - Not working on this day";
                     dgvDateTime.Rows.Add(rows);
                 }
                 foreach (DataGridViewRow row in dgvDateTime.Rows)
@@ -387,6 +402,10 @@ namespace SSD_CW_20_21.gui
                     rows[9] = order.Paid == 0 ? "No" : "Yes";
                     dgvDateTime.Rows.Add(rows);
                 }
+            }
+            foreach (DataGridViewColumn col in dgvDateTime.Columns)
+            {
+                col.Width = dgvDateTime.Size.Width / dgvDateTime.Columns.Count;
             }
         }
 
@@ -452,6 +471,63 @@ namespace SSD_CW_20_21.gui
                         MessageBox.Show("Something went wrong when recording the order. Please try again in a few minutes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+                }
+            }
+        }
+
+        private void checkNails_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkNails.Checked && order.StartTime != null)
+            {
+                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
+                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
+                {
+                    MessageBox.Show("You cannot add the Extra Nails as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    checkNails.Checked = false;
+                    order.Nails = 0;
+                }
+                else
+                {
+                    order.EndTime = end.ToString();
+                    order.Nails = 1;
+                }
+            }
+        }
+
+        private void checkTeeth_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkTeeth.Checked && order.StartTime != null)
+            {
+                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
+                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
+                {
+                    MessageBox.Show("You cannot add the Extra Teeth as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    checkTeeth.Checked = false;
+                    order.Teeth = 0;
+                }
+                else
+                {
+                    order.EndTime = end.ToString();
+                    order.Teeth = 1;
+                }
+            }
+        }
+
+        private void checkEars_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkEars.Checked && order.StartTime != null)
+            {
+                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
+                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
+                {
+                    MessageBox.Show("You cannot add the Extra Ears as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    checkEars.Checked = false;
+                    order.Ears = 0;
+                }
+                else
+                {
+                    order.EndTime = end.ToString();
+                    order.Ears = 1;
                 }
             }
         }
@@ -549,6 +625,7 @@ namespace SSD_CW_20_21.gui
         private void dgvDateTime_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1) return;
+            if (dgvDateTime.Rows[e.RowIndex].Cells[0].Value == null) return;
             if (type == "orders")
             {
                 btnUpdate.Enabled = true;
@@ -602,63 +679,14 @@ namespace SSD_CW_20_21.gui
         {
             populateDogCbox();
         }
+
+        private void cboxServices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Service srv = serviceAccess.getServiceById(getIdFromString(cboxServices.GetItemText(cboxServices.SelectedItem)));
+
+        }
         #endregion
 
-        private void checkNails_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkNails.Checked)
-            {
-                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
-                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
-                {
-                    MessageBox.Show("You cannot add the Extra Nails as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    checkNails.Checked = false;
-                    order.Nails = 0;
-                }
-                else
-                {
-                    order.EndTime = end.ToString();
-                    order.Nails = 1;
-                }
-            }
-        }
 
-        private void checkTeeth_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkTeeth.Checked)
-            {
-                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
-                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
-                {
-                    MessageBox.Show("You cannot add the Extra Teeth as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    checkTeeth.Checked = false;
-                    order.Teeth = 0;
-                }
-                else
-                {
-                    order.EndTime = end.ToString();
-                    order.Teeth = 1;
-                }
-            }
-        }
-
-        private void checkEars_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkEars.Checked)
-            {
-                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
-                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
-                {
-                    MessageBox.Show("You cannot add the Extra Ears as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    checkEars.Checked = false;
-                    order.Ears = 0;
-                }
-                else
-                {
-                    order.EndTime = end.ToString();
-                    order.Ears = 1;
-                }
-            }
-        }
     }
 }

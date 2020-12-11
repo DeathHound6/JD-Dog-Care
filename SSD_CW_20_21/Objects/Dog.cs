@@ -5,20 +5,24 @@
         private int id;
         private int ownerId;
         private string name;
+        private string dob;
         private string breed;
-        private string size;
+        private string aggression;
+        private string hairLength;
         private int deleted;
 
         public Dog() { }
 
-        public Dog(int id, int ownerId, string name, string breed, string size)
+        public Dog(int id, int ownerId, string name, string dob, string breed, string aggression, string hairLength, int deleted)
         {
             Id = id;
             OwnerId = ownerId;
             Name = name;
+            DOB = dob;
             Breed = breed;
-            Size = size;
-            Deleted = 0;
+            Aggression = aggression;
+            HairLength = hairLength;
+            Deleted = deleted;
         }
 
         public int Id
@@ -39,16 +43,28 @@
             set { name = value; }
         }
 
+        public string DOB
+        {
+            get { return dob; }
+            set { dob = value; }
+        }
+
         public string Breed
         {
             get { return breed; }
             set { breed = value; }
         }
 
-        public string Size
+        public string Aggression
         {
-            get { return size; }
-            set { size = value; }
+            get { return aggression; }
+            set { aggression = value; }
+        }
+
+        public string HairLength
+        {
+            get { return hairLength; }
+            set { hairLength = value; }
         }
 
         public int Deleted

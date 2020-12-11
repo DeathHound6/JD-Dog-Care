@@ -31,6 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cboxAggression = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.cboxDogBreed = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cboxDogOwner = new System.Windows.Forms.ComboBox();
@@ -46,8 +48,8 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbSelectDog = new System.Windows.Forms.ListBox();
-            this.cboxSize = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.dtpDOB = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -78,7 +80,9 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel2.Controls.Add(this.cboxSize);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.dtpDOB);
+            this.panel2.Controls.Add(this.cboxAggression);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.cboxDogBreed);
             this.panel2.Controls.Add(this.label6);
@@ -93,11 +97,31 @@
             this.panel2.Size = new System.Drawing.Size(613, 323);
             this.panel2.TabIndex = 12;
             // 
+            // cboxAggression
+            // 
+            this.cboxAggression.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxAggression.FormattingEnabled = true;
+            this.cboxAggression.Location = new System.Drawing.Point(131, 188);
+            this.cboxAggression.Name = "cboxAggression";
+            this.cboxAggression.Size = new System.Drawing.Size(278, 21);
+            this.cboxAggression.TabIndex = 25;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label5.Location = new System.Drawing.Point(8, 189);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(104, 20);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Aggression:";
+            // 
             // cboxDogBreed
             // 
             this.cboxDogBreed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxDogBreed.FormattingEnabled = true;
-            this.cboxDogBreed.Location = new System.Drawing.Point(116, 202);
+            this.cboxDogBreed.Location = new System.Drawing.Point(131, 138);
             this.cboxDogBreed.Name = "cboxDogBreed";
             this.cboxDogBreed.Size = new System.Drawing.Size(278, 21);
             this.cboxDogBreed.TabIndex = 23;
@@ -117,7 +141,7 @@
             // 
             this.cboxDogOwner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxDogOwner.FormattingEnabled = true;
-            this.cboxDogOwner.Location = new System.Drawing.Point(116, 107);
+            this.cboxDogOwner.Location = new System.Drawing.Point(131, 88);
             this.cboxDogOwner.Name = "cboxDogOwner";
             this.cboxDogOwner.Size = new System.Drawing.Size(278, 21);
             this.cboxDogOwner.TabIndex = 21;
@@ -125,17 +149,19 @@
             // txtDogName
             // 
             this.txtDogName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDogName.Location = new System.Drawing.Point(116, 49);
+            this.txtDogName.Location = new System.Drawing.Point(131, 49);
             this.txtDogName.Name = "txtDogName";
+            this.txtDogName.ShortcutsEnabled = false;
             this.txtDogName.Size = new System.Drawing.Size(278, 22);
             this.txtDogName.TabIndex = 18;
+            this.txtDogName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDogName_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(8, 203);
+            this.label4.Location = new System.Drawing.Point(8, 139);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 20);
             this.label4.TabIndex = 15;
@@ -146,7 +172,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(8, 107);
+            this.label3.Location = new System.Drawing.Point(8, 88);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 20);
             this.label3.TabIndex = 13;
@@ -254,31 +280,30 @@
             this.lbSelectDog.TabIndex = 0;
             this.lbSelectDog.SelectedIndexChanged += new System.EventHandler(this.lbSelectDog_SelectedIndexChanged);
             // 
-            // cboxSize
+            // dtpDOB
             // 
-            this.cboxSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxSize.FormattingEnabled = true;
-            this.cboxSize.Location = new System.Drawing.Point(116, 151);
-            this.cboxSize.Name = "cboxSize";
-            this.cboxSize.Size = new System.Drawing.Size(278, 21);
-            this.cboxSize.TabIndex = 25;
+            this.dtpDOB.Location = new System.Drawing.Point(131, 238);
+            this.dtpDOB.Name = "dtpDOB";
+            this.dtpDOB.Size = new System.Drawing.Size(200, 20);
+            this.dtpDOB.TabIndex = 26;
+            this.dtpDOB.ValueChanged += new System.EventHandler(this.dtpDOB_ValueChanged);
             // 
-            // label5
+            // label7
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label5.Location = new System.Drawing.Point(8, 152);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 20);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "Size:";
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label7.Location = new System.Drawing.Point(8, 238);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(117, 20);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "Date of Birth:";
             // 
             // DogManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(970, 612);
+            this.ClientSize = new System.Drawing.Size(973, 615);
             this.Controls.Add(this.lblDogDeleted);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
@@ -319,7 +344,9 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ListBox lbSelectDog;
         private System.Windows.Forms.Label lblDogDeleted;
-        private System.Windows.Forms.ComboBox cboxSize;
+        private System.Windows.Forms.ComboBox cboxAggression;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DateTimePicker dtpDOB;
     }
 }
