@@ -40,12 +40,16 @@ namespace SSD_CW_20_21.gui
             dogs = dogAccess.getAllDogs();
             custs = custAccess.getAllCustomers().FindAll(e => e.Deleted == 0);
 
+            dtpRoomView.MinDate = DateTime.Today;
+            dtpRoomView.Value = DateTime.Now;
             dtpDateTime.Value = DateTime.Now;
 
             Text = "JD Dog Care - Add Bookings";
 
             changeMode("view");
             populateComboBox();
+            type = "orders";
+            populateDataGrid();
             txtStaff.Enabled = false;
             txtTime.Enabled = false;
             txtDate.Enabled = false;
@@ -55,8 +59,8 @@ namespace SSD_CW_20_21.gui
         private void populateComboBox()
         {
             populateServCbox();
-            populateCustCbox();
-            populateDogCbox();
+            populateCustCbox(checkDelCust.Checked);
+            populateDogCbox(checkDelDog.Checked);
         }
 
         private void populateCustCbox(bool del = false)
@@ -80,6 +84,7 @@ namespace SSD_CW_20_21.gui
             {
                 cboxDog.Items.Add($"{dog.Id} - {dog.Name}");
             }
+
             try
             {
                 cboxDog.Text = cboxDog.Items[0].ToString();
@@ -109,8 +114,19 @@ namespace SSD_CW_20_21.gui
                 order = new Orders();
                 mode = newMode;
 
-                dgvDateTime.Columns.Clear();
-                dgvDateTime.Rows.Clear();
+                dgvSelect.Visible = false;
+                dgvRoomOne.Visible = true;
+                dgvRoomTwo.Visible = true;
+                dgvRoomThree.Visible = true;
+
+                dgvRoomOne.Columns.Clear();
+                dgvRoomOne.Rows.Clear();
+                dgvRoomTwo.Columns.Clear();
+                dgvRoomTwo.Rows.Clear();
+                dgvRoomThree.Columns.Clear();
+                dgvRoomThree.Rows.Clear();
+                dgvSelect.Columns.Clear();
+                dgvSelect.Rows.Clear();
 
                 btnUpdate.Enabled = false;
                 btnDelete.Enabled = false;
@@ -140,6 +156,11 @@ namespace SSD_CW_20_21.gui
             else if (newMode == "edit")
             {
                 mode = newMode;
+
+                dgvSelect.Visible = false;
+                dgvRoomOne.Visible = true;
+                dgvRoomTwo.Visible = true;
+                dgvRoomThree.Visible = true;
 
                 btnAdd.Enabled = false;
                 btnDelete.Enabled = true;
@@ -173,7 +194,12 @@ namespace SSD_CW_20_21.gui
                 else order = new Orders(1, 1, 1, dtpDateTime.Value.ToShortDateString(), dtpDateTime.Value.ToShortTimeString(), dtpDateTime.Value.AddMinutes(serv.Time).ToShortTimeString(), 0, 0, 0, 1, 0);
                 mode = newMode;
 
-                dgvDateTime.Enabled = true;
+                dgvSelect.Visible = false;
+                dgvRoomOne.Visible = true;
+                dgvRoomTwo.Visible = true;
+                dgvRoomThree.Visible = true;
+
+                dgvSelect.Enabled = false;
                 btnAdd.Enabled = true;
                 btnDelete.Enabled = false;
                 btnUpdate.Enabled = false;
@@ -212,15 +238,15 @@ namespace SSD_CW_20_21.gui
 
         private void populateDataGrid()
         {
-            dgvDateTime.Columns.Clear();
-            dgvDateTime.Rows.Clear();
+            dgvSelect.Columns.Clear();
+            dgvSelect.Rows.Clear();
 
             if (type == "time")
             {
-                dgvDateTime.ColumnCount = 2;
-                string[] rows = new string[dgvDateTime.ColumnCount];
-                dgvDateTime.Columns[0].Name = "Time";
-                dgvDateTime.Columns[1].Name = "Availabilty";
+                dgvSelect.ColumnCount = 2;
+                string[] rows = new string[dgvSelect.ColumnCount];
+                dgvSelect.Columns[0].Name = "Time";
+                dgvSelect.Columns[1].Name = "Availabilty";
 
                 dtpDateTime.Value = DateTime.Now;
                 DateTime startTimedateTime = Convert.ToDateTime("09:00:00");
@@ -243,11 +269,11 @@ namespace SSD_CW_20_21.gui
                         }
                         else continue;
                     }
-                    dgvDateTime.Rows.Add(rows);
+                    dgvSelect.Rows.Add(rows);
                     startTimedateTime = startTimedateTime.AddMinutes(15.0);
                     endTime = startTimedateTime.AddMinutes(serv.Time);
                 }
-                foreach(DataGridViewRow row in dgvDateTime.Rows)
+                foreach(DataGridViewRow row in dgvSelect.Rows)
                 {
                     string rowStr = row.Cells[1].Value == null ? "" : row.Cells[1].Value.ToString();
                     if (rowStr.Contains("No"))
@@ -262,10 +288,10 @@ namespace SSD_CW_20_21.gui
             }
             else if (type == "date")
             {
-                dgvDateTime.ColumnCount = 2;
-                string[] rows = new string[dgvDateTime.ColumnCount];
-                dgvDateTime.Columns[0].Name = "Date";
-                dgvDateTime.Columns[1].Name = "Availabilty";
+                dgvSelect.ColumnCount = 2;
+                string[] rows = new string[dgvSelect.ColumnCount];
+                dgvSelect.Columns[0].Name = "Date";
+                dgvSelect.Columns[1].Name = "Availabilty";
 
                 dtpDateTime.Value = DateTime.Now;
                 DateTime min = dtpDateTime.Value;
@@ -295,10 +321,10 @@ namespace SSD_CW_20_21.gui
                         }
                     }
                     rows[0] += $"({min.DayOfWeek})";
-                    dgvDateTime.Rows.Add(rows);
+                    dgvSelect.Rows.Add(rows);
                     min = min.AddDays(1);
                 }
-                foreach (DataGridViewRow row in dgvDateTime.Rows)
+                foreach (DataGridViewRow row in dgvSelect.Rows)
                 {
                     string rowStr = row.Cells[1].Value == null ? "" : row.Cells[1].Value.ToString();
                     if (rowStr.Contains("No"))
@@ -313,10 +339,10 @@ namespace SSD_CW_20_21.gui
             }
             else if (type == "staff")
             {
-                dgvDateTime.ColumnCount = 2;
-                string[] rows = new string[dgvDateTime.ColumnCount];
-                dgvDateTime.Columns[0].Name = "Staff Member";
-                dgvDateTime.Columns[1].Name = "Availabilty";
+                dgvSelect.ColumnCount = 2;
+                string[] rows = new string[dgvSelect.ColumnCount];
+                dgvSelect.Columns[0].Name = "Staff Member";
+                dgvSelect.Columns[1].Name = "Availabilty";
 
                 DateTime date = Convert.ToDateTime(order.Date);
                 DateTime start = Convert.ToDateTime(order.StartTime);
@@ -355,9 +381,9 @@ namespace SSD_CW_20_21.gui
                         }
                     }
                     else rows[1] = "No - Not working on this day";
-                    dgvDateTime.Rows.Add(rows);
+                    dgvSelect.Rows.Add(rows);
                 }
-                foreach (DataGridViewRow row in dgvDateTime.Rows)
+                foreach (DataGridViewRow row in dgvSelect.Rows)
                 {
                     string rowStr = row.Cells[1].Value == null ? "" : row.Cells[1].Value.ToString();
                     if (rowStr.Contains("No"))
@@ -372,40 +398,55 @@ namespace SSD_CW_20_21.gui
             }
             else if (type == "orders")
             {
-                List<Orders> orders = orderAccess.getAllOrders();
-                dgvDateTime.ColumnCount = 10;
-                string[] rows = new string[dgvDateTime.ColumnCount];
-                dgvDateTime.Columns[0].Name = "Order ID";
-                dgvDateTime.Columns[1].Name = "Dog";
-                dgvDateTime.Columns[2].Name = "Date";
-                dgvDateTime.Columns[3].Name = "Starting Time";
-                dgvDateTime.Columns[4].Name = "Staff Assigned";
-                dgvDateTime.Columns[5].Name = "Service";
-                dgvDateTime.Columns[6].Name = "Extra Ears";
-                dgvDateTime.Columns[7].Name = "Extra Nails";
-                dgvDateTime.Columns[8].Name = "Extra Teeth";
-                dgvDateTime.Columns[9].Name = "Customer has Paid?";
-
-                foreach (Orders order in orders.FindAll(e => e.Cancelled == 0))
-                {
-                    rows[0] = order.Id.ToString();
-                    Dog dog = dogAccess.getDogById(order.DogId);
-                    rows[1] = dog.Name;
-                    rows[2] = order.Date;
-                    rows[3] = order.StartTime;
-                    rows[4] = staffAccess.getStaffById(order.StaffId).Name;
-                    Service serv = serviceAccess.getServiceById(servOrderAccess.getObjectByOrderID(order.Id).ServiceID);
-                    rows[5] = serv.Description;
-                    rows[6] = order.Ears == 0 ? "No" : "Yes";
-                    rows[7] = order.Nails == 0 ? "No" : "Yes";
-                    rows[8] = order.Teeth == 0 ? "No" : "Yes";
-                    rows[9] = order.Paid == 0 ? "No" : "Yes";
-                    dgvDateTime.Rows.Add(rows);
-                }
+                displayBookingSlots();
             }
-            foreach (DataGridViewColumn col in dgvDateTime.Columns)
+        }
+
+        private void displayBookingSlots()
+        {
+            object[] arr = { dgvRoomOne, dgvRoomTwo, dgvRoomThree };
+            int roomID = 0;
+            foreach (DataGridView dgv in arr)
             {
-                col.Width = dgvDateTime.Size.Width / dgvDateTime.Columns.Count;
+                dgv.Rows.Clear();
+                dgv.Columns.Clear();
+                roomID++;
+                List<Orders> orders = orderAccess.getAllOrders().FindAll(e => {
+                    return e.Cancelled == 0 && e.RoomID == roomID && Convert.ToDateTime(e.Date) == Convert.ToDateTime(dtpRoomView.Value.ToShortDateString());
+                });
+                DateTime start = Convert.ToDateTime("09:00:00");
+                while (start < Convert.ToDateTime("17:00:00"))
+                {
+                    // create each column
+                    dgv.Columns.Add("", "");
+                    start = start.AddMinutes(15);
+                }
+                dgv.Rows.Add();
+                dgv.RowTemplate.Height = dgv.Height;
+
+                foreach (DataGridViewColumn col in dgv.Columns)
+                {
+                    // style each column
+                    col.Width = dgv.Size.Width / dgv.Columns.Count;
+                    col.DividerWidth = 1;
+
+                    if (orders.Count > 0)
+                    {
+                        foreach (Orders order in orders)
+                        {
+                            col.Tag = order.Id;
+                            dgv.Rows[0].Cells[col.Index].Style.BackColor = Color.Green;
+                            start = Convert.ToDateTime("09:00:00");
+                            for (int j = 1; j <= 32 / col.Index; j++)
+                            {
+                                start = start.AddMinutes(15);
+                                if (Convert.ToDateTime(order.StartTime) >= start && Convert.ToDateTime(order.EndTime) < start)
+                                    dgv.Rows[0].Cells[col.Index].Style.BackColor = Color.Red;
+                            }
+                        }
+                    }
+                    else dgv.Rows[0].Cells[col.Index].Style.BackColor = Color.Green;
+                }
             }
         }
 
@@ -422,19 +463,49 @@ namespace SSD_CW_20_21.gui
             if (add) // if we are adding a record
             {
                 List<Orders> tempOrders = orderAccess.getAllOrders().FindAll(e => e.DogId == order.DogId);
-                if (tempOrders.Count >= 1) min = min.AddMinutes(Globals.firstTimeMinute);
+                if (tempOrders.Count == 1) min = min.AddMinutes(Globals.firstTimeMinute);
             }
             return min;
+        }
+
+        private double calcCost()
+        {
+            return 0;
+        }
+
+        private void roomDGVCellClick(DataGridView dgv)
+        {
+
+        }
+
+        private void checkValidEndTime(CheckBox obj)
+        {
+            if (obj.Checked && order.StartTime != null)
+            {
+                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
+                if (end.Hour >= 17)
+                {
+                    MessageBox.Show($"You cannot add the Extra {obj.Text} as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    obj.Checked = false;
+                    if (obj == checkNails) order.Nails = 0;
+                    else if (obj == checkTeeth) order.Teeth = 0;
+                    else if (obj == checkEars) order.Ears = 0;
+                }
+                else
+                {
+                    order.EndTime = end.ToString();
+                    if (obj == checkNails) order.Nails = 1;
+                    else if (obj == checkTeeth) order.Teeth = 1;
+                    else if (obj == checkEars) order.Ears = 1;
+                }
+            }
         }
         #endregion
 
         #region Events
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (mode != "view")
-            {
-                changeMode("view");
-            }
+            if (mode != "view") changeMode("view");
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -477,59 +548,17 @@ namespace SSD_CW_20_21.gui
 
         private void checkNails_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkNails.Checked && order.StartTime != null)
-            {
-                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
-                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
-                {
-                    MessageBox.Show("You cannot add the Extra Nails as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    checkNails.Checked = false;
-                    order.Nails = 0;
-                }
-                else
-                {
-                    order.EndTime = end.ToString();
-                    order.Nails = 1;
-                }
-            }
+            checkValidEndTime(checkNails);
         }
 
         private void checkTeeth_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkTeeth.Checked && order.StartTime != null)
-            {
-                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
-                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
-                {
-                    MessageBox.Show("You cannot add the Extra Teeth as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    checkTeeth.Checked = false;
-                    order.Teeth = 0;
-                }
-                else
-                {
-                    order.EndTime = end.ToString();
-                    order.Teeth = 1;
-                }
-            }
+            checkValidEndTime(checkTeeth);
         }
 
         private void checkEars_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkEars.Checked && order.StartTime != null)
-            {
-                DateTime end = getEndTime(Convert.ToDateTime(order.StartTime), true);
-                if (end.Hour > 17 || (end.Hour == 17 && end.Minute > 00))
-                {
-                    MessageBox.Show("You cannot add the Extra Ears as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    checkEars.Checked = false;
-                    order.Ears = 0;
-                }
-                else
-                {
-                    order.EndTime = end.ToString();
-                    order.Ears = 1;
-                }
-            }
+            checkValidEndTime(checkEars);
         }
 
         private void btnUpdate_Click(object sender, EventArgs ev)
@@ -614,7 +643,12 @@ namespace SSD_CW_20_21.gui
 
         private void checkDelDog_CheckedChanged(object sender, EventArgs e)
         {
-            populateDogCbox(true);
+            populateDogCbox(checkDelDog.Checked);
+        }
+
+        private void checkDelCust_CheckedChanged(object sender, EventArgs e)
+        {
+            populateCustCbox(checkDelCust.Checked);
         }
 
         private void btnView_Click(object sender, EventArgs e)
@@ -625,20 +659,20 @@ namespace SSD_CW_20_21.gui
         private void dgvDateTime_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1) return;
-            if (dgvDateTime.Rows[e.RowIndex].Cells[0].Value == null) return;
-            if (type == "orders")
+            if (dgvSelect.Rows[e.RowIndex].Cells[0].Value == null) return;
+            //if (type == "orders")
+            //{
+            //    btnUpdate.Enabled = true;
+            //    order = orderAccess.getOrderById(Convert.ToInt32(dgvSelect.Rows[e.RowIndex].Cells[0].Value));
+            //}
+            if (type == "date")
             {
-                btnUpdate.Enabled = true;
-                order = orderAccess.getOrderById(Convert.ToInt32(dgvDateTime.Rows[e.RowIndex].Cells[0].Value));
-            }
-            else if (type == "date")
-            {
-                if (dgvDateTime.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
+                if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
                 {
                     MessageBox.Show("This date is not available to select a booking for. Please select another date", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                string date = Convert.ToString(dgvDateTime.Rows[e.RowIndex].Cells[0].Value).Split('(')[0];
+                string date = Convert.ToString(dgvSelect.Rows[e.RowIndex].Cells[0].Value).Split('(')[0];
                 order.Date = date;
                 txtDate.Text = date;
                 type = "";
@@ -647,12 +681,12 @@ namespace SSD_CW_20_21.gui
             }
             else if (type == "time")
             {
-                if (dgvDateTime.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
+                if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
                 {
                     MessageBox.Show("This time is not available to select a booking for. Please select another time", "Invalid Time", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                string time = Convert.ToString(dgvDateTime.Rows[e.RowIndex].Cells[0].Value);
+                string time = Convert.ToString(dgvSelect.Rows[e.RowIndex].Cells[0].Value);
                 txtTime.Text = time;
                 order.StartTime = time;
                 order.EndTime = getEndTime().ToShortTimeString();
@@ -662,12 +696,12 @@ namespace SSD_CW_20_21.gui
             }
             else if (type == "staff")
             {
-                if (dgvDateTime.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
+                if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
                 {
                     MessageBox.Show("This staff member is not available at this time", "Invalid Staff Member", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                string name = Convert.ToString(dgvDateTime.Rows[e.RowIndex].Cells[0].Value);
+                string name = Convert.ToString(dgvSelect.Rows[e.RowIndex].Cells[0].Value);
                 order.StaffId = staffAccess.getStaffByName(name).Id;
                 txtStaff.Text = name;
                 type = "";
@@ -680,13 +714,20 @@ namespace SSD_CW_20_21.gui
             populateDogCbox();
         }
 
-        private void cboxServices_SelectedIndexChanged(object sender, EventArgs e)
+        private void dgvRoomOne_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Service srv = serviceAccess.getServiceById(getIdFromString(cboxServices.GetItemText(cboxServices.SelectedItem)));
+            roomDGVCellClick(dgvRoomOne);
+        }
 
+        private void dgvRoomTwo_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            roomDGVCellClick(dgvRoomTwo);
+        }
+
+        private void dgvRoomThree_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            roomDGVCellClick(dgvRoomThree);
         }
         #endregion
-
-
     }
 }

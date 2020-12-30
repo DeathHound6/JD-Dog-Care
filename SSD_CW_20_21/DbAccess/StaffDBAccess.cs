@@ -51,7 +51,15 @@ namespace SSD_CW_20_21.DbAccess
 
         private Staff getStaffFromReader(SqlDataReader rdr)
         {
-            return new Staff(rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(4), rdr.GetInt32(5));
+            Staff stf = new Staff();
+            stf.Id = rdr.GetInt32(0);
+            stf.Name = rdr.GetString(1);
+            stf.WorkingDays = rdr.GetString(2);
+            stf.StartLunch = rdr.GetString(3);
+            stf.EndLunch = rdr.GetString(4);
+            stf.Partial = rdr.GetInt32(5);
+            stf.Deleted = rdr.GetInt32(6);
+            return stf;
         }
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkDelCust = new System.Windows.Forms.CheckBox();
             this.cboxCust = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.checkDelDog = new System.Windows.Forms.CheckBox();
@@ -53,7 +53,11 @@
             this.cboxServices = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dgvDateTime = new System.Windows.Forms.DataGridView();
+            this.dtpRoomView = new System.Windows.Forms.DateTimePicker();
+            this.dgvRoomThree = new System.Windows.Forms.DataGridView();
+            this.dgvRoomTwo = new System.Windows.Forms.DataGridView();
+            this.dgvRoomOne = new System.Windows.Forms.DataGridView();
+            this.dgvSelect = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnView = new System.Windows.Forms.Button();
@@ -64,14 +68,17 @@
             this.dtpDateTime = new System.Windows.Forms.DateTimePicker();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDateTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRoomThree)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRoomTwo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRoomOne)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSelect)).BeginInit();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Controls.Add(this.checkDelCust);
             this.panel2.Controls.Add(this.cboxCust);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.checkDelDog);
@@ -99,16 +106,17 @@
             this.panel2.Size = new System.Drawing.Size(443, 323);
             this.panel2.TabIndex = 13;
             // 
-            // checkBox1
+            // checkDelCust
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(340, 15);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(100, 17);
-            this.checkBox1.TabIndex = 48;
-            this.checkBox1.Text = "Hide Deleted";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkDelCust.AutoSize = true;
+            this.checkDelCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkDelCust.Location = new System.Drawing.Point(340, 15);
+            this.checkDelCust.Name = "checkDelCust";
+            this.checkDelCust.Size = new System.Drawing.Size(100, 17);
+            this.checkDelCust.TabIndex = 48;
+            this.checkDelCust.Text = "Hide Deleted";
+            this.checkDelCust.UseVisualStyleBackColor = true;
+            this.checkDelCust.CheckedChanged += new System.EventHandler(this.checkDelCust_CheckedChanged);
             // 
             // cboxCust
             // 
@@ -333,7 +341,6 @@
             this.cboxServices.Name = "cboxServices";
             this.cboxServices.Size = new System.Drawing.Size(278, 28);
             this.cboxServices.TabIndex = 25;
-            this.cboxServices.SelectedIndexChanged += new System.EventHandler(this.cboxServices_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -349,23 +356,92 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel4.Controls.Add(this.dgvDateTime);
+            this.panel4.Controls.Add(this.dtpRoomView);
+            this.panel4.Controls.Add(this.dgvRoomThree);
+            this.panel4.Controls.Add(this.dgvRoomTwo);
+            this.panel4.Controls.Add(this.dgvRoomOne);
+            this.panel4.Controls.Add(this.dgvSelect);
             this.panel4.Location = new System.Drawing.Point(12, 102);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(497, 462);
             this.panel4.TabIndex = 21;
             // 
-            // dgvDateTime
+            // dtpRoomView
             // 
-            this.dgvDateTime.AllowUserToAddRows = false;
-            this.dgvDateTime.AllowUserToDeleteRows = false;
-            this.dgvDateTime.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDateTime.Location = new System.Drawing.Point(3, 3);
-            this.dgvDateTime.Name = "dgvDateTime";
-            this.dgvDateTime.ReadOnly = true;
-            this.dgvDateTime.Size = new System.Drawing.Size(491, 456);
-            this.dgvDateTime.TabIndex = 0;
-            this.dgvDateTime.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDateTime_CellClick);
+            this.dtpRoomView.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtpRoomView.Location = new System.Drawing.Point(142, 29);
+            this.dtpRoomView.Name = "dtpRoomView";
+            this.dtpRoomView.Size = new System.Drawing.Size(200, 20);
+            this.dtpRoomView.TabIndex = 4;
+            // 
+            // dgvRoomThree
+            // 
+            this.dgvRoomThree.AllowUserToAddRows = false;
+            this.dgvRoomThree.AllowUserToDeleteRows = false;
+            this.dgvRoomThree.AllowUserToResizeColumns = false;
+            this.dgvRoomThree.AllowUserToResizeRows = false;
+            this.dgvRoomThree.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRoomThree.ColumnHeadersVisible = false;
+            this.dgvRoomThree.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgvRoomThree.Location = new System.Drawing.Point(91, 324);
+            this.dgvRoomThree.Name = "dgvRoomThree";
+            this.dgvRoomThree.ReadOnly = true;
+            this.dgvRoomThree.RowHeadersVisible = false;
+            this.dgvRoomThree.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvRoomThree.Size = new System.Drawing.Size(386, 101);
+            this.dgvRoomThree.TabIndex = 3;
+            this.dgvRoomThree.Visible = false;
+            this.dgvRoomThree.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoomThree_CellClick);
+            // 
+            // dgvRoomTwo
+            // 
+            this.dgvRoomTwo.AllowUserToAddRows = false;
+            this.dgvRoomTwo.AllowUserToDeleteRows = false;
+            this.dgvRoomTwo.AllowUserToResizeColumns = false;
+            this.dgvRoomTwo.AllowUserToResizeRows = false;
+            this.dgvRoomTwo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRoomTwo.ColumnHeadersVisible = false;
+            this.dgvRoomTwo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgvRoomTwo.Location = new System.Drawing.Point(91, 208);
+            this.dgvRoomTwo.Name = "dgvRoomTwo";
+            this.dgvRoomTwo.ReadOnly = true;
+            this.dgvRoomTwo.RowHeadersVisible = false;
+            this.dgvRoomTwo.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvRoomTwo.Size = new System.Drawing.Size(386, 101);
+            this.dgvRoomTwo.TabIndex = 2;
+            this.dgvRoomTwo.Visible = false;
+            this.dgvRoomTwo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoomTwo_CellClick);
+            // 
+            // dgvRoomOne
+            // 
+            this.dgvRoomOne.AllowUserToAddRows = false;
+            this.dgvRoomOne.AllowUserToDeleteRows = false;
+            this.dgvRoomOne.AllowUserToResizeColumns = false;
+            this.dgvRoomOne.AllowUserToResizeRows = false;
+            this.dgvRoomOne.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRoomOne.ColumnHeadersVisible = false;
+            this.dgvRoomOne.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgvRoomOne.Location = new System.Drawing.Point(91, 88);
+            this.dgvRoomOne.Name = "dgvRoomOne";
+            this.dgvRoomOne.ReadOnly = true;
+            this.dgvRoomOne.RowHeadersVisible = false;
+            this.dgvRoomOne.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvRoomOne.Size = new System.Drawing.Size(386, 101);
+            this.dgvRoomOne.TabIndex = 1;
+            this.dgvRoomOne.Visible = false;
+            this.dgvRoomOne.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoomOne_CellClick);
+            // 
+            // dgvSelect
+            // 
+            this.dgvSelect.AllowUserToAddRows = false;
+            this.dgvSelect.AllowUserToDeleteRows = false;
+            this.dgvSelect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSelect.Location = new System.Drawing.Point(3, 3);
+            this.dgvSelect.Name = "dgvSelect";
+            this.dgvSelect.ReadOnly = true;
+            this.dgvSelect.Size = new System.Drawing.Size(491, 456);
+            this.dgvSelect.TabIndex = 0;
+            this.dgvSelect.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDateTime_CellClick);
             // 
             // label1
             // 
@@ -464,14 +540,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 577);
+            this.ClientSize = new System.Drawing.Size(973, 615);
             this.Controls.Add(this.dtpDateTime);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.lblOrderCancelled);
-            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "BookingsManage";
             this.Text = "BookingsManage";
             this.Controls.SetChildIndex(this.lblOrderCancelled, 0);
@@ -483,7 +558,10 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDateTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRoomThree)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRoomTwo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRoomOne)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSelect)).EndInit();
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -512,7 +590,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox checkPaid;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DataGridView dgvDateTime;
+        private System.Windows.Forms.DataGridView dgvSelect;
         private System.Windows.Forms.Button btnSelectTime;
         private System.Windows.Forms.Button btnSelectDate;
         private System.Windows.Forms.TextBox txtTime;
@@ -523,8 +601,12 @@
         private System.Windows.Forms.CheckBox checkDelDog;
         private System.Windows.Forms.DateTimePicker dtpDateTime;
         private System.Windows.Forms.Button btnView;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkDelCust;
         private System.Windows.Forms.ComboBox cboxCust;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView dgvRoomThree;
+        private System.Windows.Forms.DataGridView dgvRoomTwo;
+        private System.Windows.Forms.DataGridView dgvRoomOne;
+        private System.Windows.Forms.DateTimePicker dtpRoomView;
     }
 }
