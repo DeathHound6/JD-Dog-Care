@@ -388,14 +388,7 @@ namespace SSD_CW_20_21.gui
 
         private void throwDogException(string message, string title)
         {
-            try
-            {
-                throw new DogException(message);
-            }
-            catch (DogException)
-            {
-                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
         #endregion
     }
