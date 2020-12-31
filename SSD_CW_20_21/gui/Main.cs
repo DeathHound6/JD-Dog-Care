@@ -18,6 +18,7 @@ namespace SSD_CW_20_21.gui
             InitializeComponent();
             showDbConn();
             Text = "JD Dog Care - Main Menu";
+            //imgLogo.Image = Properties.Resources.logo;
         }
 
         private void btnGrooming_Click(object sender, EventArgs e)

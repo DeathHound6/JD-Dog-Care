@@ -373,6 +373,7 @@
             this.dtpRoomView.Name = "dtpRoomView";
             this.dtpRoomView.Size = new System.Drawing.Size(200, 20);
             this.dtpRoomView.TabIndex = 4;
+            this.dtpRoomView.ValueChanged += new System.EventHandler(this.dtpRoomView_ValueChanged);
             // 
             // dgvRoomThree
             // 

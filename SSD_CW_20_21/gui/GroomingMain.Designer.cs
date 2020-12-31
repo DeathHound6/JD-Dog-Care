@@ -32,7 +32,9 @@
             this.btnDogs = new System.Windows.Forms.Button();
             this.btnBooking = new System.Windows.Forms.Button();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
+            this.imgLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -79,11 +81,22 @@
             this.dgvOrders.Size = new System.Drawing.Size(394, 283);
             this.dgvOrders.TabIndex = 13;
             // 
+            // imgLogo
+            // 
+            this.imgLogo.Image = global::SSD_CW_20_21.Properties.Resources.logo;
+            this.imgLogo.Location = new System.Drawing.Point(781, 43);
+            this.imgLogo.Name = "imgLogo";
+            this.imgLogo.Size = new System.Drawing.Size(176, 156);
+            this.imgLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgLogo.TabIndex = 14;
+            this.imgLogo.TabStop = false;
+            // 
             // GroomingMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(970, 612);
+            this.ClientSize = new System.Drawing.Size(973, 615);
+            this.Controls.Add(this.imgLogo);
             this.Controls.Add(this.dgvOrders);
             this.Controls.Add(this.btnBooking);
             this.Controls.Add(this.btnDogs);
@@ -94,7 +107,9 @@
             this.Controls.SetChildIndex(this.btnDogs, 0);
             this.Controls.SetChildIndex(this.btnBooking, 0);
             this.Controls.SetChildIndex(this.dgvOrders, 0);
+            this.Controls.SetChildIndex(this.imgLogo, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,5 +120,6 @@
         private System.Windows.Forms.Button btnDogs;
         private System.Windows.Forms.Button btnBooking;
         private System.Windows.Forms.DataGridView dgvOrders;
+        private System.Windows.Forms.PictureBox imgLogo;
     }
 }

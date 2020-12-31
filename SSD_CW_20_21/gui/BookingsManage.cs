@@ -429,19 +429,22 @@ namespace SSD_CW_20_21.gui
                     // style each column
                     col.Width = dgv.Size.Width / dgv.Columns.Count;
                     col.DividerWidth = 1;
+                    col.Tag = -1;
 
                     if (orders.Count > 0)
                     {
                         foreach (Orders order in orders)
                         {
-                            col.Tag = order.Id;
                             dgv.Rows[0].Cells[col.Index].Style.BackColor = Color.Green;
                             start = Convert.ToDateTime("09:00:00");
                             for (int j = 1; j <= 32 / col.Index; j++)
                             {
                                 start = start.AddMinutes(15);
                                 if (Convert.ToDateTime(order.StartTime) >= start && Convert.ToDateTime(order.EndTime) < start)
+                                {
+                                    col.Tag = order.Id;
                                     dgv.Rows[0].Cells[col.Index].Style.BackColor = Color.Red;
+                                }
                             }
                         }
                     }
@@ -473,9 +476,23 @@ namespace SSD_CW_20_21.gui
             return 0;
         }
 
-        private void roomDGVCellClick(DataGridView dgv)
+        private void roomDGVCellClick(DataGridView dgv, DataGridViewCellEventArgs e)
         {
+            int orderID = Convert.ToInt32(dgv.Columns[e.ColumnIndex].Tag.ToString());
+            Orders odr = orderID != -1 ? orderAccess.getOrderById(orderID) : null;
 
+            if (odr == null)
+            {
+                MessageBox.Show("During this timeslot, there is no order appointment taking place", "No Appointments", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                string text = $"Dog: {dogAccess.getDogById(odr.DogId).Name}";
+                text += $"\nTime: {odr.StartTime} - {odr.EndTime}";
+                text += $"\nRoom: #{odr.RoomID}";
+                text += $"\nStaff: {staffAccess.getStaffById(odr.StaffId).Name}";
+                MessageBox.Show(text, $"Order #{odr.Id}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void checkValidEndTime(CheckBox obj)
@@ -716,17 +733,22 @@ namespace SSD_CW_20_21.gui
 
         private void dgvRoomOne_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            roomDGVCellClick(dgvRoomOne);
+            roomDGVCellClick(dgvRoomOne, e);
         }
 
         private void dgvRoomTwo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            roomDGVCellClick(dgvRoomTwo);
+            roomDGVCellClick(dgvRoomTwo, e);
         }
 
         private void dgvRoomThree_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            roomDGVCellClick(dgvRoomThree);
+            roomDGVCellClick(dgvRoomThree, e);
+        }
+
+        private void dtpRoomView_ValueChanged(object sender, EventArgs e)
+        {
+            displayBookingSlots();
         }
         #endregion
     }

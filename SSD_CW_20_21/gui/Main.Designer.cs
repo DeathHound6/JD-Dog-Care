@@ -34,6 +34,8 @@
             this.btnTraining = new System.Windows.Forms.Button();
             this.btnDaycare = new System.Windows.Forms.Button();
             this.btnMobile = new System.Windows.Forms.Button();
+            this.imgLogo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGrooming
@@ -102,18 +104,28 @@
             this.btnMobile.UseVisualStyleBackColor = true;
             this.btnMobile.Click += new System.EventHandler(this.btnMobile_Click);
             // 
+            // imgLogo
+            // 
+            this.imgLogo.Image = global::SSD_CW_20_21.Properties.Resources.logo;
+            this.imgLogo.Location = new System.Drawing.Point(701, 67);
+            this.imgLogo.Name = "imgLogo";
+            this.imgLogo.Size = new System.Drawing.Size(248, 235);
+            this.imgLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgLogo.TabIndex = 12;
+            this.imgLogo.TabStop = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(968, 612);
+            this.ClientSize = new System.Drawing.Size(973, 615);
+            this.Controls.Add(this.imgLogo);
             this.Controls.Add(this.btnMobile);
             this.Controls.Add(this.btnDaycare);
             this.Controls.Add(this.btnTraining);
             this.Controls.Add(this.btnWalking);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnGrooming);
-            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "Main";
             this.Text = "Menu";
             this.Controls.SetChildIndex(this.btnGrooming, 0);
@@ -122,6 +134,8 @@
             this.Controls.SetChildIndex(this.btnTraining, 0);
             this.Controls.SetChildIndex(this.btnDaycare, 0);
             this.Controls.SetChildIndex(this.btnMobile, 0);
+            this.Controls.SetChildIndex(this.imgLogo, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,5 +149,6 @@
         private System.Windows.Forms.Button btnTraining;
         private System.Windows.Forms.Button btnDaycare;
         private System.Windows.Forms.Button btnMobile;
+        private System.Windows.Forms.PictureBox imgLogo;
     }
 }

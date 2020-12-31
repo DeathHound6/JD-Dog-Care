@@ -50,6 +50,9 @@
   <PropertyGroup>
     <StartupObject>SSD_CW_20_21.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>image0.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Nager.Date, Version=1.26.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nager.Date.1.26.4\lib\net45\Nager.Date.dll</HintPath>
@@ -128,6 +131,9 @@
     <EmbeddedResource Include="gui\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="gui\Template.en-GB.resx">
+      <DependentUpon>Template.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="gui\Template.resx">
       <DependentUpon>Template.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +181,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
+    <Content Include="image0.ico" />
+    <None Include="Resources\image0.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
