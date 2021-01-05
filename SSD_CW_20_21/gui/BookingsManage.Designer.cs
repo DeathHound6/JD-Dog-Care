@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtEndtime = new System.Windows.Forms.TextBox();
+            this.txtPaid = new System.Windows.Forms.TextBox();
             this.checkDelCust = new System.Windows.Forms.CheckBox();
             this.cboxCust = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -41,7 +44,6 @@
             this.txtDate = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.checkPaid = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.checkEars = new System.Windows.Forms.CheckBox();
@@ -53,6 +55,12 @@
             this.cboxServices = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.lblRoomThree = new System.Windows.Forms.Label();
+            this.lblRoomTwo = new System.Windows.Forms.Label();
+            this.lblRoomOne = new System.Windows.Forms.Label();
+            this.lblMessageTwo = new System.Windows.Forms.Label();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.lblMessageOne = new System.Windows.Forms.Label();
             this.dtpRoomView = new System.Windows.Forms.DateTimePicker();
             this.dgvRoomThree = new System.Windows.Forms.DataGridView();
             this.dgvRoomTwo = new System.Windows.Forms.DataGridView();
@@ -66,6 +74,8 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.lblOrderCancelled = new System.Windows.Forms.Label();
             this.dtpDateTime = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtCost = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoomThree)).BeginInit();
@@ -78,6 +88,11 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Controls.Add(this.txtCost);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.txtEndtime);
+            this.panel2.Controls.Add(this.txtPaid);
             this.panel2.Controls.Add(this.checkDelCust);
             this.panel2.Controls.Add(this.cboxCust);
             this.panel2.Controls.Add(this.label6);
@@ -90,7 +105,6 @@
             this.panel2.Controls.Add(this.txtDate);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.checkPaid);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.checkEars);
@@ -105,6 +119,37 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(443, 323);
             this.panel2.TabIndex = 13;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label10.Location = new System.Drawing.Point(8, 235);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(89, 20);
+            this.label10.TabIndex = 51;
+            this.label10.Text = "End Time:";
+            // 
+            // txtEndtime
+            // 
+            this.txtEndtime.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtEndtime.Enabled = false;
+            this.txtEndtime.Location = new System.Drawing.Point(124, 237);
+            this.txtEndtime.Name = "txtEndtime";
+            this.txtEndtime.Size = new System.Drawing.Size(189, 20);
+            this.txtEndtime.TabIndex = 50;
+            // 
+            // txtPaid
+            // 
+            this.txtPaid.Location = new System.Drawing.Point(124, 294);
+            this.txtPaid.Name = "txtPaid";
+            this.txtPaid.ShortcutsEnabled = false;
+            this.txtPaid.Size = new System.Drawing.Size(100, 20);
+            this.txtPaid.TabIndex = 49;
+            this.txtPaid.Text = "£";
+            this.txtPaid.Enter += new System.EventHandler(this.txtPaid_Enter);
+            this.txtPaid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaid_KeyPress);
             // 
             // checkDelCust
             // 
@@ -231,17 +276,6 @@
             this.label8.TabIndex = 37;
             this.label8.Text = "Paid:";
             // 
-            // checkPaid
-            // 
-            this.checkPaid.AutoSize = true;
-            this.checkPaid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkPaid.Location = new System.Drawing.Point(124, 292);
-            this.checkPaid.Name = "checkPaid";
-            this.checkPaid.Size = new System.Drawing.Size(63, 24);
-            this.checkPaid.TabIndex = 36;
-            this.checkPaid.Text = "Paid";
-            this.checkPaid.UseVisualStyleBackColor = true;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -341,6 +375,7 @@
             this.cboxServices.Name = "cboxServices";
             this.cboxServices.Size = new System.Drawing.Size(278, 28);
             this.cboxServices.TabIndex = 25;
+            this.cboxServices.Click += new System.EventHandler(this.cboxServices_Click);
             // 
             // label2
             // 
@@ -356,6 +391,12 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel4.Controls.Add(this.lblRoomThree);
+            this.panel4.Controls.Add(this.lblRoomTwo);
+            this.panel4.Controls.Add(this.lblRoomOne);
+            this.panel4.Controls.Add(this.lblMessageTwo);
+            this.panel4.Controls.Add(this.lblDate);
+            this.panel4.Controls.Add(this.lblMessageOne);
             this.panel4.Controls.Add(this.dtpRoomView);
             this.panel4.Controls.Add(this.dgvRoomThree);
             this.panel4.Controls.Add(this.dgvRoomTwo);
@@ -366,10 +407,84 @@
             this.panel4.Size = new System.Drawing.Size(497, 462);
             this.panel4.TabIndex = 21;
             // 
+            // lblRoomThree
+            // 
+            this.lblRoomThree.AutoSize = true;
+            this.lblRoomThree.BackColor = System.Drawing.Color.Transparent;
+            this.lblRoomThree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRoomThree.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRoomThree.Location = new System.Drawing.Point(8, 364);
+            this.lblRoomThree.Name = "lblRoomThree";
+            this.lblRoomThree.Size = new System.Drawing.Size(76, 20);
+            this.lblRoomThree.TabIndex = 32;
+            this.lblRoomThree.Text = "Room 3:";
+            // 
+            // lblRoomTwo
+            // 
+            this.lblRoomTwo.AutoSize = true;
+            this.lblRoomTwo.BackColor = System.Drawing.Color.Transparent;
+            this.lblRoomTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRoomTwo.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRoomTwo.Location = new System.Drawing.Point(8, 252);
+            this.lblRoomTwo.Name = "lblRoomTwo";
+            this.lblRoomTwo.Size = new System.Drawing.Size(76, 20);
+            this.lblRoomTwo.TabIndex = 31;
+            this.lblRoomTwo.Text = "Room 2:";
+            // 
+            // lblRoomOne
+            // 
+            this.lblRoomOne.AutoSize = true;
+            this.lblRoomOne.BackColor = System.Drawing.Color.Transparent;
+            this.lblRoomOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRoomOne.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRoomOne.Location = new System.Drawing.Point(8, 127);
+            this.lblRoomOne.Name = "lblRoomOne";
+            this.lblRoomOne.Size = new System.Drawing.Size(76, 20);
+            this.lblRoomOne.TabIndex = 30;
+            this.lblRoomOne.Text = "Room 1:";
+            // 
+            // lblMessageTwo
+            // 
+            this.lblMessageTwo.AutoSize = true;
+            this.lblMessageTwo.BackColor = System.Drawing.Color.Transparent;
+            this.lblMessageTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessageTwo.ForeColor = System.Drawing.Color.White;
+            this.lblMessageTwo.Location = new System.Drawing.Point(8, 46);
+            this.lblMessageTwo.Name = "lblMessageTwo";
+            this.lblMessageTwo.Size = new System.Drawing.Size(230, 20);
+            this.lblMessageTwo.TabIndex = 29;
+            this.lblMessageTwo.Text = "Right Click to Edit An Order";
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblDate.Location = new System.Drawing.Point(273, 16);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(202, 20);
+            this.lblDate.TabIndex = 28;
+            this.lblDate.Text = "Select View Order Date:";
+            // 
+            // lblMessageOne
+            // 
+            this.lblMessageOne.AutoSize = true;
+            this.lblMessageOne.BackColor = System.Drawing.Color.Transparent;
+            this.lblMessageOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessageOne.ForeColor = System.Drawing.Color.White;
+            this.lblMessageOne.Location = new System.Drawing.Point(8, 16);
+            this.lblMessageOne.Name = "lblMessageOne";
+            this.lblMessageOne.Size = new System.Drawing.Size(259, 20);
+            this.lblMessageOne.TabIndex = 27;
+            this.lblMessageOne.Text = "Left Click to View Order Details";
+            // 
             // dtpRoomView
             // 
             this.dtpRoomView.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtpRoomView.Location = new System.Drawing.Point(142, 29);
+            this.dtpRoomView.Location = new System.Drawing.Point(277, 50);
             this.dtpRoomView.Name = "dtpRoomView";
             this.dtpRoomView.Size = new System.Drawing.Size(200, 20);
             this.dtpRoomView.TabIndex = 4;
@@ -393,6 +508,7 @@
             this.dgvRoomThree.TabIndex = 3;
             this.dgvRoomThree.Visible = false;
             this.dgvRoomThree.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoomThree_CellClick);
+            this.dgvRoomThree.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRoomThree_CellMouseClick);
             // 
             // dgvRoomTwo
             // 
@@ -412,6 +528,7 @@
             this.dgvRoomTwo.TabIndex = 2;
             this.dgvRoomTwo.Visible = false;
             this.dgvRoomTwo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoomTwo_CellClick);
+            this.dgvRoomTwo.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRoomTwo_CellMouseClick);
             // 
             // dgvRoomOne
             // 
@@ -431,6 +548,7 @@
             this.dgvRoomOne.TabIndex = 1;
             this.dgvRoomOne.Visible = false;
             this.dgvRoomOne.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoomOne_CellClick);
+            this.dgvRoomOne.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRoomOne_CellMouseClick);
             // 
             // dgvSelect
             // 
@@ -442,7 +560,7 @@
             this.dgvSelect.ReadOnly = true;
             this.dgvSelect.Size = new System.Drawing.Size(491, 456);
             this.dgvSelect.TabIndex = 0;
-            this.dgvSelect.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDateTime_CellClick);
+            this.dgvSelect.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSelect_CellClick);
             // 
             // label1
             // 
@@ -537,6 +655,28 @@
             this.dtpDateTime.TabIndex = 25;
             this.dtpDateTime.Visible = false;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label11.Location = new System.Drawing.Point(248, 294);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 20);
+            this.label11.TabIndex = 52;
+            this.label11.Text = "Cost:";
+            // 
+            // txtCost
+            // 
+            this.txtCost.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtCost.Enabled = false;
+            this.txtCost.Location = new System.Drawing.Point(302, 294);
+            this.txtCost.Name = "txtCost";
+            this.txtCost.ShortcutsEnabled = false;
+            this.txtCost.Size = new System.Drawing.Size(93, 20);
+            this.txtCost.TabIndex = 53;
+            this.txtCost.Text = "£";
+            // 
             // BookingsManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,6 +699,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoomThree)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoomTwo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoomOne)).EndInit();
@@ -589,7 +730,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox checkPaid;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridView dgvSelect;
         private System.Windows.Forms.Button btnSelectTime;
@@ -609,5 +749,16 @@
         private System.Windows.Forms.DataGridView dgvRoomTwo;
         private System.Windows.Forms.DataGridView dgvRoomOne;
         private System.Windows.Forms.DateTimePicker dtpRoomView;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtEndtime;
+        private System.Windows.Forms.TextBox txtPaid;
+        private System.Windows.Forms.Label lblRoomThree;
+        private System.Windows.Forms.Label lblRoomTwo;
+        private System.Windows.Forms.Label lblRoomOne;
+        private System.Windows.Forms.Label lblMessageTwo;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Label lblMessageOne;
+        private System.Windows.Forms.TextBox txtCost;
+        private System.Windows.Forms.Label label11;
     }
 }

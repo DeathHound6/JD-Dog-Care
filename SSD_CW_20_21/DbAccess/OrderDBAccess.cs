@@ -28,7 +28,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool updateOrder(Orders order)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"UPDATE ORDERS SET Cancelled = {order.Cancelled}, RoomID = {order.RoomID}, DogID = {order.DogId}, StaffID = {order.StaffId}, Date = '{order.Date}', StartTime = '{order.StartTime}', EndTime = '{order.EndTime}', Paid = {order.Paid} WHERE OrderID = {order.Id}";
+            Db.Command.CommandText = $"UPDATE ORDERS SET Cancelled = {order.Cancelled}, RoomID = {order.RoomID}, DogID = {order.DogId}, StaffID = {order.StaffId}, Date = '{order.Date}', StartTime = '{order.StartTime}', EndTime = '{order.EndTime}', Paid = {Convert.ToDecimal(order.Paid)} WHERE OrderID = {order.Id}";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -44,7 +44,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool insertOrder(Orders order)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"INSERT INTO ORDERS (OrderID, DogID, StaffID, Date, StartTime, EndTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES ({order.Id}, {order.DogId}, {order.StaffId}, '{order.Date}', '{order.StartTime}', '{order.EndTime}', {order.Ears}, {order.Teeth}, {order.Nails}, {order.RoomID}, {order.Paid}, {order.Cancelled})";
+            Db.Command.CommandText = $"INSERT INTO ORDERS (OrderID, DogID, StaffID, Date, StartTime, EndTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES ({order.Id}, {order.DogId}, {order.StaffId}, '{order.Date}', '{order.StartTime}', '{order.EndTime}', {order.Ears}, {order.Teeth}, {order.Nails}, {order.RoomID}, {Convert.ToDecimal(order.Paid)}, {order.Cancelled})";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -73,7 +73,20 @@ namespace SSD_CW_20_21.DbAccess
 
         private Orders getOrderFromReader(SqlDataReader rdr)
         {
-            return new Orders(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetInt32(2), rdr.GetString(3), rdr.GetString(4), rdr.GetString(5), rdr.GetInt32(6), rdr.GetInt32(7), rdr.GetInt32(8), rdr.GetInt32(9), rdr.GetInt32(10));
+            Orders order = new Orders();
+            order.Id = rdr.GetInt32(0);
+            order.DogId = rdr.GetInt32(1);
+            order.StaffId = rdr.GetInt32(2);
+            order.Date = rdr.GetString(3);
+            order.StartTime = rdr.GetString(4);
+            order.EndTime = rdr.GetString(5);
+            order.Ears = rdr.GetInt32(6);
+            order.Teeth = rdr.GetInt32(7);
+            order.Nails = rdr.GetInt32(8);
+            order.RoomID = rdr.GetInt32(9);
+            order.Paid = Convert.ToDouble(rdr.GetDecimal(10));
+            order.Cancelled = rdr.GetInt32(11);
+            return order;
         }
     }
 }

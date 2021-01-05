@@ -29,18 +29,6 @@ namespace SSD_CW_20_21.DbAccess
             }
         }
 
-        public ServiceOrder getObjectByServiceID(int id)
-        {
-            ServiceOrder obj;
-            DB.Command = DB.Connection.CreateCommand();
-            DB.Command.CommandText = $"SELECT * FROM SERVICEORDER WHERE ServiceID = {id}";
-            DB.Reader = DB.Command.ExecuteReader();
-            DB.Reader.Read();
-            obj = getObjectFromReader(DB.Reader);
-            DB.Reader.Close();
-            return obj;
-        }
-
         public ServiceOrder getObjectByOrderID(int id)
         {
             ServiceOrder obj;
@@ -51,6 +39,22 @@ namespace SSD_CW_20_21.DbAccess
             obj = getObjectFromReader(DB.Reader);
             DB.Reader.Close();
             return obj;
+        }
+
+        public bool updateServOrder(ServiceOrder so)
+        {
+            DB.Command = DB.Connection.CreateCommand();
+            DB.Command.CommandText = $"UPDATE SERVICEORDER SET ServiceID = {so.ServiceID} WHERE OrderID = {so.OrderID}";
+            try
+            {
+                DB.Command.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
         }
 
         private ServiceOrder getObjectFromReader(SqlDataReader rdr)

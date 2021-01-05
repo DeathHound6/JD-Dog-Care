@@ -12,7 +12,7 @@
         private int teeth;
         private int nails;
         private int roomID;
-        private int paid;
+        private double paid;
         private int cancelled;
 
         public Orders()
@@ -20,7 +20,7 @@
 
         }
 
-        public Orders(int id, int dogId, int staffId, string date, string startTime, string endTime, int ears, int teeth, int nails, int roomID, int paid)
+        public Orders(int id, int dogId, int staffId, string date, string startTime, string endTime, int ears, int teeth, int nails, int roomID, double paid)
         {
             Id = id;
             DogId = dogId;
@@ -95,7 +95,7 @@
             set { roomID = value; }
         }
 
-        public int Paid
+        public double Paid
         {
             get { return paid; }
             set { paid = value; }

@@ -34,7 +34,18 @@ namespace SSD_CW_20_21.DbAccess
         public Service getServiceById(int id)
         {
             database.Command = database.Connection.CreateCommand();
-            database.Command.CommandText = $"SELECT * FROM SERVICE WHERE ServiceID = {id}";
+            database.Command.CommandText = $"SELECT * FROM SERVICE WHERE ServiceId = {id}";
+            database.Reader = database.Command.ExecuteReader();
+            database.Reader.Read();
+            Service serv = getserviceFromReader(database.Reader);
+            database.Reader.Close();
+            return serv;
+        }
+
+        public Service getServiceByDesc(string text)
+        {
+            database.Command = database.Connection.CreateCommand();
+            database.Command.CommandText = $"SELECT * FROM SERVICE WHERE Description = '{text}'";
             database.Reader = database.Command.ExecuteReader();
             database.Reader.Read();
             Service serv = getserviceFromReader(database.Reader);
@@ -45,7 +56,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool insertService(Service serv)
         {
             database.Command = database.Connection.CreateCommand();
-            database.Command.CommandText = $"INSERT INTO SERVICE(ServiceId, Description, Time) VALUES({serv.ServiceID}, '{serv.Description}', '{serv.Time}')";
+            database.Command.CommandText = $"INSERT INTO SERVICE(ServiceId, Description, Time, Cost) VALUES({serv.ServiceID}, '{serv.Description}', '{serv.Time}', {Convert.ToDecimal(serv.Cost)})";
             try
             {
                 database.Command.ExecuteNonQuery();
@@ -58,10 +69,10 @@ namespace SSD_CW_20_21.DbAccess
             }
         }
 
-        public bool updateService(Service serv)
+        private bool updateService(Service serv)
         {
             database.Command = database.Connection.CreateCommand();
-            database.Command.CommandText = $"UPDATE SERVICE SET Description = '{serv.Description}', Time = '{serv.Time}' WHERE ServiceID = {serv.ServiceID}";
+            database.Command.CommandText = $"UPDATE SERVICE SET Cost = {Convert.ToDecimal(serv.Cost)}, Description = '{serv.Description}', Time = '{serv.Time}' WHERE ServiceId = {serv.ServiceID}";
             try
             {
                 database.Command.ExecuteNonQuery();
@@ -80,6 +91,7 @@ namespace SSD_CW_20_21.DbAccess
             serv.ServiceID = rdr.GetInt32(0);
             serv.Description = rdr.GetString(1);
             serv.Time = rdr.GetInt32(2);
+            serv.Cost = Convert.ToDouble(rdr.GetDecimal(3));
             return serv;
         }
     }

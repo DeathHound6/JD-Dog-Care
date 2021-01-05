@@ -11,16 +11,19 @@ namespace SSD_CW_20_21.Objects
         private int serviceID;
         private string description;
         private int time;
+        private double cost;
 
         public Service()
         {
 
         }
 
-        public Service(int id, string description, int time)
+        public Service(int id, string description, int time, double cost)
         {
             ServiceID = id;
             Description = description;
+            Time = time;
+            Cost = cost;
         }
 
         public int ServiceID
@@ -39,6 +42,12 @@ namespace SSD_CW_20_21.Objects
         {
             get { return time; }
             set { time = value; }
+        }
+
+        public double Cost
+        {
+            get { return cost; }
+            set { cost = value; }
         }
     }
 }

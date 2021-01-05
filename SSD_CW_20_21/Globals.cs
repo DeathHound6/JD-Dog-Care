@@ -18,8 +18,8 @@ namespace SSD_CW_20_21
         public static int extraEarsMinute { get; } = 5;
         public static int firstTimeMinute { get; } = 15;
 
-        public static double extraNailsPrice { get; } = 2.50;
-        public static double extraTeethPrice { get; } = 3.00;
-        public static double extraEarsPrice { get; } = 2.00;
+        public static double extraNailsPrice { get; } = 4.50;
+        public static double extraTeethPrice { get; } = 5.50;
+        public static double extraEarsPrice { get; } = 4.00;
     }
 }
