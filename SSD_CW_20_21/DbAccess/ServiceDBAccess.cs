@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SSD_CW_20_21.Objects;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace SSD_CW_20_21.DbAccess
 {
@@ -45,7 +46,7 @@ namespace SSD_CW_20_21.DbAccess
         public Service getServiceByDesc(string text)
         {
             database.Command = database.Connection.CreateCommand();
-            database.Command.CommandText = $"SELECT * FROM SERVICE WHERE Description = '{text}'";
+            database.Command.CommandText = $"SELECT * FROM SERVICE WHERE Description = '{Regex.Replace(text, @"^[\D\S]", "")}'";
             database.Reader = database.Command.ExecuteReader();
             database.Reader.Read();
             Service serv = getserviceFromReader(database.Reader);

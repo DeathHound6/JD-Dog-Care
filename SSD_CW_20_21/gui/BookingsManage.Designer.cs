@@ -29,13 +29,16 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtPaidTwo = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtCost = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txtEndtime = new System.Windows.Forms.TextBox();
-            this.txtPaid = new System.Windows.Forms.TextBox();
-            this.checkDelCust = new System.Windows.Forms.CheckBox();
+            this.txtPaidOne = new System.Windows.Forms.TextBox();
             this.cboxCust = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.checkDelDog = new System.Windows.Forms.CheckBox();
             this.btnSelectStaff = new System.Windows.Forms.Button();
             this.txtStaff = new System.Windows.Forms.TextBox();
             this.btnSelectTime = new System.Windows.Forms.Button();
@@ -74,8 +77,6 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.lblOrderCancelled = new System.Windows.Forms.Label();
             this.dtpDateTime = new System.Windows.Forms.DateTimePicker();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtCost = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoomThree)).BeginInit();
@@ -88,15 +89,16 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Controls.Add(this.txtPaidTwo);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.txtCost);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.txtEndtime);
-            this.panel2.Controls.Add(this.txtPaid);
-            this.panel2.Controls.Add(this.checkDelCust);
+            this.panel2.Controls.Add(this.txtPaidOne);
             this.panel2.Controls.Add(this.cboxCust);
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.checkDelDog);
             this.panel2.Controls.Add(this.btnSelectStaff);
             this.panel2.Controls.Add(this.txtStaff);
             this.panel2.Controls.Add(this.btnSelectTime);
@@ -120,6 +122,59 @@
             this.panel2.Size = new System.Drawing.Size(443, 323);
             this.panel2.TabIndex = 13;
             // 
+            // txtPaidTwo
+            // 
+            this.txtPaidTwo.Location = new System.Drawing.Point(175, 294);
+            this.txtPaidTwo.Name = "txtPaidTwo";
+            this.txtPaidTwo.ShortcutsEnabled = false;
+            this.txtPaidTwo.Size = new System.Drawing.Size(34, 20);
+            this.txtPaidTwo.TabIndex = 56;
+            this.txtPaidTwo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaidTwo_KeyPress);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label13.Location = new System.Drawing.Point(155, 294);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(14, 20);
+            this.label13.TabIndex = 55;
+            this.label13.Text = ".";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label12.Location = new System.Drawing.Point(108, 294);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(19, 20);
+            this.label12.TabIndex = 54;
+            this.label12.Text = "£";
+            // 
+            // txtCost
+            // 
+            this.txtCost.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtCost.Location = new System.Drawing.Point(302, 294);
+            this.txtCost.Name = "txtCost";
+            this.txtCost.ReadOnly = true;
+            this.txtCost.ShortcutsEnabled = false;
+            this.txtCost.Size = new System.Drawing.Size(93, 20);
+            this.txtCost.TabIndex = 53;
+            this.txtCost.Text = "£";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label11.Location = new System.Drawing.Point(248, 294);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 20);
+            this.label11.TabIndex = 52;
+            this.label11.Text = "Cost:";
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -134,34 +189,20 @@
             // txtEndtime
             // 
             this.txtEndtime.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.txtEndtime.Enabled = false;
             this.txtEndtime.Location = new System.Drawing.Point(124, 237);
             this.txtEndtime.Name = "txtEndtime";
+            this.txtEndtime.ReadOnly = true;
             this.txtEndtime.Size = new System.Drawing.Size(189, 20);
             this.txtEndtime.TabIndex = 50;
             // 
-            // txtPaid
+            // txtPaidOne
             // 
-            this.txtPaid.Location = new System.Drawing.Point(124, 294);
-            this.txtPaid.Name = "txtPaid";
-            this.txtPaid.ShortcutsEnabled = false;
-            this.txtPaid.Size = new System.Drawing.Size(100, 20);
-            this.txtPaid.TabIndex = 49;
-            this.txtPaid.Text = "£";
-            this.txtPaid.Enter += new System.EventHandler(this.txtPaid_Enter);
-            this.txtPaid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaid_KeyPress);
-            // 
-            // checkDelCust
-            // 
-            this.checkDelCust.AutoSize = true;
-            this.checkDelCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkDelCust.Location = new System.Drawing.Point(340, 15);
-            this.checkDelCust.Name = "checkDelCust";
-            this.checkDelCust.Size = new System.Drawing.Size(100, 17);
-            this.checkDelCust.TabIndex = 48;
-            this.checkDelCust.Text = "Hide Deleted";
-            this.checkDelCust.UseVisualStyleBackColor = true;
-            this.checkDelCust.CheckedChanged += new System.EventHandler(this.checkDelCust_CheckedChanged);
+            this.txtPaidOne.Location = new System.Drawing.Point(124, 294);
+            this.txtPaidOne.Name = "txtPaidOne";
+            this.txtPaidOne.ShortcutsEnabled = false;
+            this.txtPaidOne.Size = new System.Drawing.Size(34, 20);
+            this.txtPaidOne.TabIndex = 49;
+            this.txtPaidOne.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaidOne_KeyPress);
             // 
             // cboxCust
             // 
@@ -170,7 +211,7 @@
             this.cboxCust.FormattingEnabled = true;
             this.cboxCust.Location = new System.Drawing.Point(124, 8);
             this.cboxCust.Name = "cboxCust";
-            this.cboxCust.Size = new System.Drawing.Size(210, 28);
+            this.cboxCust.Size = new System.Drawing.Size(278, 28);
             this.cboxCust.TabIndex = 47;
             this.cboxCust.SelectedIndexChanged += new System.EventHandler(this.cboxCust_SelectedIndexChanged);
             // 
@@ -184,18 +225,6 @@
             this.label6.Size = new System.Drawing.Size(65, 20);
             this.label6.TabIndex = 46;
             this.label6.Text = "Owner:";
-            // 
-            // checkDelDog
-            // 
-            this.checkDelDog.AutoSize = true;
-            this.checkDelDog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkDelDog.Location = new System.Drawing.Point(340, 49);
-            this.checkDelDog.Name = "checkDelDog";
-            this.checkDelDog.Size = new System.Drawing.Size(100, 17);
-            this.checkDelDog.TabIndex = 45;
-            this.checkDelDog.Text = "Hide Deleted";
-            this.checkDelDog.UseVisualStyleBackColor = true;
-            this.checkDelDog.CheckedChanged += new System.EventHandler(this.checkDelDog_CheckedChanged);
             // 
             // btnSelectStaff
             // 
@@ -352,7 +381,7 @@
             this.cboxDog.FormattingEnabled = true;
             this.cboxDog.Location = new System.Drawing.Point(124, 42);
             this.cboxDog.Name = "cboxDog";
-            this.cboxDog.Size = new System.Drawing.Size(210, 28);
+            this.cboxDog.Size = new System.Drawing.Size(278, 28);
             this.cboxDog.TabIndex = 27;
             // 
             // label3
@@ -375,7 +404,7 @@
             this.cboxServices.Name = "cboxServices";
             this.cboxServices.Size = new System.Drawing.Size(278, 28);
             this.cboxServices.TabIndex = 25;
-            this.cboxServices.Click += new System.EventHandler(this.cboxServices_Click);
+            this.cboxServices.SelectedIndexChanged += new System.EventHandler(this.cboxServices_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -412,7 +441,7 @@
             this.lblRoomThree.AutoSize = true;
             this.lblRoomThree.BackColor = System.Drawing.Color.Transparent;
             this.lblRoomThree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRoomThree.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRoomThree.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblRoomThree.Location = new System.Drawing.Point(8, 364);
             this.lblRoomThree.Name = "lblRoomThree";
             this.lblRoomThree.Size = new System.Drawing.Size(76, 20);
@@ -424,7 +453,7 @@
             this.lblRoomTwo.AutoSize = true;
             this.lblRoomTwo.BackColor = System.Drawing.Color.Transparent;
             this.lblRoomTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRoomTwo.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRoomTwo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblRoomTwo.Location = new System.Drawing.Point(8, 252);
             this.lblRoomTwo.Name = "lblRoomTwo";
             this.lblRoomTwo.Size = new System.Drawing.Size(76, 20);
@@ -436,7 +465,7 @@
             this.lblRoomOne.AutoSize = true;
             this.lblRoomOne.BackColor = System.Drawing.Color.Transparent;
             this.lblRoomOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRoomOne.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRoomOne.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblRoomOne.Location = new System.Drawing.Point(8, 127);
             this.lblRoomOne.Name = "lblRoomOne";
             this.lblRoomOne.Size = new System.Drawing.Size(76, 20);
@@ -449,7 +478,7 @@
             this.lblMessageTwo.BackColor = System.Drawing.Color.Transparent;
             this.lblMessageTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessageTwo.ForeColor = System.Drawing.Color.White;
+            this.lblMessageTwo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.lblMessageTwo.Location = new System.Drawing.Point(8, 46);
             this.lblMessageTwo.Name = "lblMessageTwo";
             this.lblMessageTwo.Size = new System.Drawing.Size(230, 20);
@@ -461,7 +490,7 @@
             this.lblDate.AutoSize = true;
             this.lblDate.BackColor = System.Drawing.Color.Transparent;
             this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.lblDate.Location = new System.Drawing.Point(273, 16);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(202, 20);
@@ -474,7 +503,7 @@
             this.lblMessageOne.BackColor = System.Drawing.Color.Transparent;
             this.lblMessageOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessageOne.ForeColor = System.Drawing.Color.White;
+            this.lblMessageOne.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.lblMessageOne.Location = new System.Drawing.Point(8, 16);
             this.lblMessageOne.Name = "lblMessageOne";
             this.lblMessageOne.Size = new System.Drawing.Size(259, 20);
@@ -655,28 +684,6 @@
             this.dtpDateTime.TabIndex = 25;
             this.dtpDateTime.Visible = false;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label11.Location = new System.Drawing.Point(248, 294);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(51, 20);
-            this.label11.TabIndex = 52;
-            this.label11.Text = "Cost:";
-            // 
-            // txtCost
-            // 
-            this.txtCost.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.txtCost.Enabled = false;
-            this.txtCost.Location = new System.Drawing.Point(302, 294);
-            this.txtCost.Name = "txtCost";
-            this.txtCost.ShortcutsEnabled = false;
-            this.txtCost.Size = new System.Drawing.Size(93, 20);
-            this.txtCost.TabIndex = 53;
-            this.txtCost.Text = "£";
-            // 
             // BookingsManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -739,10 +746,8 @@
         private System.Windows.Forms.Label lblOrderCancelled;
         private System.Windows.Forms.Button btnSelectStaff;
         private System.Windows.Forms.TextBox txtStaff;
-        private System.Windows.Forms.CheckBox checkDelDog;
         private System.Windows.Forms.DateTimePicker dtpDateTime;
         private System.Windows.Forms.Button btnView;
-        private System.Windows.Forms.CheckBox checkDelCust;
         private System.Windows.Forms.ComboBox cboxCust;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dgvRoomThree;
@@ -751,7 +756,7 @@
         private System.Windows.Forms.DateTimePicker dtpRoomView;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtEndtime;
-        private System.Windows.Forms.TextBox txtPaid;
+        private System.Windows.Forms.TextBox txtPaidOne;
         private System.Windows.Forms.Label lblRoomThree;
         private System.Windows.Forms.Label lblRoomTwo;
         private System.Windows.Forms.Label lblRoomOne;
@@ -760,5 +765,8 @@
         private System.Windows.Forms.Label lblMessageOne;
         private System.Windows.Forms.TextBox txtCost;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtPaidTwo;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
     }
 }
