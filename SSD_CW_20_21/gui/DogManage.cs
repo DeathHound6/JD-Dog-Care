@@ -24,17 +24,24 @@ namespace SSD_CW_20_21.gui
         public DogManage() : base()
         {
             InitializeComponent();
+            lbSelectDog.SelectedItem = null;
             dogs = dogAccess.getAllDogs().FindAll(e => e.Deleted == 0);
             Text = "JD Dog Care - Dogs";
 
-            populateListBox();
             populateComboBox();
+            populateListBox();
             cboxSearch.SelectedIndex = 0;
             
             changeMode("view");
         }
 
         #region Events
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            new GroomingMain().Show();
+            Hide();
+        }
+
         private void btnUpdate_Click(object sender, EventArgs ev)
         {
             if (mode != "edit")
@@ -141,11 +148,11 @@ namespace SSD_CW_20_21.gui
                         dogs = dogAccess.getAllDogs().FindAll(e => e.Deleted == 0);
                         populateListBox();
                         changeMode("view");
-                        MessageBox.Show("The dog has been recorded successfully", "Dog Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("The dog has been added successfully", "Dog Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Something went wrong when recording the dog's details", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Something went wrong when adding the dog's details", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -154,10 +161,7 @@ namespace SSD_CW_20_21.gui
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (mode != "view")
-            {
-                changeMode("view");
-            }
+            if (mode != "view") changeMode("view");
         }
 
         private void lbSelectDog_SelectedIndexChanged(object sender, EventArgs e)
@@ -238,13 +242,18 @@ namespace SSD_CW_20_21.gui
                 cboxHair.Enabled = false;
                 cboxSearch.Enabled = true;
                 //txtSearch.Enabled = true;
+                if (lbSelectDog.SelectedIndex == 0) btnPrevious.Enabled = false;
+                else btnPrevious.Enabled = true;
+                if (lbSelectDog.SelectedIndex == lbSelectDog.Items.Count - 1) btnNext.Enabled = false;
+                else btnNext.Enabled = true;
 
                 lblDogId.Text = $"#{dog.Id}";
                 txtDogName.Text = dog.Name;
                 cboxDogBreed.Text = dog.Breed;
+                cboxHair.Text = dog.HairLength;
 
                 Customer cust = custAccess.getOwnerById(dog.OwnerId);
-                cboxDogOwner.Text = $"{cust.Forename} {cust.Surname}";
+                cboxDogOwner.Text = $"{cust.Forename} {cust.Surname} - {cust.Id}";
 
                 cboxAggression.Text = dog.Aggression;
                 btnAdd.Text = "Add New Dog";
@@ -272,6 +281,8 @@ namespace SSD_CW_20_21.gui
                 lbSelectDog.Enabled = false;
                 txtSearch.Enabled = false;
                 cboxSearch.Enabled = false;
+                btnNext.Enabled = false;
+                btnPrevious.Enabled = false;
 
                 txtSearch.Text = "";
                 cboxSearch.Text = "";
@@ -295,19 +306,12 @@ namespace SSD_CW_20_21.gui
                     return;
                 }
                 mode = newMode;
-
-                lblDogId.Text = $"#{dog.Id}";
-                txtDogName.Text = dog.Name;
-                cboxDogBreed.Text = dog.Breed;
-                Customer cust = custAccess.getOwnerById(dog.OwnerId);
-                cboxDogOwner.Text = $"{cust.Forename} {cust.Surname} - {cust.Id}";
-                cboxAggression.Text = dog.Aggression;
+                
                 btnAdd.Text = "";
                 btnCancel.Text = "Cancel Edit Dog";
                 btnDelete.Text = "Delete Dog";
                 btnUpdate.Text = "Save Changes";
                 dtpDOB.Value = Convert.ToDateTime(dog.DOB);
-                cboxHair.Text = dog.HairLength;
                 txtSearch.Text = "";
                 cboxSearch.Text = "";
 
@@ -324,6 +328,8 @@ namespace SSD_CW_20_21.gui
                 btnDelete.Enabled = true;
                 btnUpdate.Enabled = true;
                 lbSelectDog.Enabled = false;
+                btnPrevious.Enabled = false;
+                btnNext.Enabled = false;
             }
         }
 
@@ -335,7 +341,8 @@ namespace SSD_CW_20_21.gui
 
             foreach (Dog dog in dogs)
             {
-                data.Rows.Add(dog.Id, $"{dog.Name} - {dog.Id}");
+                Customer owner = custAccess.getOwnerById(dog.OwnerId);
+                data.Rows.Add(dog.Id, $"Dog({dog.Name}, {dog.Id}) - Owner({owner.Forename} {owner.Surname})");
             }
             lbSelectDog.ValueMember = "DogID";
             lbSelectDog.DisplayMember = "DogName";
@@ -356,7 +363,7 @@ namespace SSD_CW_20_21.gui
                 cboxDogOwner.Items.Add($"{owner.Forename} {owner.Surname} - {owner.Id}");
             }
 
-            string[] breeds = { "Pug", "German Shephard", "Husky" };
+            string[] breeds = { "Pug", "German Shephard", "Husky", "Bulldog", "Poodle", "Labrador", "French Bulldog", "Rottweiler", "Great Dane", "Border Collie", "Basset Hound" };
             foreach (string breed in breeds)
             {
                 cboxDogBreed.Items.Add(breed);
@@ -396,6 +403,26 @@ namespace SSD_CW_20_21.gui
             {
                 MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            lbSelectDog.SelectedIndex += 1;
+
+            if (lbSelectDog.SelectedIndex == 0) btnPrevious.Enabled = false;
+            else btnPrevious.Enabled = true;
+            if (lbSelectDog.SelectedIndex == lbSelectDog.Items.Count - 1) btnNext.Enabled = false;
+            else btnNext.Enabled = true;
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            lbSelectDog.SelectedIndex -= 1;
+
+            if (lbSelectDog.SelectedIndex == 0) btnPrevious.Enabled = false;
+            else btnPrevious.Enabled = true;
+            if (lbSelectDog.SelectedIndex == lbSelectDog.Items.Count - 1) btnNext.Enabled = false;
+            else btnNext.Enabled = true;
         }
         #endregion
     }

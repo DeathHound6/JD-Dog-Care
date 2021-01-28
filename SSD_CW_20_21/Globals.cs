@@ -21,5 +21,9 @@ namespace SSD_CW_20_21
         public static double extraNailsPrice { get; } = 4.50;
         public static double extraTeethPrice { get; } = 5.50;
         public static double extraEarsPrice { get; } = 4.00;
+
+        public static double shortCoatPrice { get; } = 0.50;
+        public static double mediumCoatPrice { get; } = 1.00;
+        public static double longCoatPrice { get; } = 1.50;
     }
 }

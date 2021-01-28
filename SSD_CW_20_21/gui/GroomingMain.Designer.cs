@@ -33,6 +33,9 @@
             this.btnBooking = new System.Windows.Forms.Button();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.imgLogo = new System.Windows.Forms.PictureBox();
+            this.btnMenu = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnReports = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).BeginInit();
             this.SuspendLayout();
@@ -76,8 +79,11 @@
             this.dgvOrders.AllowUserToDeleteRows = false;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrders.Location = new System.Drawing.Point(564, 218);
+            this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
+            this.dgvOrders.RowHeadersVisible = false;
+            this.dgvOrders.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgvOrders.Size = new System.Drawing.Size(394, 283);
             this.dgvOrders.TabIndex = 13;
             // 
@@ -91,11 +97,47 @@
             this.imgLogo.TabIndex = 14;
             this.imgLogo.TabStop = false;
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.btnMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnMenu.Location = new System.Drawing.Point(686, 507);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(133, 57);
+            this.btnMenu.TabIndex = 27;
+            this.btnMenu.Text = "Main Menu";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(574, 179);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(183, 20);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Upcoming 5 Bookings";
+            // 
+            // btnReports
+            // 
+            this.btnReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReports.Location = new System.Drawing.Point(12, 317);
+            this.btnReports.Name = "btnReports";
+            this.btnReports.Size = new System.Drawing.Size(162, 80);
+            this.btnReports.TabIndex = 29;
+            this.btnReports.Text = "View Reports";
+            this.btnReports.UseVisualStyleBackColor = true;
+            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
+            // 
             // GroomingMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(973, 615);
+            this.Controls.Add(this.btnReports);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.imgLogo);
             this.Controls.Add(this.dgvOrders);
             this.Controls.Add(this.btnBooking);
@@ -108,6 +150,9 @@
             this.Controls.SetChildIndex(this.btnBooking, 0);
             this.Controls.SetChildIndex(this.dgvOrders, 0);
             this.Controls.SetChildIndex(this.imgLogo, 0);
+            this.Controls.SetChildIndex(this.btnMenu, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.btnReports, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).EndInit();
             this.ResumeLayout(false);
@@ -121,5 +166,8 @@
         private System.Windows.Forms.Button btnBooking;
         private System.Windows.Forms.DataGridView dgvOrders;
         private System.Windows.Forms.PictureBox imgLogo;
+        private System.Windows.Forms.Button btnMenu;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnReports;
     }
 }

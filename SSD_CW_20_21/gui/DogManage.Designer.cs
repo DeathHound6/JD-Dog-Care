@@ -55,6 +55,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnMenu = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -299,6 +302,8 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel4.Controls.Add(this.btnNext);
+            this.panel4.Controls.Add(this.btnPrevious);
             this.panel4.Controls.Add(this.lbSelectDog);
             this.panel4.Location = new System.Drawing.Point(12, 118);
             this.panel4.Name = "panel4";
@@ -312,7 +317,7 @@
             this.lbSelectDog.ItemHeight = 18;
             this.lbSelectDog.Location = new System.Drawing.Point(4, 12);
             this.lbSelectDog.Name = "lbSelectDog";
-            this.lbSelectDog.Size = new System.Drawing.Size(304, 346);
+            this.lbSelectDog.Size = new System.Drawing.Size(320, 292);
             this.lbSelectDog.TabIndex = 0;
             this.lbSelectDog.SelectedIndexChanged += new System.EventHandler(this.lbSelectDog_SelectedIndexChanged);
             // 
@@ -356,11 +361,48 @@
             this.label10.TabIndex = 24;
             this.label10.Text = "Value:";
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.btnMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnMenu.Location = new System.Drawing.Point(686, 505);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(133, 57);
+            this.btnMenu.TabIndex = 27;
+            this.btnMenu.Text = "Grooming Menu";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Enabled = false;
+            this.btnPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrevious.Location = new System.Drawing.Point(4, 319);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(148, 49);
+            this.btnPrevious.TabIndex = 21;
+            this.btnPrevious.Text = "Previous Dog";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Enabled = false;
+            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext.Location = new System.Drawing.Point(176, 319);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(148, 49);
+            this.btnNext.TabIndex = 22;
+            this.btnNext.Text = "Next Dog";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
             // DogManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(973, 615);
+            this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label9);
@@ -379,6 +421,7 @@
             this.Controls.SetChildIndex(this.label9, 0);
             this.Controls.SetChildIndex(this.txtSearch, 0);
             this.Controls.SetChildIndex(this.label10, 0);
+            this.Controls.SetChildIndex(this.btnMenu, 0);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -416,5 +459,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnMenu;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnPrevious;
     }
 }

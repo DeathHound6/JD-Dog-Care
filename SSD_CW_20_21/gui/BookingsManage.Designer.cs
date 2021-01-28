@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtPaidTwo = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -77,6 +80,7 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.lblOrderCancelled = new System.Windows.Forms.Label();
             this.dtpDateTime = new System.Windows.Forms.DateTimePicker();
+            this.btnMenu = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoomThree)).BeginInit();
@@ -254,6 +258,7 @@
             this.btnSelectTime.TabIndex = 42;
             this.btnSelectTime.Text = "Select";
             this.btnSelectTime.UseVisualStyleBackColor = true;
+            this.btnSelectTime.Visible = false;
             this.btnSelectTime.Click += new System.EventHandler(this.btnSelectTime_Click);
             // 
             // btnSelectDate
@@ -265,6 +270,7 @@
             this.btnSelectDate.TabIndex = 41;
             this.btnSelectDate.Text = "Select";
             this.btnSelectDate.UseVisualStyleBackColor = true;
+            this.btnSelectDate.Visible = false;
             this.btnSelectDate.Click += new System.EventHandler(this.btnSelectDate_Click);
             // 
             // txtTime
@@ -528,6 +534,14 @@
             this.dgvRoomThree.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRoomThree.ColumnHeadersVisible = false;
             this.dgvRoomThree.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRoomThree.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvRoomThree.Location = new System.Drawing.Point(91, 324);
             this.dgvRoomThree.Name = "dgvRoomThree";
             this.dgvRoomThree.ReadOnly = true;
@@ -548,6 +562,14 @@
             this.dgvRoomTwo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRoomTwo.ColumnHeadersVisible = false;
             this.dgvRoomTwo.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRoomTwo.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvRoomTwo.Location = new System.Drawing.Point(91, 208);
             this.dgvRoomTwo.Name = "dgvRoomTwo";
             this.dgvRoomTwo.ReadOnly = true;
@@ -568,6 +590,14 @@
             this.dgvRoomOne.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRoomOne.ColumnHeadersVisible = false;
             this.dgvRoomOne.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRoomOne.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvRoomOne.Location = new System.Drawing.Point(91, 88);
             this.dgvRoomOne.Name = "dgvRoomOne";
             this.dgvRoomOne.ReadOnly = true;
@@ -676,7 +706,7 @@
             // 
             // dtpDateTime
             // 
-            this.dtpDateTime.Location = new System.Drawing.Point(543, 507);
+            this.dtpDateTime.Location = new System.Drawing.Point(518, 507);
             this.dtpDateTime.MaxDate = new System.DateTime(2021, 12, 31, 0, 0, 0, 0);
             this.dtpDateTime.MinDate = new System.DateTime(2020, 11, 13, 0, 0, 0, 0);
             this.dtpDateTime.Name = "dtpDateTime";
@@ -684,11 +714,24 @@
             this.dtpDateTime.TabIndex = 25;
             this.dtpDateTime.Visible = false;
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.btnMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnMenu.Location = new System.Drawing.Point(686, 507);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(133, 57);
+            this.btnMenu.TabIndex = 26;
+            this.btnMenu.Text = "Grooming Menu";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
             // BookingsManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(973, 615);
+            this.ClientSize = new System.Drawing.Size(996, 615);
+            this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.dtpDateTime);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.label1);
@@ -703,6 +746,7 @@
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.panel3, 0);
             this.Controls.SetChildIndex(this.dtpDateTime, 0);
+            this.Controls.SetChildIndex(this.btnMenu, 0);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -768,5 +812,6 @@
         private System.Windows.Forms.TextBox txtPaidTwo;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnMenu;
     }
 }

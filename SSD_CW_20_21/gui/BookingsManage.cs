@@ -28,8 +28,6 @@ namespace SSD_CW_20_21.gui
         private string mode = "";
         private string type = "";
         private List<Service> services;
-
-        private bool booting = true;
         #endregion
 
         public BookingsManage() : base()
@@ -55,7 +53,6 @@ namespace SSD_CW_20_21.gui
             txtStaff.Enabled = false;
             txtTime.Enabled = false;
             txtDate.Enabled = false;
-            booting = false;
         }
 
         #region Custom Methods
@@ -74,27 +71,21 @@ namespace SSD_CW_20_21.gui
             {
                 cboxCust.Items.Add($"{cust.Id} - {cust.Forename} {cust.Surname}");
             }
-            cboxCust.Text = cboxCust.Items[0].ToString();
+            cboxCust.Text = "";
         }
 
         private void populateDogCbox()
         {
             cboxDog.Items.Clear();
             dogs = dogAccess.getAllDogs().FindAll(e => e.Deleted == 0 && e.OwnerId == getIdFromString(cboxCust.Text));
-            foreach (Dog dog in dogs)
+            if (dogs.Count > 0)
             {
-                cboxDog.Items.Add($"{dog.Id} - {dog.Name}");
+                foreach (Dog dog in dogs)
+                {
+                    cboxDog.Items.Add($"{dog.Id} - {dog.Name}");
+                }
             }
-
-            try
-            {
-                cboxDog.Text = cboxDog.Items[0].ToString();
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                cboxDog.Items.Add("None Available");
-                cboxDog.Text = cboxDog.Items[0].ToString();
-            }
+            else cboxDog.Items.Add("None Available");
         }
 
         private void populateServCbox()
@@ -105,7 +96,7 @@ namespace SSD_CW_20_21.gui
             {
                 cboxServices.Items.Add($"{srv.ServiceID} - {srv.Description}");
             }
-            cboxServices.Text = cboxServices.Items[0].ToString();
+            cboxServices.Text = "";
             serv = serviceAccess.getServiceById(getIdFromString(cboxServices.Text));
             txtCost.Text = $"£{calcCost(order)}";
         }
@@ -823,37 +814,37 @@ namespace SSD_CW_20_21.gui
         {
             if (e.RowIndex == -1) return;
             if (dgvSelect.Rows[e.RowIndex].Cells[0].Value == null) return;
-            if (type == "date")
-            {
-                if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
-                {
-                    MessageBox.Show("This date is not available to select a booking for. Please select another date", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                string date = Convert.ToString(dgvSelect.Rows[e.RowIndex].Cells[0].Value).Split('(')[0];
-                order.Date = date;
-                txtDate.Text = date;
-                type = "";
-                populateDataGrid();
-                btnSelectTime.Enabled = true;
-            }
-            else if (type == "time")
-            {
-                if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
-                {
-                    MessageBox.Show("This time is not available to select a booking for. Please select another time", "Invalid Time", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                string time = Convert.ToString(dgvSelect.Rows[e.RowIndex].Cells[0].Value);
-                txtTime.Text = time;
-                order.StartTime = time;
-                order.EndTime = getEndTime(Convert.ToDateTime(time), true).ToShortTimeString();
-                txtEndtime.Text = order.EndTime;
-                type = "";
-                populateDataGrid();
-                btnSelectStaff.Enabled = true;
-            }
-            else if (type == "staff")
+            //if (type == "date")
+            //{
+            //    if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
+            //    {
+            //        MessageBox.Show("This date is not available to select a booking for. Please select another date", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        return;
+            //    }
+            //    string date = Convert.ToString(dgvSelect.Rows[e.RowIndex].Cells[0].Value).Split('(')[0];
+            //    order.Date = date;
+            //    txtDate.Text = date;
+            //    type = "";
+            //    populateDataGrid();
+            //    btnSelectTime.Enabled = true;
+            //}
+            //else if (type == "time")
+            //{
+            //    if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
+            //    {
+            //        MessageBox.Show("This time is not available to select a booking for. Please select another time", "Invalid Time", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        return;
+            //    }
+            //    string time = Convert.ToString(dgvSelect.Rows[e.RowIndex].Cells[0].Value);
+            //    txtTime.Text = time;
+            //    order.StartTime = time;
+            //    order.EndTime = getEndTime(Convert.ToDateTime(time), true).ToShortTimeString();
+            //    txtEndtime.Text = order.EndTime;
+            //    type = "";
+            //    populateDataGrid();
+            //    btnSelectStaff.Enabled = true;
+            //}
+            if (type == "staff")
             {
                 if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
                 {
@@ -929,7 +920,6 @@ namespace SSD_CW_20_21.gui
 
         private void cboxServices_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (booting) return;
             if (checkValidEndTime(cboxServices)) serv = serviceAccess.getServiceById(getIdFromString(cboxServices.Text));
             txtCost.Text = $"£{calcCost(order)}";
         }
@@ -942,6 +932,12 @@ namespace SSD_CW_20_21.gui
         private void txtPaidTwo_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) || (txtPaidTwo.Text.Length == 2 && e.KeyChar != (char)8)) e.Handled = true;
+        }
+
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            new GroomingMain().Show();
+            Hide();
         }
         #endregion
     }

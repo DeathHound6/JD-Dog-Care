@@ -117,7 +117,92 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="tsMenu.Text" xml:space="preserve">
+    <value>Grooming Menu</value>
+  </data>
+  <data name="tsDogs.Text" xml:space="preserve">
+    <value>Dogs</value>
+  </data>
+  <data name="tsBookings.Text" xml:space="preserve">
+    <value>Bookings</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="viewReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 23</value>
+  </data>
+  <data name="viewReportsToolStripMenuItem.Text" xml:space="preserve">
+    <value>View Reports</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="toolstripMenuSubsystems.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolstripMenuSubsystems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="toolstripMenuSubsystems.Text" xml:space="preserve">
+    <value>Grooming</value>
+  </data>
+  <data name="dayCareToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="dayCareToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 23</value>
+  </data>
+  <data name="dayCareToolStripMenuItem.Text" xml:space="preserve">
+    <value>Day Care</value>
+  </data>
+  <data name="dogWalkingToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="dogWalkingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="dogWalkingToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dog Walking</value>
+  </data>
+  <data name="dogTrainingToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="dogTrainingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 23</value>
+  </data>
+  <data name="dogTrainingToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dog Training</value>
+  </data>
+  <data name="collectionToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="collectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 23</value>
+  </data>
+  <data name="collectionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Collection, Delivery and Mobile Grooming</value>
+  </data>
+  <data name="exitToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>962, 27</value>
+  </data>
+  <data name="lblDbConn.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14.25pt, style=Bold, Italic</value>
+  </data>
+  <data name="lblDbConn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 6</value>
+  </data>
+  <data name="lblDbConn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 24</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>962, 42</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>962, 609</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAYAAAAAAAEAIADtJQAAZgAAAICAAAABACAAKAgBAFMmAABAQAAAAQAgAChCAAB7LgEAMDAAAAEA

@@ -40,10 +40,10 @@
             // 
             // btnGrooming
             // 
-            this.btnGrooming.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGrooming.Location = new System.Drawing.Point(12, 132);
+            this.btnGrooming.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGrooming.Location = new System.Drawing.Point(12, 174);
             this.btnGrooming.Name = "btnGrooming";
-            this.btnGrooming.Size = new System.Drawing.Size(162, 80);
+            this.btnGrooming.Size = new System.Drawing.Size(229, 126);
             this.btnGrooming.TabIndex = 6;
             this.btnGrooming.Text = "Grooming";
             this.btnGrooming.UseVisualStyleBackColor = true;
@@ -62,10 +62,10 @@
             // 
             // btnWalking
             // 
-            this.btnWalking.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWalking.Location = new System.Drawing.Point(12, 218);
+            this.btnWalking.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWalking.Location = new System.Drawing.Point(12, 306);
             this.btnWalking.Name = "btnWalking";
-            this.btnWalking.Size = new System.Drawing.Size(162, 80);
+            this.btnWalking.Size = new System.Drawing.Size(229, 126);
             this.btnWalking.TabIndex = 8;
             this.btnWalking.Text = "Dog Walking";
             this.btnWalking.UseVisualStyleBackColor = true;
@@ -73,10 +73,10 @@
             // 
             // btnTraining
             // 
-            this.btnTraining.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTraining.Location = new System.Drawing.Point(12, 304);
+            this.btnTraining.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTraining.Location = new System.Drawing.Point(12, 438);
             this.btnTraining.Name = "btnTraining";
-            this.btnTraining.Size = new System.Drawing.Size(162, 80);
+            this.btnTraining.Size = new System.Drawing.Size(229, 126);
             this.btnTraining.TabIndex = 9;
             this.btnTraining.Text = "Dog Training";
             this.btnTraining.UseVisualStyleBackColor = true;
@@ -84,10 +84,10 @@
             // 
             // btnDaycare
             // 
-            this.btnDaycare.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDaycare.Location = new System.Drawing.Point(12, 390);
+            this.btnDaycare.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDaycare.Location = new System.Drawing.Point(247, 306);
             this.btnDaycare.Name = "btnDaycare";
-            this.btnDaycare.Size = new System.Drawing.Size(162, 80);
+            this.btnDaycare.Size = new System.Drawing.Size(229, 126);
             this.btnDaycare.TabIndex = 10;
             this.btnDaycare.Text = "Day Care";
             this.btnDaycare.UseVisualStyleBackColor = true;
@@ -95,10 +95,10 @@
             // 
             // btnMobile
             // 
-            this.btnMobile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMobile.Location = new System.Drawing.Point(12, 476);
+            this.btnMobile.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMobile.Location = new System.Drawing.Point(247, 438);
             this.btnMobile.Name = "btnMobile";
-            this.btnMobile.Size = new System.Drawing.Size(162, 80);
+            this.btnMobile.Size = new System.Drawing.Size(229, 126);
             this.btnMobile.TabIndex = 11;
             this.btnMobile.Text = "Collection, Delivery and Mobile Grooming";
             this.btnMobile.UseVisualStyleBackColor = true;
@@ -107,9 +107,9 @@
             // imgLogo
             // 
             this.imgLogo.Image = global::SSD_CW_20_21.Properties.Resources.logo;
-            this.imgLogo.Location = new System.Drawing.Point(701, 67);
+            this.imgLogo.Location = new System.Drawing.Point(584, 67);
             this.imgLogo.Name = "imgLogo";
-            this.imgLogo.Size = new System.Drawing.Size(248, 235);
+            this.imgLogo.Size = new System.Drawing.Size(319, 281);
             this.imgLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imgLogo.TabIndex = 12;
             this.imgLogo.TabStop = false;

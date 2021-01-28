@@ -104,6 +104,12 @@
     <Compile Include="gui\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\Reports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\Reports.Designer.cs">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\Template.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,7 @@
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
     <Content Include="image0.ico" />
+    <Content Include="Resources\image0.ico" />
     <None Include="Resources\image0.png" />
   </ItemGroup>
   <ItemGroup />
