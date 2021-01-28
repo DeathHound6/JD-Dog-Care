@@ -36,6 +36,26 @@ namespace SSD_CW_20_21.gui
         }
 
         #region Events
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            lbSelectDog.SelectedIndex += 1;
+
+            if (lbSelectDog.SelectedIndex == 0) btnPrevious.Enabled = false;
+            else btnPrevious.Enabled = true;
+            if (lbSelectDog.SelectedIndex == lbSelectDog.Items.Count - 1) btnNext.Enabled = false;
+            else btnNext.Enabled = true;
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            lbSelectDog.SelectedIndex -= 1;
+
+            if (lbSelectDog.SelectedIndex == 0) btnPrevious.Enabled = false;
+            else btnPrevious.Enabled = true;
+            if (lbSelectDog.SelectedIndex == lbSelectDog.Items.Count - 1) btnNext.Enabled = false;
+            else btnNext.Enabled = true;
+        }
+
         private void btnMenu_Click(object sender, EventArgs e)
         {
             new GroomingMain().Show();
@@ -403,26 +423,6 @@ namespace SSD_CW_20_21.gui
             {
                 MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            lbSelectDog.SelectedIndex += 1;
-
-            if (lbSelectDog.SelectedIndex == 0) btnPrevious.Enabled = false;
-            else btnPrevious.Enabled = true;
-            if (lbSelectDog.SelectedIndex == lbSelectDog.Items.Count - 1) btnNext.Enabled = false;
-            else btnNext.Enabled = true;
-        }
-
-        private void btnPrevious_Click(object sender, EventArgs e)
-        {
-            lbSelectDog.SelectedIndex -= 1;
-
-            if (lbSelectDog.SelectedIndex == 0) btnPrevious.Enabled = false;
-            else btnPrevious.Enabled = true;
-            if (lbSelectDog.SelectedIndex == lbSelectDog.Items.Count - 1) btnNext.Enabled = false;
-            else btnNext.Enabled = true;
         }
         #endregion
     }

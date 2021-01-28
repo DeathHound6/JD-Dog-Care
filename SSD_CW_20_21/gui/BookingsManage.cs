@@ -517,6 +517,10 @@ namespace SSD_CW_20_21.gui
             if (order.Ears == 1) cost += Globals.extraEarsPrice;
             if (order.Nails == 1) cost += Globals.extraNailsPrice;
             if (order.Teeth == 1) cost += Globals.extraTeethPrice;
+            Dog dog = dogAccess.getDogById(order.DogId);
+            if (dog.HairLength == "Short") cost += Globals.shortCoatPrice;
+            else if (dog.HairLength == "Medium") cost += Globals.mediumCoatPrice;
+            else if (dog.HairLength == "Long") cost += Globals.longCoatPrice;
             if (orderAccess.getAllOrders().FindAll(e => e.DogId == order.DogId).Count == 0 || orderAccess.getAllOrders().Find(e => e.DogId == order.DogId) == order) cost += 5.00; // first time cost
             return cost;
         }
