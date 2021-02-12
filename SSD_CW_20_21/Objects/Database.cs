@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data;
+using System.ComponentModel;
 
 namespace SSD_CW_20_21.Objects
 {
@@ -11,7 +12,7 @@ namespace SSD_CW_20_21.Objects
         private SqlConnection conn;
         private SqlDataReader rdr;
         private bool connected;
-
+        
         public Database()
         {
 
@@ -24,6 +25,7 @@ namespace SSD_CW_20_21.Objects
             connected = false;
         }
 
+        
         public void Connect()
         {
             SqlConnectionStringBuilder scStrBuild = new SqlConnectionStringBuilder();

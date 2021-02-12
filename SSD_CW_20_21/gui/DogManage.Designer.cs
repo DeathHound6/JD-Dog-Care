@@ -50,14 +50,15 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
             this.lbSelectDog = new System.Windows.Forms.ListBox();
             this.cboxSearch = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnMenu = new System.Windows.Forms.Button();
-            this.btnPrevious = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -88,6 +89,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.cboxHair);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label7);
@@ -110,10 +112,11 @@
             // cboxHair
             // 
             this.cboxHair.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxHair.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxHair.FormattingEnabled = true;
             this.cboxHair.Location = new System.Drawing.Point(131, 278);
             this.cboxHair.Name = "cboxHair";
-            this.cboxHair.Size = new System.Drawing.Size(231, 21);
+            this.cboxHair.Size = new System.Drawing.Size(231, 28);
             this.cboxHair.TabIndex = 29;
             // 
             // label8
@@ -141,21 +144,23 @@
             // dtpDOB
             // 
             this.dtpDOB.Enabled = false;
+            this.dtpDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDOB.Location = new System.Drawing.Point(131, 135);
             this.dtpDOB.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
             this.dtpDOB.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dtpDOB.Name = "dtpDOB";
-            this.dtpDOB.Size = new System.Drawing.Size(231, 20);
+            this.dtpDOB.Size = new System.Drawing.Size(231, 26);
             this.dtpDOB.TabIndex = 26;
             this.dtpDOB.ValueChanged += new System.EventHandler(this.dtpDOB_ValueChanged);
             // 
             // cboxAggression
             // 
             this.cboxAggression.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxAggression.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxAggression.FormattingEnabled = true;
             this.cboxAggression.Location = new System.Drawing.Point(131, 230);
             this.cboxAggression.Name = "cboxAggression";
-            this.cboxAggression.Size = new System.Drawing.Size(231, 21);
+            this.cboxAggression.Size = new System.Drawing.Size(231, 28);
             this.cboxAggression.TabIndex = 25;
             // 
             // label5
@@ -172,10 +177,11 @@
             // cboxDogBreed
             // 
             this.cboxDogBreed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxDogBreed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxDogBreed.FormattingEnabled = true;
             this.cboxDogBreed.Location = new System.Drawing.Point(131, 180);
             this.cboxDogBreed.Name = "cboxDogBreed";
-            this.cboxDogBreed.Size = new System.Drawing.Size(231, 21);
+            this.cboxDogBreed.Size = new System.Drawing.Size(231, 28);
             this.cboxDogBreed.TabIndex = 23;
             // 
             // label6
@@ -192,19 +198,20 @@
             // cboxDogOwner
             // 
             this.cboxDogOwner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxDogOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxDogOwner.FormattingEnabled = true;
             this.cboxDogOwner.Location = new System.Drawing.Point(131, 88);
             this.cboxDogOwner.Name = "cboxDogOwner";
-            this.cboxDogOwner.Size = new System.Drawing.Size(231, 21);
+            this.cboxDogOwner.Size = new System.Drawing.Size(231, 28);
             this.cboxDogOwner.TabIndex = 21;
             // 
             // txtDogName
             // 
-            this.txtDogName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDogName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDogName.Location = new System.Drawing.Point(131, 49);
             this.txtDogName.Name = "txtDogName";
             this.txtDogName.ShortcutsEnabled = false;
-            this.txtDogName.Size = new System.Drawing.Size(231, 22);
+            this.txtDogName.Size = new System.Drawing.Size(231, 26);
             this.txtDogName.TabIndex = 18;
             // 
             // label4
@@ -310,6 +317,30 @@
             this.panel4.Size = new System.Drawing.Size(327, 381);
             this.panel4.TabIndex = 20;
             // 
+            // btnNext
+            // 
+            this.btnNext.Enabled = false;
+            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext.Location = new System.Drawing.Point(176, 319);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(148, 49);
+            this.btnNext.TabIndex = 22;
+            this.btnNext.Text = "Next Dog";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Enabled = false;
+            this.btnPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrevious.Location = new System.Drawing.Point(4, 319);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(148, 49);
+            this.btnPrevious.TabIndex = 21;
+            this.btnPrevious.Text = "Previous Dog";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
             // lbSelectDog
             // 
             this.lbSelectDog.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -373,29 +404,16 @@
             this.btnMenu.UseVisualStyleBackColor = true;
             this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
-            // btnPrevious
+            // label11
             // 
-            this.btnPrevious.Enabled = false;
-            this.btnPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrevious.Location = new System.Drawing.Point(4, 319);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(148, 49);
-            this.btnPrevious.TabIndex = 21;
-            this.btnPrevious.Text = "Previous Dog";
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Enabled = false;
-            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNext.Location = new System.Drawing.Point(176, 319);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(148, 49);
-            this.btnNext.TabIndex = 22;
-            this.btnNext.Text = "Next Dog";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Brown;
+            this.label11.Location = new System.Drawing.Point(368, 112);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(228, 75);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Dogs must be at least 8 Weeks old and at most 20 Years old";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // DogManage
             // 
@@ -462,5 +480,6 @@
         private System.Windows.Forms.Button btnMenu;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrevious;
+        private System.Windows.Forms.Label label11;
     }
 }

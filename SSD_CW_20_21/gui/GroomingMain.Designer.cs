@@ -78,7 +78,7 @@
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrders.Location = new System.Drawing.Point(564, 218);
+            this.dgvOrders.Location = new System.Drawing.Point(262, 164);
             this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
@@ -90,9 +90,9 @@
             // imgLogo
             // 
             this.imgLogo.Image = global::SSD_CW_20_21.Properties.Resources.logo;
-            this.imgLogo.Location = new System.Drawing.Point(781, 43);
+            this.imgLogo.Location = new System.Drawing.Point(694, 43);
             this.imgLogo.Name = "imgLogo";
-            this.imgLogo.Size = new System.Drawing.Size(176, 156);
+            this.imgLogo.Size = new System.Drawing.Size(263, 217);
             this.imgLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imgLogo.TabIndex = 14;
             this.imgLogo.TabStop = false;
@@ -113,7 +113,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(574, 179);
+            this.label2.Location = new System.Drawing.Point(355, 132);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(183, 20);
             this.label2.TabIndex = 28;

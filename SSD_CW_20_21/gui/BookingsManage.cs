@@ -77,7 +77,7 @@ namespace SSD_CW_20_21.gui
         private void populateDogCbox()
         {
             cboxDog.Items.Clear();
-            dogs = dogAccess.getAllDogs().FindAll(e => e.Deleted == 0 && e.OwnerId == getIdFromString(cboxCust.Text));
+            dogs = dogAccess.getAllDogs().FindAll(e => e.Deleted == 0 && cboxCust.Text != "" ? e.OwnerId == getIdFromString(cboxCust.Text) : true);
             if (dogs.Count > 0)
             {
                 foreach (Dog dog in dogs)
@@ -96,8 +96,8 @@ namespace SSD_CW_20_21.gui
             {
                 cboxServices.Items.Add($"{srv.ServiceID} - {srv.Description}");
             }
-            cboxServices.Text = "";
-            serv = serviceAccess.getServiceById(getIdFromString(cboxServices.Text));
+            cboxServices.Text = "";//cboxServices.Items[0].ToString();
+            serv = cboxServices.Text != "" ? serviceAccess.getServiceById(getIdFromString(cboxServices.Text)) : services.ToArray()[0];
             txtCost.Text = $"£{calcCost(order)}";
         }
 
@@ -234,9 +234,9 @@ namespace SSD_CW_20_21.gui
                 txtPaidTwo.Enabled = false;
                 checkTeeth.Enabled = false;
 
-                cboxCust.Text = $"{dogAccess.getDogById(order.DogId).OwnerId} - {custAccess.getOwnerById(dogAccess.getDogById(order.DogId).OwnerId).Forename} {custAccess.getOwnerById(dogAccess.getDogById(order.DogId).OwnerId).Surname}";
-                cboxDog.Text = $"{order.DogId} - {dogAccess.getDogById(order.DogId).Name}";
-                cboxServices.Text = $"{serv.ServiceID} - {serv.Description}";
+                cboxCust.Text = "";
+                cboxDog.Text = "";
+                cboxServices.Text = "";
                 checkEars.Checked = false;
                 checkNails.Checked = false;
                 checkTeeth.Checked = false;
@@ -250,7 +250,7 @@ namespace SSD_CW_20_21.gui
                 lblRoomThree.Visible = true;
 
                 type = "orders";
-                populateDataGrid();
+                displayBookingSlots();
 
                 txtPaidOne.Text = order.Paid.ToString().Split('.')[0];
                 txtPaidTwo.Text = order.Paid.ToString().Split('.').Length > 1 ? order.Paid.ToString().Split('.')[1] : "00";
@@ -358,7 +358,7 @@ namespace SSD_CW_20_21.gui
                     }
                 }
             }
-            else if (type == "staff")
+            if (type == "staff")
             {
                 dgvSelect.ColumnCount = 2;
                 string[] rows = new string[dgvSelect.ColumnCount];
@@ -451,32 +451,36 @@ namespace SSD_CW_20_21.gui
                     col.Width = dgv.Size.Width / dgv.Columns.Count;
                     col.DividerWidth = 1;
                     col.Tag = -1;
+                    dgv.DefaultCellStyle.SelectionBackColor = Color.Green;
+                    dgv.Rows[0].Cells[col.Index].Style.BackColor = Color.Green;
 
-                    if (orders.Count > 0)
+                    foreach (Orders order in orders)
                     {
-                        foreach (Orders order in orders)
-                        {
-                            dgv.Rows[0].Cells[col.Index].Style.BackColor = Color.Green;
-                            string[] date = order.Date.Split('/');
-                            DateTime counter = new DateTime(Convert.ToInt32(date[2]), Convert.ToInt32(date[1]), Convert.ToInt32(date[0]), 09, 00, 00);
-                            string[] endTime = order.EndTime.Split(':');
-                            DateTime end = new DateTime(Convert.ToInt32(date[2]), Convert.ToInt32(date[1]), Convert.ToInt32(date[0]), Convert.ToInt32(endTime[0]), Convert.ToInt32(endTime[1]), 00);
+                        string[] date = order.Date.Split('/');
+                        DateTime counter = new DateTime(Convert.ToInt32(date[2]), Convert.ToInt32(date[1]), Convert.ToInt32(date[0]), 09, 00, 00);
 
-                            string[] startTime = order.StartTime.Split(':');
-                            DateTime Start = new DateTime(Convert.ToInt32(date[2]), Convert.ToInt32(date[1]), Convert.ToInt32(date[0]), Convert.ToInt32(startTime[0]), Convert.ToInt32(startTime[1]), 00);
-                            DateTime End = getEndTime(order, serviceAccess.getServiceById(servOrderAccess.getObjectByOrderID(order.Id).ServiceID), Start, true);
-                            for (int i = 0; i < dgv.Columns.Count; i++)
+                        // actual end time
+                        string[] endTime = order.EndTime.Split(':');
+                        DateTime end = new DateTime(Convert.ToInt32(date[2]), Convert.ToInt32(date[1]), Convert.ToInt32(date[0]), Convert.ToInt32(endTime[0]), Convert.ToInt32(endTime[1]), 00);
+
+                        // actual start time
+                        string[] startTime = order.StartTime.Split(':');
+                        DateTime Start = new DateTime(Convert.ToInt32(date[2]), Convert.ToInt32(date[1]), Convert.ToInt32(date[0]), Convert.ToInt32(startTime[0]), Convert.ToInt32(startTime[1]), 00);
+
+                        for (int i = 0; i < dgv.ColumnCount; i++)
+                        {
+                            dgv.Rows[0].Cells[i].Tag = $"{counter.ToShortTimeString()} - {order.Date}";
+                            dgv.Rows[0].Cells[i].Style.BackColor = Color.Green;
+
+                            if (Start <= counter && counter <= end)
                             {
-                                if (Start <= counter && End <= end && (i == (dgv.Columns.Count / (col.Index + 1)) - 1))
-                                {
-                                    col.Tag = order.Id;
-                                    dgv.Rows[0].Cells[col.Index].Style.BackColor = Color.Red;
-                                }
-                                counter = counter.AddMinutes(15);
+                                dgv.Columns[i].Tag = order.Id;
+                                dgv.Rows[0].Cells[i].Style.BackColor = Color.Red;
+                                dgv.DefaultCellStyle.SelectionBackColor = Color.Red;
                             }
+                            counter = counter.AddMinutes(15);
                         }
                     }
-                    else dgv.Rows[0].Cells[col.Index].Style.BackColor = Color.Green;
                 }
             }
         }
@@ -528,8 +532,12 @@ namespace SSD_CW_20_21.gui
         // left click for DGV room cells
         private void roomDGVCellClick(DataGridView dgv, DataGridViewCellEventArgs e)
         {
-            int orderID = Convert.ToInt32(dgv.Columns[e.ColumnIndex].Tag.ToString());
+            DataGridViewColumn col = dgv.Columns[e.ColumnIndex];
+            DataGridViewCell cell = dgv.Rows[0].Cells[e.ColumnIndex];
+            int orderID = Convert.ToInt32(col.Tag.ToString());
             Orders odr = orderID != -1 ? orderAccess.getOrderById(orderID) : null;
+            dgv.DefaultCellStyle.BackColor = Color.Green;
+            cell.Style.BackColor = Color.Green;
 
             if (odr == null)
             {
@@ -537,6 +545,8 @@ namespace SSD_CW_20_21.gui
             }
             else
             {
+                cell.Style.BackColor = Color.Red;
+                dgv.DefaultCellStyle.SelectionBackColor = Color.Red;
                 string text = $"Dog: {dogAccess.getDogById(odr.DogId).Name}";
                 text += $"\nDate: {odr.Date}";
                 text += $"\nTime: {odr.StartTime} - {odr.EndTime}";
@@ -818,36 +828,6 @@ namespace SSD_CW_20_21.gui
         {
             if (e.RowIndex == -1) return;
             if (dgvSelect.Rows[e.RowIndex].Cells[0].Value == null) return;
-            //if (type == "date")
-            //{
-            //    if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
-            //    {
-            //        MessageBox.Show("This date is not available to select a booking for. Please select another date", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        return;
-            //    }
-            //    string date = Convert.ToString(dgvSelect.Rows[e.RowIndex].Cells[0].Value).Split('(')[0];
-            //    order.Date = date;
-            //    txtDate.Text = date;
-            //    type = "";
-            //    populateDataGrid();
-            //    btnSelectTime.Enabled = true;
-            //}
-            //else if (type == "time")
-            //{
-            //    if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
-            //    {
-            //        MessageBox.Show("This time is not available to select a booking for. Please select another time", "Invalid Time", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        return;
-            //    }
-            //    string time = Convert.ToString(dgvSelect.Rows[e.RowIndex].Cells[0].Value);
-            //    txtTime.Text = time;
-            //    order.StartTime = time;
-            //    order.EndTime = getEndTime(Convert.ToDateTime(time), true).ToShortTimeString();
-            //    txtEndtime.Text = order.EndTime;
-            //    type = "";
-            //    populateDataGrid();
-            //    btnSelectStaff.Enabled = true;
-            //}
             if (type == "staff")
             {
                 if (dgvSelect.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Red)
@@ -942,6 +922,11 @@ namespace SSD_CW_20_21.gui
         {
             new GroomingMain().Show();
             Hide();
+        }
+
+        private void cboxDog_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            order.DogId = getIdFromString(cboxDog.Text);
         }
         #endregion
     }

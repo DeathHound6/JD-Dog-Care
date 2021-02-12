@@ -31,7 +31,10 @@ namespace SSD_CW_20_21.gui
             populateComboBox();
             populateListBox();
             cboxSearch.SelectedIndex = 0;
-            
+            dtpDOB.MaxDate = DateTime.Now.AddDays(7 * -8);
+            dtpDOB.MinDate = dtpDOB.MaxDate.AddYears(-20);
+            dtpDOB.Value = dtpDOB.MaxDate;
+
             changeMode("view");
         }
 
@@ -140,12 +143,12 @@ namespace SSD_CW_20_21.gui
                     throwDogException("Select the dog's breed", "Dog Breed");
                     return;
                 }
-                if (dtpDOB.Value > dtpDOB.MaxDate)
+                if (dtpDOB.Value > DateTime.Now.AddDays(7 * -8)) // 7 days per week * -8 weeks (8 weeks subtracted)
                 {
                     throwDogException("The dog is too young", "Dog too young");
                     return;
                 }
-                if (dtpDOB.Value < dtpDOB.MinDate)
+                if (dtpDOB.Value < DateTime.Now.AddDays(7 * -8).AddYears(-20)) // dogs usually live 15-20 years
                 {
                     throwDogException("The dog is too old", "Dog too old");
                     return;
@@ -245,9 +248,6 @@ namespace SSD_CW_20_21.gui
                 }
                 mode = newMode;
 
-                dtpDOB.MaxDate = DateTime.Now.AddDays(7 * -8); // 7 days per week * -8 weeks (8 weeks subtracted)
-                dtpDOB.MinDate = dtpDOB.MaxDate.AddYears(-20); // dogs usually live 15-20 years
-
                 txtDogName.Enabled = false;
                 cboxDogBreed.Enabled = false;
                 cboxDogOwner.Enabled = false;
@@ -271,6 +271,7 @@ namespace SSD_CW_20_21.gui
                 txtDogName.Text = dog.Name;
                 cboxDogBreed.Text = dog.Breed;
                 cboxHair.Text = dog.HairLength;
+                dtpDOB.Value = Convert.ToDateTime(dog.DOB);
 
                 Customer cust = custAccess.getOwnerById(dog.OwnerId);
                 cboxDogOwner.Text = $"{cust.Forename} {cust.Surname} - {cust.Id}";

@@ -46,7 +46,7 @@ namespace SSD_CW_20_21.DbAccess
         public Service getServiceByDesc(string text)
         {
             database.Command = database.Connection.CreateCommand();
-            database.Command.CommandText = $"SELECT * FROM SERVICE WHERE Description = '{Regex.Replace(text, @"^[\D\S]", "")}'";
+            database.Command.CommandText = $"SELECT * FROM SERVICE WHERE Description = '{Regex.Replace(text, @"\d [^\w,] ", "")}'";
             database.Reader = database.Command.ExecuteReader();
             database.Reader.Read();
             Service serv = getserviceFromReader(database.Reader);
