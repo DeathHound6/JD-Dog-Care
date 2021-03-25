@@ -28,28 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.pnlDetails = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
             this.cboxHair = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblCoat = new System.Windows.Forms.Label();
+            this.lblDoB = new System.Windows.Forms.Label();
             this.dtpDOB = new System.Windows.Forms.DateTimePicker();
             this.cboxAggression = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblAggression = new System.Windows.Forms.Label();
             this.cboxDogBreed = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblID = new System.Windows.Forms.Label();
             this.cboxDogOwner = new System.Windows.Forms.ComboBox();
             this.txtDogName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblBreed = new System.Windows.Forms.Label();
+            this.lblOwner = new System.Windows.Forms.Label();
             this.lblDogId = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnlDogs = new System.Windows.Forms.Panel();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.lbSelectDog = new System.Windows.Forms.ListBox();
@@ -58,56 +59,66 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnMenu = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.panel2.SuspendLayout();
+            this.pnlDetails.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.pnlDogs.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 25);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Dogs";
+            this.lblTitle.Location = new System.Drawing.Point(7, 41);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(66, 25);
+            this.lblTitle.TabIndex = 10;
+            this.lblTitle.Text = "Dogs";
             // 
-            // label2
+            // lblName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(8, 49);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 20);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Name:";
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblName.Location = new System.Drawing.Point(8, 49);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(60, 20);
+            this.lblName.TabIndex = 11;
+            this.lblName.Text = "Name:";
             // 
-            // panel2
+            // pnlDetails
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel2.Controls.Add(this.label11);
-            this.panel2.Controls.Add(this.cboxHair);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.dtpDOB);
-            this.panel2.Controls.Add(this.cboxAggression);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.cboxDogBreed);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.cboxDogOwner);
-            this.panel2.Controls.Add(this.txtDogName);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.lblDogId);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(345, 118);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(613, 323);
-            this.panel2.TabIndex = 12;
+            this.pnlDetails.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.pnlDetails.Controls.Add(this.label11);
+            this.pnlDetails.Controls.Add(this.cboxHair);
+            this.pnlDetails.Controls.Add(this.lblCoat);
+            this.pnlDetails.Controls.Add(this.lblDoB);
+            this.pnlDetails.Controls.Add(this.dtpDOB);
+            this.pnlDetails.Controls.Add(this.cboxAggression);
+            this.pnlDetails.Controls.Add(this.lblAggression);
+            this.pnlDetails.Controls.Add(this.cboxDogBreed);
+            this.pnlDetails.Controls.Add(this.lblID);
+            this.pnlDetails.Controls.Add(this.cboxDogOwner);
+            this.pnlDetails.Controls.Add(this.txtDogName);
+            this.pnlDetails.Controls.Add(this.lblBreed);
+            this.pnlDetails.Controls.Add(this.lblOwner);
+            this.pnlDetails.Controls.Add(this.lblDogId);
+            this.pnlDetails.Controls.Add(this.lblName);
+            this.pnlDetails.Location = new System.Drawing.Point(345, 118);
+            this.pnlDetails.Name = "pnlDetails";
+            this.pnlDetails.Size = new System.Drawing.Size(613, 323);
+            this.pnlDetails.TabIndex = 12;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Brown;
+            this.label11.Location = new System.Drawing.Point(368, 112);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(228, 75);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Dogs must be at least 8 Weeks old and at most 20 Years old";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // cboxHair
             // 
@@ -119,27 +130,27 @@
             this.cboxHair.Size = new System.Drawing.Size(231, 28);
             this.cboxHair.TabIndex = 29;
             // 
-            // label8
+            // lblCoat
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label8.Location = new System.Drawing.Point(8, 279);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(113, 20);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "Coat Length:";
+            this.lblCoat.AutoSize = true;
+            this.lblCoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCoat.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblCoat.Location = new System.Drawing.Point(8, 279);
+            this.lblCoat.Name = "lblCoat";
+            this.lblCoat.Size = new System.Drawing.Size(113, 20);
+            this.lblCoat.TabIndex = 28;
+            this.lblCoat.Text = "Coat Length:";
             // 
-            // label7
+            // lblDoB
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label7.Location = new System.Drawing.Point(8, 135);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(117, 20);
-            this.label7.TabIndex = 27;
-            this.label7.Text = "Date of Birth:";
+            this.lblDoB.AutoSize = true;
+            this.lblDoB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDoB.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblDoB.Location = new System.Drawing.Point(8, 135);
+            this.lblDoB.Name = "lblDoB";
+            this.lblDoB.Size = new System.Drawing.Size(117, 20);
+            this.lblDoB.TabIndex = 27;
+            this.lblDoB.Text = "Date of Birth:";
             // 
             // dtpDOB
             // 
@@ -163,16 +174,16 @@
             this.cboxAggression.Size = new System.Drawing.Size(231, 28);
             this.cboxAggression.TabIndex = 25;
             // 
-            // label5
+            // lblAggression
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label5.Location = new System.Drawing.Point(8, 231);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 20);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "Aggression:";
+            this.lblAggression.AutoSize = true;
+            this.lblAggression.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggression.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblAggression.Location = new System.Drawing.Point(8, 231);
+            this.lblAggression.Name = "lblAggression";
+            this.lblAggression.Size = new System.Drawing.Size(104, 20);
+            this.lblAggression.TabIndex = 24;
+            this.lblAggression.Text = "Aggression:";
             // 
             // cboxDogBreed
             // 
@@ -184,16 +195,16 @@
             this.cboxDogBreed.Size = new System.Drawing.Size(231, 28);
             this.cboxDogBreed.TabIndex = 23;
             // 
-            // label6
+            // lblID
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label6.Location = new System.Drawing.Point(7, 12);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 20);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Dog ID:";
+            this.lblID.AutoSize = true;
+            this.lblID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblID.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblID.Location = new System.Drawing.Point(7, 12);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(71, 20);
+            this.lblID.TabIndex = 22;
+            this.lblID.Text = "Dog ID:";
             // 
             // cboxDogOwner
             // 
@@ -214,27 +225,27 @@
             this.txtDogName.Size = new System.Drawing.Size(231, 26);
             this.txtDogName.TabIndex = 18;
             // 
-            // label4
+            // lblBreed
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(8, 181);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 20);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Breed:";
+            this.lblBreed.AutoSize = true;
+            this.lblBreed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBreed.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblBreed.Location = new System.Drawing.Point(8, 181);
+            this.lblBreed.Name = "lblBreed";
+            this.lblBreed.Size = new System.Drawing.Size(62, 20);
+            this.lblBreed.TabIndex = 15;
+            this.lblBreed.Text = "Breed:";
             // 
-            // label3
+            // lblOwner
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(8, 88);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 20);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Owner:";
+            this.lblOwner.AutoSize = true;
+            this.lblOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOwner.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblOwner.Location = new System.Drawing.Point(8, 88);
+            this.lblOwner.Name = "lblOwner";
+            this.lblOwner.Size = new System.Drawing.Size(65, 20);
+            this.lblOwner.TabIndex = 13;
+            this.lblOwner.Text = "Owner:";
             // 
             // lblDogId
             // 
@@ -306,16 +317,16 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // panel4
+            // pnlDogs
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel4.Controls.Add(this.btnNext);
-            this.panel4.Controls.Add(this.btnPrevious);
-            this.panel4.Controls.Add(this.lbSelectDog);
-            this.panel4.Location = new System.Drawing.Point(12, 118);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(327, 381);
-            this.panel4.TabIndex = 20;
+            this.pnlDogs.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlDogs.Controls.Add(this.btnNext);
+            this.pnlDogs.Controls.Add(this.btnPrevious);
+            this.pnlDogs.Controls.Add(this.lbSelectDog);
+            this.pnlDogs.Location = new System.Drawing.Point(12, 118);
+            this.pnlDogs.Name = "pnlDogs";
+            this.pnlDogs.Size = new System.Drawing.Size(327, 381);
+            this.pnlDogs.TabIndex = 20;
             // 
             // btnNext
             // 
@@ -404,17 +415,6 @@
             this.btnMenu.UseVisualStyleBackColor = true;
             this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Brown;
-            this.label11.Location = new System.Drawing.Point(368, 112);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(228, 75);
-            this.label11.TabIndex = 30;
-            this.label11.Text = "Dogs must be at least 8 Weeks old and at most 20 Years old";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // DogManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,54 +425,54 @@
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cboxSearch);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pnlDogs);
+            this.Controls.Add(this.pnlDetails);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.panel3);
             this.Name = "DogManage";
             this.Text = "DogManage";
             this.Controls.SetChildIndex(this.panel3, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.panel2, 0);
-            this.Controls.SetChildIndex(this.panel4, 0);
+            this.Controls.SetChildIndex(this.lblTitle, 0);
+            this.Controls.SetChildIndex(this.pnlDetails, 0);
+            this.Controls.SetChildIndex(this.pnlDogs, 0);
             this.Controls.SetChildIndex(this.cboxSearch, 0);
             this.Controls.SetChildIndex(this.label9, 0);
             this.Controls.SetChildIndex(this.txtSearch, 0);
             this.Controls.SetChildIndex(this.label10, 0);
             this.Controls.SetChildIndex(this.btnMenu, 0);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnlDetails.ResumeLayout(false);
+            this.pnlDetails.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
+            this.pnlDogs.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Panel pnlDetails;
         private System.Windows.Forms.Label lblDogId;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblOwner;
+        private System.Windows.Forms.Label lblBreed;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.TextBox txtDogName;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ComboBox cboxDogOwner;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel pnlDogs;
+        private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.ComboBox cboxDogBreed;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ListBox lbSelectDog;
         private System.Windows.Forms.ComboBox cboxAggression;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblAggression;
+        private System.Windows.Forms.Label lblDoB;
         private System.Windows.Forms.DateTimePicker dtpDOB;
         private System.Windows.Forms.ComboBox cboxHair;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblCoat;
         private System.Windows.Forms.ComboBox cboxSearch;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtSearch;

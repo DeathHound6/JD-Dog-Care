@@ -35,6 +35,7 @@
             this.tsMenu = new System.Windows.Forms.ToolStripTextBox();
             this.tsDogs = new System.Windows.Forms.ToolStripTextBox();
             this.tsBookings = new System.Windows.Forms.ToolStripTextBox();
+            this.viewReportsToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
             this.dayCareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dogWalkingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dogTrainingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +44,6 @@
             this.lblDbConn = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
-            this.viewReportsToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -101,6 +101,12 @@
             this.tsBookings.Name = "tsBookings";
             this.tsBookings.Click += new System.EventHandler(this.tsBookings_Click);
             // 
+            // viewReportsToolStripMenuItem
+            // 
+            resources.ApplyResources(this.viewReportsToolStripMenuItem, "viewReportsToolStripMenuItem");
+            this.viewReportsToolStripMenuItem.Name = "viewReportsToolStripMenuItem";
+            this.viewReportsToolStripMenuItem.Click += new System.EventHandler(this.viewReportsToolStripMenuItem_Click);
+            // 
             // dayCareToolStripMenuItem
             // 
             resources.ApplyResources(this.dayCareToolStripMenuItem, "dayCareToolStripMenuItem");
@@ -153,12 +159,6 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // viewReportsToolStripMenuItem
-            // 
-            resources.ApplyResources(this.viewReportsToolStripMenuItem, "viewReportsToolStripMenuItem");
-            this.viewReportsToolStripMenuItem.Name = "viewReportsToolStripMenuItem";
-            this.viewReportsToolStripMenuItem.Click += new System.EventHandler(this.viewReportsToolStripMenuItem_Click);
-            // 
             // Template
             // 
             resources.ApplyResources(this, "$this");
@@ -180,8 +180,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripTextBox toolstripMenuMain;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnExit;
@@ -196,5 +194,6 @@
         protected System.Windows.Forms.ToolStripMenuItem collectionToolStripMenuItem;
         protected System.Windows.Forms.ToolStripTextBox exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox viewReportsToolStripMenuItem;
+        protected System.Windows.Forms.MenuStrip menuStrip1;
     }
 }

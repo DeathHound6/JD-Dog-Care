@@ -1,0 +1,6 @@
+- Dogs Manage
+	- DOB, Breed etc can be changed as person adding details may have made a mistake
+
+- Bookings Manage
+	- Dog Name and Owner can be edited as person may have made mistake
+	- When editing, cannot change date, so order should be cancelled if want changed

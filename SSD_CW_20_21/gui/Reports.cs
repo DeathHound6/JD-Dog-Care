@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace SSD_CW_20_21.gui
 {
-    public partial class Reports : Form
+    public partial class Reports : Template
     {
         public Reports()
         {

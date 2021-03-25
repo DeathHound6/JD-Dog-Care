@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnGrooming = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.btnWalking = new System.Windows.Forms.Button();
             this.btnTraining = new System.Windows.Forms.Button();
             this.btnDaycare = new System.Windows.Forms.Button();
@@ -49,16 +49,16 @@
             this.btnGrooming.UseVisualStyleBackColor = true;
             this.btnGrooming.Click += new System.EventHandler(this.btnGrooming_Click);
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 67);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 25);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "JD Dog Care";
+            this.lblTitle.Location = new System.Drawing.Point(12, 67);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(146, 25);
+            this.lblTitle.TabIndex = 7;
+            this.lblTitle.Text = "JD Dog Care";
             // 
             // btnWalking
             // 
@@ -124,12 +124,12 @@
             this.Controls.Add(this.btnDaycare);
             this.Controls.Add(this.btnTraining);
             this.Controls.Add(this.btnWalking);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnGrooming);
             this.Name = "Main";
             this.Text = "Menu";
             this.Controls.SetChildIndex(this.btnGrooming, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.lblTitle, 0);
             this.Controls.SetChildIndex(this.btnWalking, 0);
             this.Controls.SetChildIndex(this.btnTraining, 0);
             this.Controls.SetChildIndex(this.btnDaycare, 0);
@@ -144,7 +144,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnGrooming;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnWalking;
         private System.Windows.Forms.Button btnTraining;
         private System.Windows.Forms.Button btnDaycare;

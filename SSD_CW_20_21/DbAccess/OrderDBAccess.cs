@@ -84,7 +84,7 @@ namespace SSD_CW_20_21.DbAccess
             order.Teeth = rdr.GetInt32(7);
             order.Nails = rdr.GetInt32(8);
             order.RoomID = rdr.GetInt32(9);
-            order.Paid = Convert.ToDouble(rdr.GetDecimal(10));
+            order.Paid = rdr.GetInt32(10);
             order.Cancelled = rdr.GetInt32(11);
             return order;
         }

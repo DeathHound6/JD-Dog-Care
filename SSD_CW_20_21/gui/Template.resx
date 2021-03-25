@@ -130,8 +130,8 @@
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;toolstripTxtTraining.Name" xml:space="preserve">
-    <value>toolstripTxtTraining</value>
+  <data name="&gt;&gt;viewReportsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnBack.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -160,9 +160,11 @@
   <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
     <value>exitToolStripMenuItem</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 570</value>
+  <data name="&gt;&gt;toolstripTxtTraining.Name" xml:space="preserve">
+    <value>toolstripTxtTraining</value>
+  </data>
+  <data name="lblDbConn.Text" xml:space="preserve">
+    <value>Database Disconnected</value>
   </data>
   <data name="toolstripTxtGrooming.Text" xml:space="preserve">
     <value>Grooming</value>
@@ -173,6 +175,7 @@
   <data name="&gt;&gt;dogTrainingToolStripMenuItem.Name" xml:space="preserve">
     <value>dogTrainingToolStripMenuItem</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="collectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 23</value>
   </data>
@@ -182,8 +185,8 @@
   <data name="toolStripTextBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="viewReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 23</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>970, 42</value>
@@ -191,18 +194,12 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;viewReportsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>800, 577</value>
-  </data>
-  <data name="toolstripMenuMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 23</value>
   </data>
   <data name="toolstripTxtMobile.Text" xml:space="preserve">
     <value>Collection, Delivery and Mobile Grooming</value>
@@ -279,9 +276,6 @@
   <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="viewReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 23</value>
-  </data>
   <data name="lblDbConn.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 16</value>
   </data>
@@ -290,6 +284,9 @@
   </data>
   <data name="&gt;&gt;btnExit.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="&gt;&gt;dogTrainingToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -306,6 +303,9 @@
   <data name="&gt;&gt;btnBack.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 570</value>
+  </data>
   <data name="&gt;&gt;toolstripTxtTraining.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -321,8 +321,8 @@
   <data name="btnExit.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 57</value>
   </data>
-  <data name="lblDbConn.Text" xml:space="preserve">
-    <value>Database Disconnected</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnExit.Location" type="System.Drawing.Point, System.Drawing">
     <value>825, 507</value>
@@ -414,8 +414,8 @@
   <data name="&gt;&gt;lblDbConn.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="toolstripTxtWalking.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
   </data>
   <data name="toolstripTxtTraining.Text" xml:space="preserve">
     <value>Dog Training</value>
@@ -423,8 +423,8 @@
   <data name="&gt;&gt;toolstripTxtMobile.Name" xml:space="preserve">
     <value>toolstripTxtMobile</value>
   </data>
-  <data name="toolstripTxtWalking.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+  <data name="toolstripMenuMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 23</value>
   </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>

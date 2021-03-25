@@ -73,6 +73,22 @@ namespace SSD_CW_20_21.gui
             }
             else
             {
+                if (cboxDogOwner.Text == "")
+                {
+                    throwDogException("Select the dog's owner", "Dog Owner");
+                    return;
+                }
+                if (dtpDOB.Value > DateTime.Now.AddDays(7 * -8)) // 7 days per week * -8 weeks (8 weeks subtracted)
+                {
+                    throwDogException("The dog is too young", "Dog too young");
+                    return;
+                }
+                if (dtpDOB.Value < DateTime.Now.AddDays(7 * -8).AddYears(-20)) // dogs usually live 15-20 years
+                {
+                    throwDogException("The dog is too old", "Dog too old");
+                    return;
+                }
+
                 dog.Name = txtDogName.Text;
                 dog.Breed = cboxDogBreed.Text;
                 dog.HairLength = cboxHair.Text;
@@ -230,7 +246,7 @@ namespace SSD_CW_20_21.gui
         {
             if (newMode == "view")
             {
-                if (dog == null)
+                if (dog == null || dog.Name == null)
                 {
                     if (dogs.Count > 0) dog = dogs.ToArray()[0];
                     else
@@ -240,7 +256,7 @@ namespace SSD_CW_20_21.gui
                         dog.OwnerId = 1;
                         dog.Aggression = "";
                         dog.Breed = "";
-                        dog.DOB = "";
+                        dog.DOB = DateTime.Today.ToShortDateString();
                         dog.HairLength = "";
                         dog.Name = "";
                         dog.Deleted = 0;
@@ -306,13 +322,13 @@ namespace SSD_CW_20_21.gui
                 btnPrevious.Enabled = false;
 
                 txtSearch.Text = "";
-                cboxSearch.Text = "";
+                cboxSearch.SelectedIndex = 0;
                 txtDogName.Text = "";
-                cboxDogBreed.Text = "";
-                cboxDogOwner.Text = "";
+                cboxDogBreed.SelectedIndex = 0;
+                cboxDogOwner.SelectedIndex = 0;
                 lblDogId.Text = $"#{dog.Id}";
-                cboxHair.Text = "";
-                cboxAggression.Text = "";
+                cboxHair.SelectedIndex = 0;
+                cboxAggression.SelectedIndex = 0;
                 btnAdd.Text = "Save New Dog";
                 btnCancel.Text = "Cancel New Dog";
                 btnDelete.Text = "";
@@ -384,7 +400,7 @@ namespace SSD_CW_20_21.gui
                 cboxDogOwner.Items.Add($"{owner.Forename} {owner.Surname} - {owner.Id}");
             }
 
-            string[] breeds = { "Pug", "German Shephard", "Husky", "Bulldog", "Poodle", "Labrador", "French Bulldog", "Rottweiler", "Great Dane", "Border Collie", "Basset Hound" };
+            string[] breeds = { "Basset Hound", "Border Collie", "Bulldog", "French Bulldog", "German Shephard", "Great Dane", "Husky", "Labrador", "Rottweiler", "Poodle", "Pug" };
             foreach (string breed in breeds)
             {
                 cboxDogBreed.Items.Add(breed);

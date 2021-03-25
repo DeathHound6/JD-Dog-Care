@@ -28,28 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.btnDogs = new System.Windows.Forms.Button();
             this.btnBooking = new System.Windows.Forms.Button();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.imgLogo = new System.Windows.Forms.PictureBox();
             this.btnMenu = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblUpcoming = new System.Windows.Forms.Label();
             this.btnReports = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 25);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Grooming";
+            this.lblTitle.Location = new System.Drawing.Point(12, 60);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(113, 25);
+            this.lblTitle.TabIndex = 9;
+            this.lblTitle.Text = "Grooming";
             // 
             // btnDogs
             // 
@@ -77,14 +80,27 @@
             // 
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrders.Location = new System.Drawing.Point(262, 164);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvOrders.Location = new System.Drawing.Point(207, 164);
             this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
             this.dgvOrders.RowHeadersVisible = false;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrders.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvOrders.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvOrders.Size = new System.Drawing.Size(394, 283);
+            this.dgvOrders.Size = new System.Drawing.Size(504, 283);
             this.dgvOrders.TabIndex = 13;
             // 
             // imgLogo
@@ -109,15 +125,15 @@
             this.btnMenu.UseVisualStyleBackColor = true;
             this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
-            // label2
+            // lblUpcoming
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(355, 132);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(183, 20);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "Upcoming 5 Bookings";
+            this.lblUpcoming.AutoSize = true;
+            this.lblUpcoming.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUpcoming.Location = new System.Drawing.Point(355, 132);
+            this.lblUpcoming.Name = "lblUpcoming";
+            this.lblUpcoming.Size = new System.Drawing.Size(183, 20);
+            this.lblUpcoming.TabIndex = 28;
+            this.lblUpcoming.Text = "Upcoming 5 Bookings";
             // 
             // btnReports
             // 
@@ -128,6 +144,7 @@
             this.btnReports.TabIndex = 29;
             this.btnReports.Text = "View Reports";
             this.btnReports.UseVisualStyleBackColor = true;
+            this.btnReports.Visible = false;
             this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
             // 
             // GroomingMain
@@ -135,24 +152,24 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(973, 615);
+            this.Controls.Add(this.dgvOrders);
             this.Controls.Add(this.btnReports);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblUpcoming);
             this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.imgLogo);
-            this.Controls.Add(this.dgvOrders);
             this.Controls.Add(this.btnBooking);
             this.Controls.Add(this.btnDogs);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTitle);
             this.Name = "GroomingMain";
             this.Text = "GroomingMain";
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.lblTitle, 0);
             this.Controls.SetChildIndex(this.btnDogs, 0);
             this.Controls.SetChildIndex(this.btnBooking, 0);
-            this.Controls.SetChildIndex(this.dgvOrders, 0);
             this.Controls.SetChildIndex(this.imgLogo, 0);
             this.Controls.SetChildIndex(this.btnMenu, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.lblUpcoming, 0);
             this.Controls.SetChildIndex(this.btnReports, 0);
+            this.Controls.SetChildIndex(this.dgvOrders, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).EndInit();
             this.ResumeLayout(false);
@@ -161,13 +178,13 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnDogs;
         private System.Windows.Forms.Button btnBooking;
         private System.Windows.Forms.DataGridView dgvOrders;
         private System.Windows.Forms.PictureBox imgLogo;
         private System.Windows.Forms.Button btnMenu;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblUpcoming;
         private System.Windows.Forms.Button btnReports;
     }
 }

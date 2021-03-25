@@ -3,7 +3,6 @@ using SSD_CW_20_21.DbAccess;
 using SSD_CW_20_21.Objects;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace SSD_CW_20_21.gui
 {
@@ -74,10 +73,15 @@ namespace SSD_CW_20_21.gui
             {
                 col.Width = dgvOrders.Size.Width / dgvOrders.Columns.Count;
             }
+            foreach (DataGridViewRow row in dgvOrders.Rows)
+            {
+                row.Height = dgvOrders.Size.Height / 5;
+            }
+            dgvOrders.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders);
         }
         #endregion
 
-        #region events
+        #region Events
         private void btnDogs_Click(object sender, EventArgs e)
         {
             new DogManage().Show();

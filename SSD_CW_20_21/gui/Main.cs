@@ -20,6 +20,7 @@ namespace SSD_CW_20_21.gui
             Text = "JD Dog Care - Main Menu";
         }
 
+        #region Events
         private void btnGrooming_Click(object sender, EventArgs e)
         {
             toolstripTxtGrooming_Click(sender, e);
@@ -44,5 +45,6 @@ namespace SSD_CW_20_21.gui
         {
             CannotOpenForm();
         }
+        #endregion
     }
 }

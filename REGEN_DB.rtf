@@ -1,0 +1,84 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green0\blue255;\red0\green0\blue0;\red128\green128\blue128;\red255\green0\blue255;\red255\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\cf1\f0\fs19\lang9 CREATE\cf2  \cf1 TABLE\cf2  [dbo].[CUSTOMER]\cf1  \cf2 (\par
+    [CustomerID] \cf1 INT\cf2            NOT NULL,\par
+    [Forename]   \cf1 VARCHAR \cf2 (MAX) NOT NULL,\par
+    [Surname]    \cf1 VARCHAR \cf2 (MAX) NOT NULL,\par
+    [Address]    \cf1 VARCHAR \cf2 (MAX) NOT NULL,\par
+    [Town]       \cf1 VARCHAR \cf2 (MAX)  NOT NULL,\par
+    [Postcode]   \cf1 VARCHAR \cf2 (MAX)   NOT NULL,\par
+    [TelNo]      \cf1 VARCHAR \cf2 (MAX)  NOT NULL,\par
+    [Email]      \cf1 VARCHAR \cf2 (MAX) NOT NULL,\par
+    [Deleted]    \cf1 INT\cf2            NOT NULL,\par
+    \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf2 ([CustomerID] \cf1 ASC\cf2 )\par
+);\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  [dbo]\cf3 .\cf2 [DOG]\cf1  \cf3 (\cf2\par
+    [DogID]      \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [OwnerID]    \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Name]       \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Breed]      \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Aggression] \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [DOB]        \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [HairLength] \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Deleted]    \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [DogID] \cf1 ASC\cf3 ),\cf2\par
+    \cf1 CONSTRAINT\cf2  [FK-DogToOwner] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [OwnerID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [CUSTOMER]\cf1  \cf3 (\cf2 [CustomerID]\cf3 )\cf2\par
+\cf3 );\cf2\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  [dbo]\cf3 .\cf2 [STAFF]\cf1  \cf3 (\cf2\par
+    [StaffID]     \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Name]        \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [WorkingDays] \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [StartLunch]  \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [EndLunch]    \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Partial]     \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Deleted]     \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [StaffID] \cf1 ASC\cf3 )\cf2\par
+\cf3 );\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  [dbo]\cf3 .\cf2 [ORDERS]\cf1  \cf3 (\cf2\par
+    [OrderID]   \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [DogID]     \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [StaffID]   \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Date]      \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [StartTime] \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [EndTime]   \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Ears]      \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Teeth]     \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Nails]     \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [RoomID]    \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Paid]      \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Cancelled] \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [OrderID] \cf1 ASC\cf3 ),\cf2\par
+    \cf1 CONSTRAINT\cf2  [FK-OrderToStaff] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [StaffID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [STAFF]\cf1  \cf3 (\cf2 [StaffID]\cf3 ),\cf2\par
+    \cf1 CONSTRAINT\cf2  [FK-OrderToDog] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [DogID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [DOG]\cf1  \cf3 (\cf2 [DogID]\cf3 )\cf2\par
+\cf3 );\cf2\par
+\cf1 CREATE\cf2  \cf1 TABLE\cf2  [dbo]\cf3 .\cf2 [SERVICE]\cf1  \cf3 (\cf2\par
+    [ServiceId]   \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Description] \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Time]        \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [ServiceId] \cf1 ASC\cf3 )\cf2\par
+\cf3 );\cf1\f1\lang1033 CREATE\cf2  \cf1 TABLE\cf2  [dbo]\cf3 .\cf2 [SERVICEORDER]\cf1  \cf3 (\cf2\par
+    [ServiceID] \cf1 INT\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [OrderID]   \cf1 INT\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    \cf1 CONSTRAINT\cf2  [PK_SERVICEORDER] \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [ServiceID] \cf1 ASC\cf3 ),\cf2\par
+    \cf1 CONSTRAINT\cf2  [FK_ServiceOrderLinkToOrder] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [OrderID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [ORDERS]\cf1  \cf3 (\cf2 [OrderID]\cf3 ),\cf2\par
+    \cf1 CONSTRAINT\cf2  [FK_ServiceOrderLinkToService] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [ServiceID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [SERVICE]\cf1  \cf3 (\cf2 [ServiceId]\cf3 )\cf2\par
+\cf3 );\par
+\par
+INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brush', 20);\par
+INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brush, trim', 25);\par
+INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brush, full-cut', 30);\cf2\lang9\par
+\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  STAFF(StaffID, Name, WorkingDays, StartLunch, EndLunch, Partial, Deleted) \cf1 VALUES\cf2 (1, 'Diane', 'Mon,Tue,Wed,Thu,Fri', '12:00:00', '12:45:00', 0, 0);\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  STAFF(StaffID, Name, WorkingDays, StartLunch, EndLunch, Partial, Deleted) \cf1 VALUES\cf2 (2, 'Elaine', 'Mon,Tue,Wed,Fri', '12:00:00', '12:45:00', 0, 0);\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  STAFF(StaffID, Name, WorkingDays, StartLunch, EndLunch, Partial, Deleted) \cf1 VALUES\cf2 (3, 'Richard', 'Tue,Wed,Thu,Fri', '12:00:00', '12:45:00', 0, 0);\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  STAFF(StaffID, Name, WorkingDays, StartLunch, EndLunch, Partial, Deleted) \cf1 VALUES\cf2 (4, 'Jane', 'Mon,Tue,Wed', '11:00:00', '11:20:00', 1, 0);\cf0\f2\fs22\par
+\par
+\cf1\f0\fs19 INSERT\cf2  \cf1 INTO\cf2  CUSTOMER\cf3 (\cf2 CustomerID\cf3 ,\cf2  Forename\cf3 ,\cf2  Surname\cf3 ,\cf2  \cf1 Address\cf3 ,\cf2  Town\cf3 ,\cf2  Postcode\cf3 ,\cf2  TelNo\cf3 ,\cf2  Email\cf3 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2 1\cf3 ,\cf2  \cf5 '\f1\lang1033 J\f0\lang9 im'\cf3 ,\cf2  \cf5 '\f1\lang1033 B\f0\lang9 rowning'\cf3 ,\cf2  \cf5 '21 \f1\lang1033 O\f0\lang9 ld \f1\lang1033 T\f0\lang9 own \f1\lang1033 R\f0\lang9 oad'\cf3 ,\cf2  \cf5 '\f1\lang1033 B\f0\lang9 elfast'\cf3 ,\cf2  \cf5 '\f1\lang1033 BT\f0\lang9 29 0\f1\lang1033 QY\f0\lang9 '\cf3 ,\cf2  \cf5 '07845938465'\cf3 ,\cf2  \cf5 'jim.browning@outlook.com'\cf3 ,\cf2  0\cf3 );\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  CUSTOMER\cf3 (\cf2 CustomerID\cf3 ,\cf2  Forename\cf3 ,\cf2  Surname\cf3 ,\cf2  \cf1 Address\cf3 ,\cf2  Town\cf3 ,\cf2  Postcode\cf3 ,\cf2  TelNo\cf3 ,\cf2  Email\cf3 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang1033 2\cf3\f0\lang9 ,\cf2  \cf5 '\f1\lang1033 William\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 Afton\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 3 Rocky Road\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 B\f0\lang9 elfast'\cf3 ,\cf2  \cf5 '\f1\lang1033 BT8 6PY\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 077649274274\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 william.afton\f0\lang9 @\f1\lang1033 gmail\f0\lang9 .com'\cf3 ,\cf2  0\cf3 );\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  CUSTOMER\cf3 (\cf2 CustomerID\cf3 ,\cf2  Forename\cf3 ,\cf2  Surname\cf3 ,\cf2  \cf1 Address\cf3 ,\cf2  Town\cf3 ,\cf2  Postcode\cf3 ,\cf2  TelNo\cf3 ,\cf2  Email\cf3 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang1033 3\cf3\f0\lang9 ,\cf2  \cf5 '\f1\lang1033 Jerry\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 Can\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 4 My House\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 B\f0\lang9 elfast'\cf3 ,\cf2  \cf5 '\f1\lang1033 BT4\f0\lang9  \f1\lang1033 7RT\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 07483927485\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 jerry.can\f0\lang9 @outlook.com'\cf3 ,\cf2  0\cf3 );\cf0\f2\fs22\par
+\par
+\cf1\f0\fs19 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\cf2 DogID\cf3 ,\cf2  OwnerID\cf3 ,\cf2  Name\cf3 ,\cf2  Breed\cf3 ,\cf2  \f1\lang2057 Aggression, DOB, HairLength\cf3\f0\lang9 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2 1\cf3 ,\cf2  1\cf3 ,\cf2  \cf5 'Sky'\cf3 ,\cf2  \cf5 'Husky'\cf3 ,\cf2  \cf5 '\f1\lang2057 Low\f0\lang9 '\f1\lang2057 , '05/10/2017', 'Medium'\cf3\f0\lang9 ,\cf2  0\cf3 );\cf0\f2\fs22\par
+\par
+}
+ 
