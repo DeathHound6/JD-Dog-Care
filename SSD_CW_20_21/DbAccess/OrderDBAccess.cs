@@ -14,21 +14,46 @@ namespace SSD_CW_20_21.DbAccess
             Db = db;
         }
 
+        public Orders exec(string query)
+        {
+            Db.Command = Db.Connection.CreateCommand();
+            Db.Command.CommandText = query;
+            Db.Reader = Db.Command.ExecuteReader();
+            Db.Reader.Read();
+            Orders order = getOrderFromReader(Db.Reader);
+            Db.Reader.Close();
+            return order;
+        }
+
         public Orders getOrderById(int id)
         {
             Db.Command = Db.Connection.CreateCommand();
             Db.Command.CommandText = $"SELECT * FROM ORDERS WHERE OrderID = {id}";
             Db.Reader = Db.Command.ExecuteReader();
             Db.Reader.Read();
-            Orders dog = getOrderFromReader(Db.Reader);
+            Orders order = getOrderFromReader(Db.Reader);
             Db.Reader.Close();
-            return dog;
+            return order;
+        }
+
+        public void deleteOrder(Orders order)
+        {
+            Db.Command = Db.Connection.CreateCommand();
+            Db.Command.CommandText = $"DELETE FROM ORDERS WHERE OrderID = {order.Id}";
+            try
+            {
+                Db.Command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         public bool updateOrder(Orders order)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"UPDATE ORDERS SET Cancelled = {order.Cancelled}, RoomID = {order.RoomID}, DogID = {order.DogId}, StaffID = {order.StaffId}, Date = '{order.Date}', StartTime = '{order.StartTime}', EndTime = '{order.EndTime}', Paid = {Convert.ToDecimal(order.Paid)} WHERE OrderID = {order.Id}";
+            Db.Command.CommandText = $"UPDATE ORDERS SET Cancelled = {order.Cancelled}, RoomID = {order.RoomID}, DogID = {order.DogId}, StaffID = {order.StaffId}, Date = '{order.Date}', StartTime = '{order.StartTime}', EndTime = '{order.EndTime}', Paid = {Convert.ToDecimal(order.Paid)}, Teeth = {order.Teeth}, Ears = {order.Ears}, Nails = {order.Nails} WHERE OrderID = {order.Id}";
             try
             {
                 Db.Command.ExecuteNonQuery();

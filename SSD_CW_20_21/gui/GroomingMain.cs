@@ -36,8 +36,7 @@ namespace SSD_CW_20_21.gui
         {
             DateTime time2 = Convert.ToDateTime(o1.Date);
             DateTime time1 = Convert.ToDateTime(o2.Date);
-
-            return time1.CompareTo(time2);
+            return time2.CompareTo(time1);
         }
 
         private void populateDGV()

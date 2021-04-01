@@ -25,5 +25,19 @@ namespace SSD_CW_20_21
         public static double shortCoatPrice { get; } = 0.50;
         public static double mediumCoatPrice { get; } = 1.00;
         public static double longCoatPrice { get; } = 1.50;
+
+        public static double calcCost(Orders order, Service serv, bool adding = false)
+        {
+            double cost = serv.Cost;
+            if (order.Ears == 1) cost += extraEarsPrice;
+            if (order.Nails == 1) cost += extraNailsPrice;
+            if (order.Teeth == 1) cost += extraTeethPrice;
+            Dog dog = dogAccess.getDogById(order.DogId);
+            if (dog.HairLength == "Short") cost += shortCoatPrice;
+            else if (dog.HairLength == "Medium") cost += mediumCoatPrice;
+            else if (dog.HairLength == "Long") cost += longCoatPrice;
+            if (adding) cost += 5.00; // first time cost
+            return cost;
+        }
     }
 }

@@ -15,6 +15,18 @@ namespace SSD_CW_20_21.gui
         {
             InitializeComponent();
             showDbConn();
+
+            toolstripMenuSubsystems.Text = "Grooming";
+            tsMenu.Text = "Grooming Menu";
+            tsDogs.Text = "Dogs";
+            tsBookings.Text = "Bookings";
+            viewReportsToolStripMenuItem.Text = "View Reports";
+
+            dayCareToolStripMenuItem.Text = "Day Care";
+            dogWalkingToolStripMenuItem.Text = "Dog Walking";
+            dogTrainingToolStripMenuItem.Text = "Dog Training";
+            collectionToolStripMenuItem.Text = "Collection, Delivery and Mobile Grooming";
+            exitToolStripMenuItem.Text = "Exit";
         }
 
         #region Events

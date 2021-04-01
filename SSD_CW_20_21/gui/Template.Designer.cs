@@ -180,12 +180,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.ToolStripTextBox toolstripMenuMain;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.ToolStripTextBox tsMenu;
-        private System.Windows.Forms.ToolStripTextBox tsDogs;
-        private System.Windows.Forms.ToolStripTextBox tsBookings;
         protected System.Windows.Forms.ToolStripMenuItem toolstripMenuSubsystems;
         protected System.Windows.Forms.Label lblDbConn;
         protected System.Windows.Forms.ToolStripMenuItem dayCareToolStripMenuItem;
@@ -193,7 +189,11 @@
         protected System.Windows.Forms.ToolStripMenuItem dogTrainingToolStripMenuItem;
         protected System.Windows.Forms.ToolStripMenuItem collectionToolStripMenuItem;
         protected System.Windows.Forms.ToolStripTextBox exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox viewReportsToolStripMenuItem;
         protected System.Windows.Forms.MenuStrip menuStrip1;
+        protected System.Windows.Forms.ToolStripTextBox tsMenu;
+        protected System.Windows.Forms.ToolStripTextBox tsDogs;
+        protected System.Windows.Forms.ToolStripTextBox tsBookings;
+        protected System.Windows.Forms.ToolStripTextBox viewReportsToolStripMenuItem;
+        protected System.Windows.Forms.ToolStripTextBox toolstripMenuMain;
     }
 }

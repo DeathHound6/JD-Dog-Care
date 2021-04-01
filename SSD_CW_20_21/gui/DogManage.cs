@@ -83,7 +83,7 @@ namespace SSD_CW_20_21.gui
                     throwDogException("The dog is too young", "Dog too young");
                     return;
                 }
-                if (dtpDOB.Value < DateTime.Now.AddDays(7 * -8).AddYears(-20)) // dogs usually live 15-20 years
+                if (dtpDOB.Value < DateTime.Now.AddDays(7 * -8).AddYears(-20).AddDays(-1)) // dogs usually live 15-20 yrs
                 {
                     throwDogException("The dog is too old", "Dog too old");
                     return;
@@ -164,7 +164,7 @@ namespace SSD_CW_20_21.gui
                     throwDogException("The dog is too young", "Dog too young");
                     return;
                 }
-                if (dtpDOB.Value < DateTime.Now.AddDays(7 * -8).AddYears(-20)) // dogs usually live 15-20 years
+                if (dtpDOB.Value <= DateTime.Now.AddDays(7 * -8).AddYears(-20).AddDays(-1)) // dogs usually live 15-20 yrs
                 {
                     throwDogException("The dog is too old", "Dog too old");
                     return;
