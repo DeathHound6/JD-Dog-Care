@@ -144,7 +144,6 @@
             this.btnReports.TabIndex = 29;
             this.btnReports.Text = "View Reports";
             this.btnReports.UseVisualStyleBackColor = true;
-            this.btnReports.Visible = false;
             this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
             // 
             // GroomingMain

@@ -117,14 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tsMenu.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
   <data name="tsMenu.Text" xml:space="preserve">
     <value>Grooming Menu</value>
+  </data>
+  <data name="tsDogs.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
   </data>
   <data name="tsDogs.Text" xml:space="preserve">
     <value>Dogs</value>
   </data>
+  <data name="tsBookings.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
   <data name="tsBookings.Text" xml:space="preserve">
     <value>Bookings</value>
+  </data>
+  <data name="viewReportsToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
   </data>
   <data name="viewReportsToolStripMenuItem.Text" xml:space="preserve">
     <value>View Reports</value>
@@ -133,7 +146,6 @@
   <data name="toolstripMenuSubsystems.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="toolstripMenuSubsystems.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>

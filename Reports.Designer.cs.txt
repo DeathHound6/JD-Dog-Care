@@ -1,4 +1,4 @@
-﻿namespace SSD_CW_20_21.gui
+namespace SSD_CW_20_21.gui
 {
     partial class Reports
     {
@@ -58,14 +58,14 @@
             reportDataSource1.Name = "ReportsDataSet";
             reportDataSource1.Value = this.DataTable1BindingSource;
             this.repReports.LocalReport.DataSources.Add(reportDataSource1);
-            this.repReports.LocalReport.ReportEmbeddedResource = "SSD_CW_20_21.IncomeReport.rdlc";
-            this.repReports.Location = new System.Drawing.Point(71, 156);
+            this.repReports.Location = new System.Drawing.Point(64, 126);
             this.repReports.Name = "repReports";
+            this.repReports.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Remote;
             this.repReports.ShowBackButton = false;
             this.repReports.ShowPrintButton = false;
             this.repReports.ShowToolBar = false;
             this.repReports.ShowZoomControl = false;
-            this.repReports.Size = new System.Drawing.Size(789, 321);
+            this.repReports.Size = new System.Drawing.Size(789, 378);
             this.repReports.TabIndex = 6;
             // 
             // DataTable1TableAdapter
@@ -90,7 +90,6 @@
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(200, 20);
             this.dtpStart.TabIndex = 8;
-            this.dtpStart.ValueChanged += new System.EventHandler(this.dtpStart_ValueChanged);
             // 
             // dtpEnd
             // 
@@ -98,7 +97,6 @@
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.Size = new System.Drawing.Size(200, 20);
             this.dtpEnd.TabIndex = 9;
-            this.dtpEnd.ValueChanged += new System.EventHandler(this.dtpEnd_ValueChanged);
             // 
             // label1
             // 
@@ -133,6 +131,7 @@
             this.Controls.Add(this.repReports);
             this.Name = "Reports";
             this.Text = "Reports";
+            this.Load += new System.EventHandler(this.Reports_Load);
             this.Controls.SetChildIndex(this.repReports, 0);
             this.Controls.SetChildIndex(this.btnDisplay, 0);
             this.Controls.SetChildIndex(this.dtpStart, 0);

@@ -8,23 +8,6 @@
             <ChartMember>
               <Group Name="DataBar1_CategoryGroup">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!Cost.Value</GroupExpression>
-                </GroupExpressions>
-              </Group>
-              <SortExpressions>
-                <SortExpression>
-                  <Value>=Fields!Cost.Value</Value>
-                </SortExpression>
-              </SortExpressions>
-              <Label>=Fields!Cost.Value</Label>
-            </ChartMember>
-          </ChartMembers>
-        </ChartCategoryHierarchy>
-        <ChartSeriesHierarchy>
-          <ChartMembers>
-            <ChartMember>
-              <Group Name="DataBar1_SeriesGroup">
-                <GroupExpressions>
                   <GroupExpression>=Fields!Date.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
@@ -36,16 +19,50 @@
               <Label>=Fields!Date.Value</Label>
             </ChartMember>
           </ChartMembers>
+        </ChartCategoryHierarchy>
+        <ChartSeriesHierarchy>
+          <ChartMembers>
+            <ChartMember>
+              <Label>Cost</Label>
+            </ChartMember>
+          </ChartMembers>
         </ChartSeriesHierarchy>
         <ChartData>
           <ChartSeriesCollection>
-            <ChartSeries Name="EmptySeriesName">
+            <ChartSeries Name="Cost">
               <ChartDataPoints>
                 <ChartDataPoint>
-                  <ChartDataPointValues />
+                  <ChartDataPointValues>
+                    <Y>=Fields!Cost.Value</Y>
+                  </ChartDataPointValues>
+                  <ChartDataLabel>
+                    <Style />
+                    <UseValueAsLabel>true</UseValueAsLabel>
+                    <Visible>true</Visible>
+                  </ChartDataLabel>
+                  <Style />
+                  <ChartMarker>
+                    <Style />
+                  </ChartMarker>
+                  <DataElementOutput>Output</DataElementOutput>
                 </ChartDataPoint>
               </ChartDataPoints>
               <Style />
+              <ChartEmptyPoints>
+                <Style />
+                <ChartMarker>
+                  <Style />
+                </ChartMarker>
+                <ChartDataLabel>
+                  <Style />
+                </ChartDataLabel>
+              </ChartEmptyPoints>
+              <ValueAxisName>Primary</ValueAxisName>
+              <CategoryAxisName>Primary</CategoryAxisName>
+              <ChartSmartLabel>
+                <CalloutLineColor>Black</CalloutLineColor>
+                <MinMovingDistance>0pt</MinMovingDistance>
+              </ChartSmartLabel>
             </ChartSeries>
           </ChartSeriesCollection>
         </ChartData>
@@ -53,12 +70,11 @@
           <ChartArea Name="Default">
             <ChartCategoryAxes>
               <ChartAxis Name="Primary">
-                <Visible>False</Visible>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Axis Title</Caption>
+                  <Caption>Payment Dates</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -132,12 +148,11 @@
             </ChartCategoryAxes>
             <ChartValueAxes>
               <ChartAxis Name="Primary">
-                <Visible>False</Visible>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Axis Title</Caption>
+                  <Caption>Cost</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -209,14 +224,37 @@
               <BackgroundColor>#00ffffff</BackgroundColor>
               <BackgroundGradientType>None</BackgroundGradientType>
             </Style>
-            <ChartElementPosition>
-              <Top>3</Top>
-              <Left>10</Left>
-              <Height>96</Height>
-              <Width>80</Width>
-            </ChartElementPosition>
           </ChartArea>
         </ChartAreas>
+        <ChartLegends>
+          <ChartLegend Name="Default">
+            <Style>
+              <BackgroundGradientType>None</BackgroundGradientType>
+              <FontSize>8pt</FontSize>
+            </Style>
+            <ChartLegendTitle>
+              <Caption />
+              <Style>
+                <FontSize>8pt</FontSize>
+                <FontWeight>Bold</FontWeight>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </ChartLegendTitle>
+            <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+            <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+          </ChartLegend>
+        </ChartLegends>
+        <ChartTitles>
+          <ChartTitle Name="Default">
+            <Caption>JD Dog Care Income</Caption>
+            <Style>
+              <BackgroundGradientType>None</BackgroundGradientType>
+              <FontWeight>Bold</FontWeight>
+              <TextAlign>General</TextAlign>
+              <VerticalAlign>Top</VerticalAlign>
+            </Style>
+          </ChartTitle>
+        </ChartTitles>
         <Palette>BrightPastel</Palette>
         <ChartBorderSkin>
           <Style>
@@ -233,19 +271,20 @@
             <VerticalAlign>Top</VerticalAlign>
           </Style>
         </ChartNoDataMessage>
-        <rd:DesignerMode>DataBar</rd:DesignerMode>
         <DataSetName>ReportsDataSet</DataSetName>
-        <Top>2.88078cm</Top>
-        <Left>4.18606cm</Left>
-        <Height>4.61021cm</Height>
-        <Width>10.94667cm</Width>
+        <Top>0.44662cm</Top>
+        <Left>3.81cm</Left>
+        <Height>6.38292cm</Height>
+        <Width>15.33875cm</Width>
         <Style>
           <Border>
             <Color>LightGrey</Color>
-            <Style>Solid</Style>
+            <Style>None</Style>
           </Border>
           <BackgroundColor>White</BackgroundColor>
           <BackgroundGradientType>None</BackgroundGradientType>
+          <BackgroundGradientEndColor>Yellow</BackgroundGradientEndColor>
+          <BackgroundHatchType>None</BackgroundHatchType>
         </Style>
       </Chart>
       <Image Name="Logo">
@@ -263,11 +302,43 @@
           </Border>
         </Style>
       </Image>
+      <Textbox Name="Textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Label>PlaceHolder Text</Label>
+                <Value>="&lt;u&gt;&lt;b&gt;Total Income&lt;/b&gt;&lt;/u&gt;: £" &amp; Sum(Fields!Cost.Value, "ReportsDataSet")</Value>
+                <MarkupType>HTML</MarkupType>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>4.82725cm</Top>
+        <Left>0.51648cm</Left>
+        <Height>2.00229cm</Height>
+        <Width>4.19333cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>10cm</Height>
+    <Height>8.49312cm</Height>
     <Style />
   </Body>
-  <Width>20cm</Width>
+  <Width>20.87562cm</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -297,18 +368,6 @@
       <Fields>
         <Field Name="Date">
           <DataField>Date</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="StartTime">
-          <DataField>StartTime</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RoomID">
-          <DataField>RoomID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Name">
-          <DataField>Name</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Cost">

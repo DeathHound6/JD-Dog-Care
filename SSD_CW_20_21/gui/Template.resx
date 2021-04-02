@@ -167,9 +167,6 @@
   <data name="&gt;&gt;toolstripTxtTraining.Name" xml:space="preserve">
     <value>toolstripTxtTraining</value>
   </data>
-  <data name="&gt;&gt;toolstripMenuMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="toolstripTxtGrooming.Text" xml:space="preserve">
     <value>Grooming</value>
   </data>
@@ -184,6 +181,9 @@
   </data>
   <data name="btnExit.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="toolStripTextBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -207,11 +207,11 @@
   <data name="&gt;&gt;dogWalkingToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toolstripMenuMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 23</value>
-  </data>
   <data name="toolstripTxtMobile.Text" xml:space="preserve">
     <value>Collection, Delivery and Mobile Grooming</value>
+  </data>
+  <data name="toolstripTxtMobile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>305, 23</value>
   </data>
   <data name="toolstripMenuMain.Text" xml:space="preserve">
     <value>Main Menu</value>
@@ -423,11 +423,11 @@
   <data name="&gt;&gt;toolstripTxtMobile.Name" xml:space="preserve">
     <value>toolstripTxtMobile</value>
   </data>
-  <data name="toolstripTxtWalking.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+  <data name="toolstripMenuMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 23</value>
   </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;toolstripMenuMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolstripTxtDaycare.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -435,8 +435,8 @@
   <data name="&gt;&gt;lblDbConn.Name" xml:space="preserve">
     <value>lblDbConn</value>
   </data>
-  <data name="toolstripTxtMobile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 23</value>
+  <data name="toolstripTxtWalking.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
   </data>
   <data name="dogTrainingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 23</value>

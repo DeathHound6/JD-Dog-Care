@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,19 +33,17 @@ namespace SSD_CW_20_21.gui
 
         private void btnDisplay_Click(object sender, EventArgs e)
         {
-            // BROKEN TABLE ADPATER STUFF
             //MessageBox.Show(orderAccess.exec($"SELECT * FROM ORDERS WHERE(ORDERS.Paid = 1) AND (ORDERS.Cancelled = 0) AND (CONVERT(datetime, {dtpStart.Value.ToShortDateString()}, 103) <= CONVERT(datetime, ORDERS.Date, 103)) AND (CONVERT(datetime, {dtpEnd.Value.ToShortDateString()}, 103) >= CONVERT(datetime, ORDERS.Date, 103))").Date);
             //MessageBox.Show("Start " + Convert.ToDateTime(dtpStart.Value.ToShortDateString()).ToString());
             //MessageBox.Show("End " + Convert.ToDateTime(dtpEnd.Value.ToShortDateString()).ToString());
             //DataTable1TableAdapter.Fill(ReportsDataSet.DataTable1, dtpStart.Value.ToShortDateString(), dtpEnd.Value.ToShortDateString());
             //repReports.RefreshReport();
-
             refreshTables();
         }
 
         private void refreshTables()
         {
-            DataTable bookingCosts = new DataTable("ReportsDataTable");
+            DataTable bookingCosts = new DataTable("DataTable1");
             bookingCosts.Columns.Add("Cost", Type.GetType("System.Double"));
             bookingCosts.Columns.Add("Date", Type.GetType("System.String"));
             bookingCosts.DefaultView.Sort = "Date desc";
@@ -68,17 +66,6 @@ namespace SSD_CW_20_21.gui
             repReports.LocalReport.DataSources.Add(rds);
 
             repReports.Refresh();
-            repReports.RefreshReport();
-        }
-
-        private void dtpStart_ValueChanged(object sender, EventArgs e)
-        {
-            dtpEnd.MinDate = dtpStart.Value;
-        }
-
-        private void dtpEnd_ValueChanged(object sender, EventArgs e)
-        {
-            dtpStart.MaxDate = dtpEnd.Value;
         }
     }
 }
