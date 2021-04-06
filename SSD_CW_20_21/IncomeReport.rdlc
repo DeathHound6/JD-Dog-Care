@@ -264,7 +264,7 @@
           </Style>
         </ChartBorderSkin>
         <ChartNoDataMessage Name="NoDataMessage">
-          <Caption>No Data Available</Caption>
+          <Caption>stolen the data!</Caption>
           <Style>
             <BackgroundGradientType>None</BackgroundGradientType>
             <TextAlign>General</TextAlign>

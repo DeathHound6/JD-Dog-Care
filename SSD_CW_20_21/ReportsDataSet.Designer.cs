@@ -283,6 +283,10 @@ namespace SSD_CW_20_21 {
             
             private global::System.Data.DataColumn columnCost;
             
+            private global::System.Data.DataColumn columnRoomID;
+            
+            private global::System.Data.DataColumn columnStartTime;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DataTable1DataTable() {
@@ -334,6 +338,22 @@ namespace SSD_CW_20_21 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RoomIDColumn {
+                get {
+                    return this.columnRoomID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn StartTimeColumn {
+                get {
+                    return this.columnStartTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -369,11 +389,13 @@ namespace SSD_CW_20_21 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string Date, decimal Cost) {
+            public DataTable1Row AddDataTable1Row(string Date, decimal Cost, int RoomID, string StartTime) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Date,
-                        Cost};
+                        Cost,
+                        RoomID,
+                        StartTime};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -398,6 +420,8 @@ namespace SSD_CW_20_21 {
             internal void InitVars() {
                 this.columnDate = base.Columns["Date"];
                 this.columnCost = base.Columns["Cost"];
+                this.columnRoomID = base.Columns["RoomID"];
+                this.columnStartTime = base.Columns["StartTime"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -407,9 +431,16 @@ namespace SSD_CW_20_21 {
                 base.Columns.Add(this.columnDate);
                 this.columnCost = new global::System.Data.DataColumn("Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCost);
+                this.columnRoomID = new global::System.Data.DataColumn("RoomID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRoomID);
+                this.columnStartTime = new global::System.Data.DataColumn("StartTime", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStartTime);
                 this.columnDate.AllowDBNull = false;
                 this.columnDate.MaxLength = 2147483647;
                 this.columnCost.AllowDBNull = false;
+                this.columnRoomID.AllowDBNull = false;
+                this.columnStartTime.AllowDBNull = false;
+                this.columnStartTime.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -569,6 +600,28 @@ namespace SSD_CW_20_21 {
                 }
                 set {
                     this[this.tableDataTable1.CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int RoomID {
+                get {
+                    return ((int)(this[this.tableDataTable1.RoomIDColumn]));
+                }
+                set {
+                    this[this.tableDataTable1.RoomIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string StartTime {
+                get {
+                    return ((string)(this[this.tableDataTable1.StartTimeColumn]));
+                }
+                set {
+                    this[this.tableDataTable1.StartTimeColumn] = value;
                 }
             }
         }
@@ -734,6 +787,8 @@ namespace SSD_CW_20_21.ReportsDataSetTableAdapters {
             tableMapping.DataSetTable = "DataTable1";
             tableMapping.ColumnMappings.Add("Date", "Date");
             tableMapping.ColumnMappings.Add("Cost", "Cost");
+            tableMapping.ColumnMappings.Add("RoomID", "RoomID");
+            tableMapping.ColumnMappings.Add("StartTime", "StartTime");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -750,9 +805,9 @@ namespace SSD_CW_20_21.ReportsDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        ORDERS.Date, SERVICE.Cost\r\nFROM            ORDERS INNER JOIN\r\n     " +
-                "                    STAFF ON ORDERS.StaffID = STAFF.StaffID CROSS JOIN\r\n        " +
-                "                 SERVICE";
+            this._commandCollection[0].CommandText = "SELECT        ORDERS.Date, SERVICE.Cost, ORDERS.RoomID, ORDERS.StartTime\r\nFROM   " +
+                "         ORDERS INNER JOIN\r\n                         STAFF ON ORDERS.StaffID = S" +
+                "TAFF.StaffID CROSS JOIN\r\n                         SERVICE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

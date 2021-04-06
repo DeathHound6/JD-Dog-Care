@@ -589,9 +589,12 @@ namespace SSD_CW_20_21.gui
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            DateTime end = DateTime.Today.AddDays(7 * 3);
+            int ordersBeforeEnd = orders.FindAll(odr => Convert.ToDateTime(odr.Date) >= end).Count;
             if (mode != "add")
             {
-                if (dtpRoomView.Value < DateTime.Today.AddDays(7 * 3))
+                // allow for override "3 weeks in advance" if there are less than 21 bookings within next 3 weeks (allows for 1 booking per day for 3 weeks)
+                if (dtpRoomView.Value < end && ordersBeforeEnd >= 21)
                 {
                     MessageBox.Show("You can only create a booking 3 weeks in advance", "Cannot make booking", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;

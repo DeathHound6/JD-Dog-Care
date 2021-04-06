@@ -27,7 +27,7 @@ namespace SSD_CW_20_21.gui
             InitializeComponent();
             dtpStart.MinDate = DateTime.Today.AddMonths(-6);
             dtpStart.MaxDate = DateTime.Today.AddMonths(6);
-            dtpEnd.MinDate = DateTime.Today.AddMonths(-6);
+            dtpEnd.MinDate = dtpStart.Value;
             dtpEnd.MaxDate = DateTime.Today.AddMonths(6);
         }
 
@@ -74,11 +74,6 @@ namespace SSD_CW_20_21.gui
         private void dtpStart_ValueChanged(object sender, EventArgs e)
         {
             dtpEnd.MinDate = dtpStart.Value;
-        }
-
-        private void dtpEnd_ValueChanged(object sender, EventArgs e)
-        {
-            dtpStart.MaxDate = dtpEnd.Value;
         }
     }
 }
