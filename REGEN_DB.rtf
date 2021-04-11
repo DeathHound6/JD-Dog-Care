@@ -23,8 +23,7 @@
     [HairLength] \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
     [Deleted]    \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
     \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [DogID] \cf1 ASC\cf3 ),\cf2\par
-    \cf1 CONSTRAINT\cf2  [FK-DogToOwner] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [OwnerID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [CUSTOMER]\cf1  \cf3 (\cf2 [CustomerID]\cf3 )\cf2\par
-\cf3 );\cf2\par
+    \cf1 CONSTRAINT\cf2  [FK-DogToOwner] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [OwnerID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [CUSTOMER]\cf1  \cf3 (\cf2 [CustomerID]\cf3 )\par
 \cf1 CREATE\cf2  \cf1 TABLE\cf2  [dbo]\cf3 .\cf2 [STAFF]\cf1  \cf3 (\cf2\par
     [StaffID]     \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
     [Name]        \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
@@ -53,18 +52,20 @@
     \cf1 CONSTRAINT\cf2  [FK-OrderToDog] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [DogID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [DOG]\cf1  \cf3 (\cf2 [DogID]\cf3 )\cf2\par
 \cf3 );\cf2\par
 \cf1 CREATE\cf2  \cf1 TABLE\cf2  [dbo]\cf3 .\cf2 [SERVICE]\cf1  \cf3 (\cf2\par
-    [ServiceId]   \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
-    [Description] \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
-    [Time]        \cf1 INT\cf2            \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [ServiceId]   \cf1 INT\cf2             \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Description] \cf1 VARCHAR \cf3 (\cf4 MAX\cf3 )\cf2   \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Time]        \cf1 INT\cf2             \cf3 NOT\cf2  \cf3 NULL,\cf2\par
+    [Cost]        \cf1 DECIMAL \cf3 (\cf2 6\cf3 ,\cf2  2\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
     \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [ServiceId] \cf1 ASC\cf3 )\cf2\par
-\cf3 );\cf1\f1\lang1033 CREATE\cf2  \cf1 TABLE\cf2  [dbo]\cf3 .\cf2 [SERVICEORDER]\cf1  \cf3 (\cf2\par
+\cf3 );\par
+\cf1\f1\lang1033 CREATE\cf2  \cf1 TABLE\cf2  [dbo]\cf3 .\cf2 [SERVICEORDER]\cf1  \cf3 (\cf2\par
     [ServiceID] \cf1 INT\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
     [OrderID]   \cf1 INT\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
-    \cf1 CONSTRAINT\cf2  [PK_SERVICEORDER] \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [ServiceID] \cf1 ASC\cf3 ),\cf2\par
-    \cf1 CONSTRAINT\cf2  [FK_ServiceOrderLinkToOrder] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [OrderID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [ORDERS]\cf1  \cf3 (\cf2 [OrderID]\cf3 ),\cf2\par
-    \cf1 CONSTRAINT\cf2  [FK_ServiceOrderLinkToService] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [ServiceID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [SERVICE]\cf1  \cf3 (\cf2 [ServiceId]\cf3 )\cf2\par
-\cf3 );\par
-\par
+    \cf1 CONSTRAINT\cf2  [PK_SERVICEORDER] \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [OrderID] \cf1 ASC\cf3 ),\cf2\par
+    \cf1 CONSTRAINT\cf2  [FK_ServiceOrderLinkToService] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [ServiceID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [SERVICE]\cf1  \cf3 (\cf2 [ServiceId]\cf3 ),\cf2\par
+    \cf1 CONSTRAINT\cf2  [FK_ServiceOrderLinkToOrder] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [OrderID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [ORDERS]\cf1  \cf3 (\cf2 [OrderID]\cf3 )\cf2\par
+\cf3 );\cf2\par
+\cf3\par
 INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brush', 20);\par
 INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brush, trim', 25);\par
 INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brush, full-cut', 30);\cf2\lang9\par
@@ -78,7 +79,22 @@ INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brus
 \cf1 INSERT\cf2  \cf1 INTO\cf2  CUSTOMER\cf3 (\cf2 CustomerID\cf3 ,\cf2  Forename\cf3 ,\cf2  Surname\cf3 ,\cf2  \cf1 Address\cf3 ,\cf2  Town\cf3 ,\cf2  Postcode\cf3 ,\cf2  TelNo\cf3 ,\cf2  Email\cf3 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang1033 2\cf3\f0\lang9 ,\cf2  \cf5 '\f1\lang1033 William\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 Afton\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 3 Rocky Road\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 B\f0\lang9 elfast'\cf3 ,\cf2  \cf5 '\f1\lang1033 BT8 6PY\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 077649274274\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 william.afton\f0\lang9 @\f1\lang1033 gmail\f0\lang9 .com'\cf3 ,\cf2  0\cf3 );\par
 \cf1 INSERT\cf2  \cf1 INTO\cf2  CUSTOMER\cf3 (\cf2 CustomerID\cf3 ,\cf2  Forename\cf3 ,\cf2  Surname\cf3 ,\cf2  \cf1 Address\cf3 ,\cf2  Town\cf3 ,\cf2  Postcode\cf3 ,\cf2  TelNo\cf3 ,\cf2  Email\cf3 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang1033 3\cf3\f0\lang9 ,\cf2  \cf5 '\f1\lang1033 Jerry\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 Can\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 4 My House\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 B\f0\lang9 elfast'\cf3 ,\cf2  \cf5 '\f1\lang1033 BT4\f0\lang9  \f1\lang1033 7RT\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 07483927485\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang1033 jerry.can\f0\lang9 @outlook.com'\cf3 ,\cf2  0\cf3 );\cf0\f2\fs22\par
 \par
-\cf1\f0\fs19 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\cf2 DogID\cf3 ,\cf2  OwnerID\cf3 ,\cf2  Name\cf3 ,\cf2  Breed\cf3 ,\cf2  \f1\lang2057 Aggression, DOB, HairLength\cf3\f0\lang9 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2 1\cf3 ,\cf2  1\cf3 ,\cf2  \cf5 'Sky'\cf3 ,\cf2  \cf5 'Husky'\cf3 ,\cf2  \cf5 '\f1\lang2057 Low\f0\lang9 '\f1\lang2057 , '05/10/2017', 'Medium'\cf3\f0\lang9 ,\cf2  0\cf3 );\cf0\f2\fs22\par
+\cf1\f0\fs19 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\cf2 DogID\cf3 ,\cf2  OwnerID\cf3 ,\cf2  Name\cf3 ,\cf2  Breed\cf3 ,\cf2  \f1\lang2057 Aggression, DOB, HairLength\cf3\f0\lang9 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2 1\cf3 ,\cf2  1\cf3 ,\cf2  \cf5 '\f1\lang2057 Lola\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 Pug\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 Low\f0\lang9 '\f1\lang2057 , '05/10/2017', 'Short'\cf3\f0\lang9 ,\cf2  0\cf3 );\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\cf2 DogID\cf3 ,\cf2  OwnerID\cf3 ,\cf2  Name\cf3 ,\cf2  Breed\cf3 ,\cf2  \f1\lang2057 Aggression, DOB, HairLength\cf3\f0\lang9 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 2\cf3\f0\lang9 ,\cf2  1\cf3 ,\cf2  \cf5 '\f1\lang2057 Sid\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 Pug\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 Low\f0\lang9 '\f1\lang2057 , '29/09/2020', 'Short'\cf3\f0\lang9 ,\cf2  \f1\lang2057 1\cf3\f0\lang9 );\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\cf2 DogID\cf3 ,\cf2  OwnerID\cf3 ,\cf2  Name\cf3 ,\cf2  Breed\cf3 ,\cf2  \f1\lang2057 Aggression, DOB, HairLength\cf3\f0\lang9 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 3\cf3\f0\lang9 ,\cf2  \f1\lang2057 3\cf3\f0\lang9 ,\cf2  \cf5 '\f1\lang2057 Bill\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 German Shephard\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 High\f0\lang9 '\f1\lang2057 , '01/09/2020', 'Long'\cf3\f0\lang9 ,\cf2  \f1\lang2057 0\cf3\f0\lang9 );\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\cf2 DogID\cf3 ,\cf2  OwnerID\cf3 ,\cf2  Name\cf3 ,\cf2  Breed\cf3 ,\cf2  \f1\lang2057 Aggression, DOB, HairLength\cf3\f0\lang9 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 4\cf3\f0\lang9 ,\cf2  \f1\lang2057 3\cf3\f0\lang9 ,\cf2  \cf5 '\f1\lang2057 Milo\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 French Bulldog\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 Medium\f0\lang9 '\f1\lang2057 , '30/01/2001', 'Medium'\cf3\f0\lang9 ,\cf2  \f1\lang2057 0\cf3\f0\lang9 );\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\cf2 DogID\cf3 ,\cf2  OwnerID\cf3 ,\cf2  Name\cf3 ,\cf2  Breed\cf3 ,\cf2  \f1\lang2057 Aggression, DOB, HairLength\cf3\f0\lang9 ,\cf2  Deleted\cf3 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 5\cf3\f0\lang9 ,\cf2  \f1\lang2057 2\cf3\f0\lang9 ,\cf2  \cf5 '\f1\lang2057 Poppy\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 Pug\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 Medium\f0\lang9 '\f1\lang2057 , '29/01/2021', 'Medium'\cf3\f0\lang9 ,\cf2  \f1\lang2057 0\cf3\f0\lang9 );\par
 \par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\f1\lang2057 OrderID, \cf2\f0\lang9 DogID\cf3 ,\cf2  \f1\lang2057 StaffID\cf3\f0\lang9 ,\cf2  \f1\lang2057 Date\cf3\f0\lang9 ,\cf2  \f1\lang2057 StartTime\cf3\f0\lang9 ,\cf2  \f1\lang2057 EndTime, Ears, Teeth\cf3\f0\lang9 ,\cf2  \f1\lang2057 Nails, RoomID, Paid, Cancelled\cf3\f0\lang9 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 1\cf3\f0\lang9 ,\cf2  \f1\lang2057 1\cf3\f0\lang9 ,\f1\lang2057  4,\cf2\f0\lang9  \cf5 '\f1\lang2057 29/04/2021\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 10:45\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 11:05\f0\lang9 '\f1\lang2057 , 0, 0, \cf2 0, 1, 1, 0\cf3\f0\lang9 );\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\f1\lang2057 OrderID, \cf2\f0\lang9 DogID\cf3 ,\cf2  \f1\lang2057 StaffID\cf3\f0\lang9 ,\cf2  \f1\lang2057 Date\cf3\f0\lang9 ,\cf2  \f1\lang2057 StartTime\cf3\f0\lang9 ,\cf2  \f1\lang2057 EndTime, Ears, Teeth\cf3\f0\lang9 ,\cf2  \f1\lang2057 Nails, RoomID, Paid, Cancelled\cf3\f0\lang9 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 2\cf3\f0\lang9 ,\cf2  \f1\lang2057 1\cf3\f0\lang9 ,\f1\lang2057  4,\cf2\f0\lang9  \cf5 '\f1\lang2057 16/06/2021\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 10:30\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 11:45\f0\lang9 '\f1\lang2057 , 1, 1, \cf2 1, 1, 0, 0\cf3\f0\lang9 );\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\f1\lang2057 OrderID, \cf2\f0\lang9 DogID\cf3 ,\cf2  \f1\lang2057 StaffID\cf3\f0\lang9 ,\cf2  \f1\lang2057 Date\cf3\f0\lang9 ,\cf2  \f1\lang2057 StartTime\cf3\f0\lang9 ,\cf2  \f1\lang2057 EndTime, Ears, Teeth\cf3\f0\lang9 ,\cf2  \f1\lang2057 Nails, RoomID, Paid, Cancelled\cf3\f0\lang9 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 3\cf3\f0\lang9 ,\cf2  \f1\lang2057 3\cf3\f0\lang9 ,\f1\lang2057  2,\cf2\f0\lang9  \cf5 '\f1\lang2057 14/01/2021\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 10:00\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 10:20\f0\lang9 '\f1\lang2057 , 0, 0, \cf2 0, 2, 1, 0\cf3\f0\lang9 );\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\f1\lang2057 OrderID, \cf2\f0\lang9 DogID\cf3 ,\cf2  \f1\lang2057 StaffID\cf3\f0\lang9 ,\cf2  \f1\lang2057 Date\cf3\f0\lang9 ,\cf2  \f1\lang2057 StartTime\cf3\f0\lang9 ,\cf2  \f1\lang2057 EndTime, Ears, Teeth\cf3\f0\lang9 ,\cf2  \f1\lang2057 Nails, RoomID, Paid, Cancelled\cf3\f0\lang9 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 4\cf3\f0\lang9 ,\cf2  \f1\lang2057 3\cf3\f0\lang9 ,\f1\lang2057  4,\cf2\f0\lang9  \cf5 '\f1\lang2057 25/03/2022\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 10:45\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 11:45\f0\lang9 '\f1\lang2057 , 1, 1, 1\cf2 , 1, 0, 0\cf3\f0\lang9 );\par
+\cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\f1\lang2057 OrderID, \cf2\f0\lang9 DogID\cf3 ,\cf2  \f1\lang2057 StaffID\cf3\f0\lang9 ,\cf2  \f1\lang2057 Date\cf3\f0\lang9 ,\cf2  \f1\lang2057 StartTime\cf3\f0\lang9 ,\cf2  \f1\lang2057 EndTime, Ears, Teeth\cf3\f0\lang9 ,\cf2  \f1\lang2057 Nails, RoomID, Paid, Cancelled\cf3\f0\lang9 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 5\cf3\f0\lang9 ,\cf2  \f1\lang2057 4\cf3\f0\lang9 ,\f1\lang2057  1,\cf2\f0\lang9  \cf5 '\f1\lang2057 26/03/2021\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 09:00\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 09:20\f0\lang9 '\f1\lang2057 , 0, 0, \cf2 0, 3, 0, 0\cf3\f0\lang9 );\par
+\par
+\f1\lang2057 INSERT INTO SERVICEORDER(ServiceID, OrderID) VALUES(1, 1);\par
+INSERT INTO SERVICEORDER(ServiceID, OrderID) VALUES(3, 2);\cf0\f2\fs22\lang9\par
+\cf3\f1\fs19\lang2057 INSERT INTO SERVICEORDER(ServiceID, OrderID) VALUES(2, 3);\par
+INSERT INTO SERVICEORDER(ServiceID, OrderID) VALUES(3, 4);\par
+INSERT INTO SERVICEORDER(ServiceID, OrderID) VALUES(1, 5);\cf0\f2\fs22\lang9\par
 }
  
