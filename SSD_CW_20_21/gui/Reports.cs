@@ -75,5 +75,11 @@ namespace SSD_CW_20_21.gui
         {
             dtpEnd.MinDate = dtpStart.Value;
         }
+
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            new GroomingMain().Show();
+            Hide();
+        }
     }
 }

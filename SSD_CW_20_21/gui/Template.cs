@@ -36,7 +36,11 @@ namespace SSD_CW_20_21.gui
             {
                 new GroomingMain().Show();
                 Hide();
-            } 
+            }
+            else
+            {
+                MessageBox.Show("You cannot go to the Main Menu as the Database is disconnected. Please see the user guide for instructions to connect", "Database Disconnected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void viewReportsToolStripMenuItem_Click(object sender, EventArgs e)

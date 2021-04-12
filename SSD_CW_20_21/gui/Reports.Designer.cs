@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.DataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ReportsDataSet = new SSD_CW_20_21.ReportsDataSet();
             this.repReports = new Microsoft.Reporting.WinForms.ReportViewer();
@@ -39,6 +39,7 @@
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnMenu = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataTable1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReportsDataSet)).BeginInit();
             this.SuspendLayout();
@@ -55,9 +56,9 @@
             // 
             // repReports
             // 
-            reportDataSource1.Name = "ReportsDataSet";
-            reportDataSource1.Value = this.DataTable1BindingSource;
-            this.repReports.LocalReport.DataSources.Add(reportDataSource1);
+            reportDataSource2.Name = "ReportsDataSet";
+            reportDataSource2.Value = this.DataTable1BindingSource;
+            this.repReports.LocalReport.DataSources.Add(reportDataSource2);
             this.repReports.LocalReport.ReportEmbeddedResource = "SSD_CW_20_21.IncomeReport.rdlc";
             this.repReports.Location = new System.Drawing.Point(71, 156);
             this.repReports.Name = "repReports";
@@ -119,11 +120,24 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "End of Time Frame";
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.btnMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnMenu.Location = new System.Drawing.Point(686, 507);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(133, 57);
+            this.btnMenu.TabIndex = 28;
+            this.btnMenu.Text = "Grooming Menu";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
             // Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(973, 615);
+            this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtpEnd);
@@ -138,6 +152,7 @@
             this.Controls.SetChildIndex(this.dtpEnd, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.btnMenu, 0);
             ((System.ComponentModel.ISupportInitialize)(this.DataTable1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReportsDataSet)).EndInit();
             this.ResumeLayout(false);
@@ -156,5 +171,6 @@
         private System.Windows.Forms.BindingSource DataTable1BindingSource;
         private ReportsDataSet ReportsDataSet;
         private ReportsDataSetTableAdapters.DataTable1TableAdapter DataTable1TableAdapter;
+        private System.Windows.Forms.Button btnMenu;
     }
 }
