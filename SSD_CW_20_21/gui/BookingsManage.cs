@@ -46,7 +46,7 @@ namespace SSD_CW_20_21.gui
             dtpDateTime.MinDate = DateTime.Today.AddYears(-1);
             dtpDateTime.Value = DateTime.Now;
 
-            Text = "JD Dog Care - Add Bookings";
+            Text = "JD Dog Care - Manage Bookings";
 
             changeMode("view");
             populateComboBox();

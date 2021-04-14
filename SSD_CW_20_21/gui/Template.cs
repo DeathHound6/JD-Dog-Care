@@ -15,18 +15,32 @@ namespace SSD_CW_20_21.gui
         {
             InitializeComponent();
             showDbConn();
+            ShowIcon = true;
+            string iconPath = Application.StartupPath;
+            iconPath = iconPath.Remove((Convert.ToInt16(iconPath.Length) - 9));
+            Icon = new Icon($"{iconPath}/image0.ico");
 
             toolstripMenuSubsystems.Text = "Grooming";
             tsMenu.Text = "Grooming Menu";
             tsDogs.Text = "Dogs";
             tsBookings.Text = "Bookings";
             viewReportsToolStripMenuItem.Text = "View Reports";
-
             dayCareToolStripMenuItem.Text = "Day Care";
             dogWalkingToolStripMenuItem.Text = "Dog Walking";
             dogTrainingToolStripMenuItem.Text = "Dog Training";
             collectionToolStripMenuItem.Text = "Collection, Delivery and Mobile Grooming";
             exitToolStripMenuItem.Text = "Exit";
+
+            toolstripMenuSubsystems.Font = new Font(toolstripMenuSubsystems.Font, FontStyle.Bold);
+            tsMenu.Font = new Font(tsMenu.Font, FontStyle.Bold);
+            tsDogs.Font = new Font(tsDogs.Font, FontStyle.Bold);
+            tsBookings.Font = new Font(tsBookings.Font, FontStyle.Bold);
+            viewReportsToolStripMenuItem.Font = new Font(viewReportsToolStripMenuItem.Font, FontStyle.Bold);
+            dayCareToolStripMenuItem.Font = new Font(dayCareToolStripMenuItem.Font, FontStyle.Bold);
+            dogWalkingToolStripMenuItem.Font = new Font(dogWalkingToolStripMenuItem.Font, FontStyle.Bold);
+            dogTrainingToolStripMenuItem.Font = new Font(dogTrainingToolStripMenuItem.Font, FontStyle.Bold);
+            collectionToolStripMenuItem.Font = new Font(collectionToolStripMenuItem.Font, FontStyle.Bold);
+            exitToolStripMenuItem.Font = new Font(exitToolStripMenuItem.Font, FontStyle.Bold);
         }
 
         #region Events
