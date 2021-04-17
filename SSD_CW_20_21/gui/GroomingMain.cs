@@ -13,7 +13,6 @@ namespace SSD_CW_20_21.gui
         private DogDBAccess dogAccess = Globals.dogAccess;
         private ServiceDBAccess servAccess = Globals.serviceAccess;
         private StaffDBAccess staffAccess = Globals.staffAccess;
-        private ServiceOrderDBAccess servorderAccess = Globals.serviceOrderAccess;
         private List<Orders> orders;
         private List<Dog> dogs;
         #endregion
@@ -58,7 +57,7 @@ namespace SSD_CW_20_21.gui
                 rows[1] = staffAccess.getStaffById(arr[i].StaffId).Name;
                 rows[2] = arr[i].Date;
                 rows[3] = arr[i].StartTime;
-                rows[4] = servAccess.getServiceById(servorderAccess.getObjectByOrderID(arr[i].Id).ServiceID).Description;
+                rows[4] = servAccess.getServiceById(arr[i].ServiceID).Description;
                 string extras = "";
                 if (arr[i].Teeth == 1) extras += "Teeth ";
                 if (arr[i].Ears == 1) extras += "Ears ";

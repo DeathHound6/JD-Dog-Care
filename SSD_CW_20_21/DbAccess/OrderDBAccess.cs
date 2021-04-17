@@ -53,7 +53,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool updateOrder(Orders order)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"UPDATE ORDERS SET Cancelled = {order.Cancelled}, RoomID = {order.RoomID}, DogID = {order.DogId}, StaffID = {order.StaffId}, Date = '{order.Date}', StartTime = '{order.StartTime}', EndTime = '{order.EndTime}', Paid = {Convert.ToDecimal(order.Paid)}, Teeth = {order.Teeth}, Ears = {order.Ears}, Nails = {order.Nails} WHERE OrderID = {order.Id}";
+            Db.Command.CommandText = $"UPDATE ORDERS SET Cancelled = {order.Cancelled}, ServiceID = {order.ServiceID}, RoomID = {order.RoomID}, DogID = {order.DogId}, StaffID = {order.StaffId}, Date = '{order.Date}', StartTime = '{order.StartTime}', Paid = {Convert.ToDecimal(order.Paid)}, Teeth = {order.Teeth}, Ears = {order.Ears}, Nails = {order.Nails} WHERE OrderID = {order.Id}";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -69,7 +69,7 @@ namespace SSD_CW_20_21.DbAccess
         public bool insertOrder(Orders order)
         {
             Db.Command = Db.Connection.CreateCommand();
-            Db.Command.CommandText = $"INSERT INTO ORDERS (OrderID, DogID, StaffID, Date, StartTime, EndTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES ({order.Id}, {order.DogId}, {order.StaffId}, '{order.Date}', '{order.StartTime}', '{order.EndTime}', {order.Ears}, {order.Teeth}, {order.Nails}, {order.RoomID}, {Convert.ToDecimal(order.Paid)}, {order.Cancelled})";
+            Db.Command.CommandText = $"INSERT INTO ORDERS (OrderID, ServiceID, DogID, StaffID, Date, StartTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES ({order.Id}, {order.ServiceID}, {order.DogId}, {order.StaffId}, '{order.Date}', '{order.StartTime}', {order.Ears}, {order.Teeth}, {order.Nails}, {order.RoomID}, {Convert.ToDecimal(order.Paid)}, {order.Cancelled})";
             try
             {
                 Db.Command.ExecuteNonQuery();
@@ -100,11 +100,11 @@ namespace SSD_CW_20_21.DbAccess
         {
             Orders order = new Orders();
             order.Id = rdr.GetInt32(0);
-            order.DogId = rdr.GetInt32(1);
-            order.StaffId = rdr.GetInt32(2);
-            order.Date = rdr.GetString(3);
-            order.StartTime = rdr.GetString(4);
-            order.EndTime = rdr.GetString(5);
+            order.ServiceID = rdr.GetInt32(1);
+            order.DogId = rdr.GetInt32(2);
+            order.StaffId = rdr.GetInt32(3);
+            order.Date = rdr.GetString(4);
+            order.StartTime = rdr.GetString(5);
             order.Ears = rdr.GetInt32(6);
             order.Teeth = rdr.GetInt32(7);
             order.Nails = rdr.GetInt32(8);

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Data;
-using System.ComponentModel;
 
 namespace SSD_CW_20_21.Objects
 {

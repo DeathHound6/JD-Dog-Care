@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SSD_CW_20_21.Objects;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;

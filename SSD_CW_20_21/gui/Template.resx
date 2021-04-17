@@ -117,15 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolstripTxtWalking.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
   <data name="&gt;&gt;toolstripTxtGrooming.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolstripMenuSubsystems.Name" xml:space="preserve">
-    <value>toolstripMenuSubsystems</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tsBookings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 23</value>
   </data>
   <data name="&gt;&gt;viewReportsToolStripMenuItem.Name" xml:space="preserve">
     <value>viewReportsToolStripMenuItem</value>
@@ -139,6 +136,9 @@
   </data>
   <data name="btnBack.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="&gt;&gt;btnExit.Name" xml:space="preserve">
+    <value>btnExit</value>
   </data>
   <data name="toolstripTxtDaycare.Text" xml:space="preserve">
     <value>Day Care</value>
@@ -182,11 +182,17 @@
   <data name="btnExit.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
   <data name="toolStripTextBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
   <data name="viewReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 23</value>
+  </data>
+  <data name="toolstripTxtTraining.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 23</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>970, 42</value>
@@ -219,12 +225,6 @@
   <data name="lblDbConn.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt, style=Bold, Italic</value>
   </data>
-  <data name="&gt;&gt;toolstripMenuMain.Name" xml:space="preserve">
-    <value>toolstripMenuMain</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 577</value>
-  </data>
   <data name="&gt;&gt;lblDbConn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -233,6 +233,9 @@
   </data>
   <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
     <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;tsMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolstripMenuSubsystems.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 23</value>
@@ -249,14 +252,11 @@
   <data name="&gt;&gt;collectionToolStripMenuItem.Name" xml:space="preserve">
     <value>collectionToolStripMenuItem</value>
   </data>
-  <data name="toolstripMenuSubsystems.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
   <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="tsBookings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 23</value>
+  <data name="&gt;&gt;toolstripMenuSubsystems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnExit.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt, style=Bold, Italic</value>
@@ -291,14 +291,14 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="btnBack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>686, 507</value>
-  </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="&gt;&gt;tsBookings.Name" xml:space="preserve">
     <value>tsBookings</value>
+  </data>
+  <data name="&gt;&gt;toolstripMenuSubsystems.Name" xml:space="preserve">
+    <value>toolstripMenuSubsystems</value>
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -306,11 +306,11 @@
   <data name="&gt;&gt;btnBack.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 570</value>
-  </data>
   <data name="&gt;&gt;toolstripTxtTraining.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolstripTxtWalking.Name" xml:space="preserve">
+    <value>toolstripTxtWalking</value>
   </data>
   <data name="lblDbConn.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 17</value>
@@ -320,6 +320,9 @@
   </data>
   <data name="toolstripTxtGrooming.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
+  </data>
+  <data name="&gt;&gt;toolstripTxtDaycare.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnExit.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 57</value>
@@ -354,17 +357,14 @@
   <data name="menuStrip1.Text" xml:space="preserve">
     <value>menuStrip1</value>
   </data>
-  <data name="toolstripTxtTraining.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 23</value>
+  <data name="&gt;&gt;toolstripMenuMain.Name" xml:space="preserve">
+    <value>toolstripMenuMain</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>800, 27</value>
   </data>
   <data name="&gt;&gt;tsBookings.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnBack.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -378,17 +378,17 @@
   <data name="&gt;&gt;toolstripTxtMobile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="btnBack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>686, 507</value>
   </data>
   <data name="&gt;&gt;dogWalkingToolStripMenuItem.Name" xml:space="preserve">
     <value>dogWalkingToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;btnExit.Name" xml:space="preserve">
-    <value>btnExit</value>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 570</value>
   </data>
-  <data name="&gt;&gt;toolstripTxtWalking.Name" xml:space="preserve">
-    <value>toolstripTxtWalking</value>
+  <data name="&gt;&gt;btnBack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolstripTxtGrooming.Name" xml:space="preserve">
     <value>toolstripTxtGrooming</value>
@@ -405,11 +405,11 @@
   <data name="toolstripTxtDaycare.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
-  <data name="&gt;&gt;toolstripMenuSubsystems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="toolstripMenuSubsystems.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;tsMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>800, 577</value>
   </data>
   <data name="&gt;&gt;lblDbConn.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -429,8 +429,8 @@
   <data name="&gt;&gt;toolstripMenuMain.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolstripTxtDaycare.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="toolstripTxtWalking.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
   </data>
   <data name="&gt;&gt;lblDbConn.Name" xml:space="preserve">
     <value>lblDbConn</value>

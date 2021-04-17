@@ -224,6 +224,7 @@
             this.txtDogName.ShortcutsEnabled = false;
             this.txtDogName.Size = new System.Drawing.Size(231, 26);
             this.txtDogName.TabIndex = 18;
+            this.txtDogName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDogName_KeyPress);
             // 
             // lblBreed
             // 

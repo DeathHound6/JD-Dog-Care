@@ -11,7 +11,6 @@ namespace SSD_CW_20_21
         public static OrderDBAccess orderAccess { get; } = new OrderDBAccess(database);
         public static StaffDBAccess staffAccess { get; } = new StaffDBAccess(database);
         public static ServiceDBAccess serviceAccess { get; } = new ServiceDBAccess(database);
-        public static ServiceOrderDBAccess serviceOrderAccess { get; } = new ServiceOrderDBAccess(database);
         
         public static int extraNailsMinute { get; } = 10;
         public static int extraTeethMinute { get; } = 10;

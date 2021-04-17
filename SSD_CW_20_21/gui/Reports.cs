@@ -11,7 +11,6 @@ namespace SSD_CW_20_21.gui
     {
         private OrderDBAccess orderAccess = Globals.orderAccess;
         private ServiceDBAccess serviceAccess = Globals.serviceAccess;
-        private ServiceOrderDBAccess servOrderAccess = Globals.serviceOrderAccess;
         private DogDBAccess dogAccess = Globals.dogAccess;
 
         private ReportDataSource rds;
@@ -51,7 +50,7 @@ namespace SSD_CW_20_21.gui
             {
                 DataRow row = bookingCosts.NewRow();
                 Orders firstOrder = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId)[0];
-                double cost = Globals.calcCost(order, serviceAccess.getServiceById(servOrderAccess.getObjectByOrderID(order.Id).ServiceID), order == firstOrder);
+                double cost = Globals.calcCost(order, serviceAccess.getServiceById(order.ServiceID), order == firstOrder);
                 row["Cost"] = cost;
                 row["Date"] = order.Date;
                 bookingCosts.Rows.Add(row);

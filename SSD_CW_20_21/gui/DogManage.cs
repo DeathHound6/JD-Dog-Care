@@ -26,19 +26,26 @@ namespace SSD_CW_20_21.gui
             InitializeComponent();
             lbSelectDog.SelectedItem = null;
             dogs = dogAccess.getAllDogs().FindAll(e => e.Deleted == 0);
-            Text = "JD Dog Care - Dogs";
+            Text = "JD Dog Care - Manage Dogs";
 
             populateComboBox();
             populateListBox();
             cboxSearch.SelectedIndex = 0;
-            dtpDOB.MaxDate = DateTime.Now.AddDays(7 * -8);
-            dtpDOB.MinDate = dtpDOB.MaxDate.AddYears(-20);
-            dtpDOB.Value = dtpDOB.MaxDate;
+            dtpDOB.MaxDate = DateTime.Today.AddDays(7 * -8);
+            dtpDOB.MinDate = Convert.ToDateTime("01/01/1753 00:00:00");
 
             changeMode("view");
         }
 
         #region Events
+        private void txtDogName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((char.IsControl(e.KeyChar) && e.KeyChar != (char)8) || char.IsDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar) || e.KeyChar == '.' || e.KeyChar == '`' || e.KeyChar == '|' || e.KeyChar == '<' || e.KeyChar == '>' || e.KeyChar == '£' || e.KeyChar == '$' || e.KeyChar == '=' || e.KeyChar == '+' || e.KeyChar == '^')
+            {
+                e.Handled = true;
+            }
+        }
+
         private void btnNext_Click(object sender, EventArgs e)
         {
             lbSelectDog.SelectedIndex += 1;
@@ -238,6 +245,7 @@ namespace SSD_CW_20_21.gui
             txtSearch.Text = "";
             if (cboxSearch.Text == "") txtSearch.Enabled = false;
             else txtSearch.Enabled = true;
+            txtSearch_TextChanged(txtSearch, new EventArgs());
         }
         #endregion
 
@@ -262,7 +270,6 @@ namespace SSD_CW_20_21.gui
                         dog.Deleted = 0;
                     }
                 }
-                mode = newMode;
 
                 txtDogName.Enabled = false;
                 cboxDogBreed.Enabled = false;
@@ -297,13 +304,17 @@ namespace SSD_CW_20_21.gui
                 btnUpdate.Text = "Edit Current Dog";
                 btnDelete.Text = "";
                 btnCancel.Text = "";
+
+                mode = newMode;
             }
             else if (newMode == "add")
             {
+                txtSearch.Text = "";
+                cboxSearch.SelectedIndex = 0;
+
                 dog = new Dog();
                 dog.Id = dogAccess.getAllDogs().Count + 1;
                 dog.Deleted = 0;
-                mode = newMode;
 
                 txtDogName.Enabled = true;
                 cboxDogBreed.Enabled = true;
@@ -321,8 +332,6 @@ namespace SSD_CW_20_21.gui
                 btnNext.Enabled = false;
                 btnPrevious.Enabled = false;
 
-                txtSearch.Text = "";
-                cboxSearch.SelectedIndex = 0;
                 txtDogName.Text = "";
                 cboxDogBreed.SelectedIndex = 0;
                 cboxDogOwner.SelectedIndex = 0;
@@ -333,6 +342,8 @@ namespace SSD_CW_20_21.gui
                 btnCancel.Text = "Cancel New Dog";
                 btnDelete.Text = "";
                 btnUpdate.Text = "";
+
+                mode = newMode;
             }
             else if (newMode == "edit")
             {
@@ -342,7 +353,6 @@ namespace SSD_CW_20_21.gui
                     changeMode("view");
                     return;
                 }
-                mode = newMode;
                 
                 btnAdd.Text = "";
                 btnCancel.Text = "Cancel Edit Dog";
@@ -367,6 +377,8 @@ namespace SSD_CW_20_21.gui
                 lbSelectDog.Enabled = false;
                 btnPrevious.Enabled = false;
                 btnNext.Enabled = false;
+                
+                mode = newMode;
             }
         }
 

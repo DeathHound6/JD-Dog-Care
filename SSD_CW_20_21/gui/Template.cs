@@ -16,9 +16,9 @@ namespace SSD_CW_20_21.gui
             InitializeComponent();
             showDbConn();
             ShowIcon = true;
-            string iconPath = Application.StartupPath;
+            /*string iconPath = Application.StartupPath;
             iconPath = iconPath.Remove((Convert.ToInt16(iconPath.Length) - 9));
-            Icon = new Icon($"{iconPath}/image0.ico");
+            Icon = new Icon($"{iconPath}/image0.ico");*/
 
             toolstripMenuSubsystems.Text = "Grooming";
             tsMenu.Text = "Grooming Menu";
@@ -149,5 +149,15 @@ namespace SSD_CW_20_21.gui
             }
         }
         #endregion
+
+        private void Template_Resize(object sender, EventArgs e)
+        {
+            Size = new Size(982, 652);
+        }
+
+        private void Template_MaximizedBoundsChanged(object sender, EventArgs e)
+        {
+            Template_Resize(sender, e);
+        }
     }
 }

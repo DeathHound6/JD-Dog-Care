@@ -80,7 +80,6 @@
     <Compile Include="DbAccess\DogDBAccess.cs" />
     <Compile Include="DbAccess\OrderDBAccess.cs" />
     <Compile Include="DbAccess\ServiceDBAccess.cs" />
-    <Compile Include="DbAccess\ServiceOrderDBAccess.cs" />
     <Compile Include="DbAccess\StaffDBAccess.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="gui\BookingsManage.cs">
@@ -124,7 +123,6 @@
     <Compile Include="Objects\Dog.cs" />
     <Compile Include="Objects\Orders.cs" />
     <Compile Include="Objects\Service.cs" />
-    <Compile Include="Objects\ServiceOrder.cs" />
     <Compile Include="Objects\Staff.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

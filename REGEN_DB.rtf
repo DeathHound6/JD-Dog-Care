@@ -58,14 +58,7 @@
     [Cost]        \cf1 DECIMAL \cf3 (\cf2 6\cf3 ,\cf2  2\cf3 )\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
     \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [ServiceId] \cf1 ASC\cf3 )\cf2\par
 \cf3 );\par
-\cf1\f1\lang1033 CREATE\cf2  \cf1 TABLE\cf2  [dbo]\cf3 .\cf2 [SERVICEORDER]\cf1  \cf3 (\cf2\par
-    [ServiceID] \cf1 INT\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
-    [OrderID]   \cf1 INT\cf2  \cf3 NOT\cf2  \cf3 NULL,\cf2\par
-    \cf1 CONSTRAINT\cf2  [PK_SERVICEORDER] \cf1 PRIMARY\cf2  \cf1 KEY\cf2  \cf1 CLUSTERED \cf3 (\cf2 [OrderID] \cf1 ASC\cf3 ),\cf2\par
-    \cf1 CONSTRAINT\cf2  [FK_ServiceOrderLinkToService] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [ServiceID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [SERVICE]\cf1  \cf3 (\cf2 [ServiceId]\cf3 ),\cf2\par
-    \cf1 CONSTRAINT\cf2  [FK_ServiceOrderLinkToOrder] \cf1 FOREIGN\cf2  \cf1 KEY \cf3 (\cf2 [OrderID]\cf3 )\cf2  \cf1 REFERENCES\cf2  [dbo]\cf3 .\cf2 [ORDERS]\cf1  \cf3 (\cf2 [OrderID]\cf3 )\cf2\par
-\cf3 );\cf2\par
-\cf3\par
+\f1\lang1033\par
 INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brush', 20);\par
 INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brush, trim', 25);\par
 INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brush, full-cut', 30);\cf2\lang9\par
@@ -91,10 +84,12 @@ INSERT INTO SERVICE(ServiceId, Description, Time) VALUES(1, 'Wash, shampoo, brus
 \cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\f1\lang2057 OrderID, \cf2\f0\lang9 DogID\cf3 ,\cf2  \f1\lang2057 StaffID\cf3\f0\lang9 ,\cf2  \f1\lang2057 Date\cf3\f0\lang9 ,\cf2  \f1\lang2057 StartTime\cf3\f0\lang9 ,\cf2  \f1\lang2057 EndTime, Ears, Teeth\cf3\f0\lang9 ,\cf2  \f1\lang2057 Nails, RoomID, Paid, Cancelled\cf3\f0\lang9 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 4\cf3\f0\lang9 ,\cf2  \f1\lang2057 3\cf3\f0\lang9 ,\f1\lang2057  4,\cf2\f0\lang9  \cf5 '\f1\lang2057 25/03/2022\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 10:45\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 11:45\f0\lang9 '\f1\lang2057 , 1, 1, 1\cf2 , 1, 0, 0\cf3\f0\lang9 );\par
 \cf1 INSERT\cf2  \cf1 INTO\cf2  DOG\cf3 (\f1\lang2057 OrderID, \cf2\f0\lang9 DogID\cf3 ,\cf2  \f1\lang2057 StaffID\cf3\f0\lang9 ,\cf2  \f1\lang2057 Date\cf3\f0\lang9 ,\cf2  \f1\lang2057 StartTime\cf3\f0\lang9 ,\cf2  \f1\lang2057 EndTime, Ears, Teeth\cf3\f0\lang9 ,\cf2  \f1\lang2057 Nails, RoomID, Paid, Cancelled\cf3\f0\lang9 )\cf2  \cf1 VALUES\cf3 (\cf2\f1\lang2057 5\cf3\f0\lang9 ,\cf2  \f1\lang2057 4\cf3\f0\lang9 ,\f1\lang2057  1,\cf2\f0\lang9  \cf5 '\f1\lang2057 26/03/2021\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 09:00\f0\lang9 '\cf3 ,\cf2  \cf5 '\f1\lang2057 09:20\f0\lang9 '\f1\lang2057 , 0, 0, \cf2 0, 3, 0, 0\cf3\f0\lang9 );\par
 \par
-\f1\lang2057 INSERT INTO SERVICEORDER(ServiceID, OrderID) VALUES(1, 1);\par
-INSERT INTO SERVICEORDER(ServiceID, OrderID) VALUES(3, 2);\cf0\f2\fs22\lang9\par
-\cf3\f1\fs19\lang2057 INSERT INTO SERVICEORDER(ServiceID, OrderID) VALUES(2, 3);\par
-INSERT INTO SERVICEORDER(ServiceID, OrderID) VALUES(3, 4);\par
-INSERT INTO SERVICEORDER(ServiceID, OrderID) VALUES(1, 5);\cf0\f2\fs22\lang9\par
+\f1\lang1033 INSERT INTO ORDERS(OrderID, ServiceID, DogID, StaffID, Date, StartTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES(1, 1, 1, 4, '29/04/2021', '10:45', 0, 0, 0, 1, 1, 0);\par
+INSERT INTO ORDERS(OrderID, ServiceID, DogID, StaffID, Date, StartTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES(2, 3, 1, 4, '16/06/2021', '10:30', 1, 1, 1, 1, 1, 0);\f0\lang9\par
+\f1\lang1033 INSERT INTO ORDERS(OrderID, ServiceID, DogID, StaffID, Date, StartTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES(3, 2, 3, 2, '14/01/2021', '10:00', 0, 0, 0, 2, 1, 0);\par
+INSERT INTO ORDERS(OrderID, ServiceID, DogID, StaffID, Date, StartTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES(4, 3, 3, 4, '25/03/2022', '10:45', 1, 1, 1, 1, 0, 0);\par
+INSERT INTO ORDERS(OrderID, ServiceID, DogID, StaffID, Date, StartTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES(5, 1, 4, 1, '26/03/2020', '09:00', 0, 0, 0, 3, 0, 0);\par
+INSERT INTO ORDERS(OrderID, ServiceID, DogID, StaffID, Date, StartTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES(6, 1, 5, 4, '08/05/2021', '10:30', 0, 0, 1, 1, 0, 1);\par
+INSERT INTO ORDERS(OrderID, ServiceID, DogID, StaffID, Date, StartTime, Ears, Teeth, Nails, RoomID, Paid, Cancelled) VALUES(3, 2, 3, 2, '29/04/2021', '10:45', 0, 0, 0, 1, 1, 0);\cf0\f2\fs22\lang9\par
 }
  

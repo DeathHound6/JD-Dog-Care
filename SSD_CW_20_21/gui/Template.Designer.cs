@@ -167,9 +167,11 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "Template";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Template_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Template_FormClosed);
+            this.Resize += new System.EventHandler(this.Template_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);

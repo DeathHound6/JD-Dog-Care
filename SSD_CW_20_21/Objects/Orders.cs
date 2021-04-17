@@ -3,11 +3,11 @@
     class Orders
     {
         private int id;
+        private int serviceID;
         private int dogId;
         private int staffId;
         private string date;
         private string startTime;
-        private string endTime;
         private int ears;
         private int teeth;
         private int nails;
@@ -20,14 +20,14 @@
 
         }
 
-        public Orders(int id, int dogId, int staffId, string date, string startTime, string endTime, int ears, int teeth, int nails, int roomID, int paid)
+        public Orders(int id, int serv, int dogId, int staffId, string date, string startTime, int ears, int teeth, int nails, int roomID, int paid)
         {
             Id = id;
+            ServiceID = serv;
             DogId = dogId;
             StaffId = staffId;
             Date = date;
             StartTime = startTime;
-            EndTime = endTime;
             Ears = ears;
             Teeth = teeth;
             Nails = nails;
@@ -39,6 +39,12 @@
         {
             get { return id; }
             set { id = value; }
+        }
+
+        public int ServiceID
+        {
+            get { return serviceID; }
+            set { serviceID = value; }
         }
 
         public int DogId
@@ -63,12 +69,6 @@
         {
             get { return startTime; }
             set { startTime = value; }
-        }
-
-        public string EndTime
-        {
-            get { return endTime; }
-            set { endTime = value; }
         }
 
         public int Ears
