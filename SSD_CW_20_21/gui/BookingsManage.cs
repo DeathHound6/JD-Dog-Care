@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Drawing;
+using Nager.Date;
 
 namespace SSD_CW_20_21.gui
 {
@@ -70,6 +71,21 @@ namespace SSD_CW_20_21.gui
             populateDogCbox();
         }
 
+        private static int SortOrders(Orders o1, Orders o2)
+        {
+            DateTime time2 = Convert.ToDateTime(o1.Date);
+            DateTime time1 = Convert.ToDateTime(o2.Date);
+            return time2.CompareTo(time1);
+        }
+
+        private Orders getFirstOrder(Orders order)
+        {
+            List<Orders> orders = orderAccess.getAllOrders().FindAll(e => e.Cancelled == 0 && order.DogId == e.DogId);
+            orders.Sort(SortOrders);
+            if (orders.Count > 0) return orders[0];
+            return null;
+        }
+
         private void populateCustCbox()
         {
             cboxCust.Items.Clear();
@@ -104,10 +120,8 @@ namespace SSD_CW_20_21.gui
                 cboxServices.Items.Add($"{srv.ServiceID} - {srv.Description}");
             }
             serv = cboxServices.Text != "" ? serviceAccess.getServiceById(getIdFromString(cboxServices.Text)) : services.ToArray()[0];
-            List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-            Orders firstOrder = order;
-            if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-            txtCost.Text = $"£{Globals.calcCost(order, serviceAccess.getServiceById(order.ServiceID), order == firstOrder || firstOrder == null).ToString()}";
+            Orders firstOrder = getFirstOrder(order);
+            txtCost.Text = $"£{Globals.calcCost(order, serviceAccess.getServiceById(order.ServiceID), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToString()}";
         }
 
         private void changeMode(string newMode)
@@ -181,6 +195,8 @@ namespace SSD_CW_20_21.gui
                 dgvRoomTwo.Visible = false;
                 dgvRoomThree.Visible = false;
 
+                dgvSelect.Enabled = true;
+
                 btnAdd.Enabled = false;
                 btnAdd.Text = "";
                 btnDelete.Enabled = true;
@@ -218,11 +234,11 @@ namespace SSD_CW_20_21.gui
             }
             else if (newMode == "view")
             {
-                if (order == null || serv == null)
+                if (order == null || order.Cancelled == 1 || serv == null)
                 {
-                    serv = serviceAccess.getAllServices()[0];
-                    if (orders.Count > 0) order = orders.ToArray()[0];
+                    if (orders.Count > 0) order = orderAccess.getAllOrders().ToArray()[0];
                     else order = new Orders(1, 1, 1, 1, dtpDateTime.Value.ToShortDateString(), dtpDateTime.Value.ToShortTimeString(), 0, 0, 0, 1, 0);
+                    serv = serviceAccess.getServiceById(order.ServiceID);
                 }
                 mode = newMode;
 
@@ -250,17 +266,15 @@ namespace SSD_CW_20_21.gui
                 checkNails.Enabled = false;
                 cboxPaid.Enabled = false;
                 checkTeeth.Enabled = false;
-
-                List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-                Orders firstOrder = order;
-                if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-
+                
+                Orders firstOrder = getFirstOrder(order);
                 cboxCust.Text = "";
                 cboxDog.Text = "";
-                if (orderAccess.getAllOrders().Find(e => e.Id == order.Id) != null)
-                    txtCost.Text = $"£{Globals.calcCost(order, serv, order == firstOrder || firstOrder == null)}";
-                else
-                    txtCost.Text = "£";
+                txtCost.Text = "£";
+                txtDate.Text = "";
+                txtEndtime.Text = "";
+                txtStaff.Text = "";
+                txtTime.Text = "";
                 cboxServices.Text = "";
                 checkEars.Checked = order.Ears == 1;
                 checkNails.Checked = order.Nails == 1;
@@ -302,10 +316,7 @@ namespace SSD_CW_20_21.gui
 
                 while (startTimedateTime < Convert.ToDateTime("17:00:00"))
                 {
-                    List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-                    Orders firstOrder = order;
-                    if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-
+                    Orders firstOrder = getFirstOrder(order);
                     rows[0] = CleanTime(startTimedateTime.ToShortTimeString());
                     rows[1] = "Yes";
                     foreach (Orders odr in orders)
@@ -317,7 +328,7 @@ namespace SSD_CW_20_21.gui
                         }
                         else continue;
                     }
-                    if (getEndTime(order, serv, startTimedateTime, order == firstOrder || firstOrder == null) > Convert.ToDateTime("17:00:00")) rows[1] = "No (Ends after closing time)";
+                    if (getEndTime(order, serv, startTimedateTime, (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)) > Convert.ToDateTime("17:00:00")) rows[1] = "No (Ends after closing time)";
                     dgvSelect.Rows.Add(rows);
                     startTimedateTime = startTimedateTime.AddMinutes(15);
                 }
@@ -344,10 +355,8 @@ namespace SSD_CW_20_21.gui
 
                 DateTime date = Convert.ToDateTime(order.Date);
                 DateTime start = Convert.ToDateTime(order.StartTime);
-                List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-                Orders firstOrder = order;
-                if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-                DateTime end = getEndTime(order, serv, start, order == firstOrder || firstOrder == null);
+                Orders firstOrder = getFirstOrder(order);
+                DateTime end = getEndTime(order, serv, start, (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null));
 
                 foreach (Staff staff in staffAccess.getAllStaff().FindAll(e => e.Deleted == 0))
                 {
@@ -365,10 +374,10 @@ namespace SSD_CW_20_21.gui
                     if (staffAvailableOnOrderDay)
                     {
                         // part-time staff not available after 12pm
-                        if (staff.Partial == 1 && (Convert.ToDateTime(order.StartTime) > Convert.ToDateTime("12:00:00")) || getEndTime(order, serviceAccess.getServiceById(serv.ServiceID), Convert.ToDateTime(order.StartTime), order == firstOrder || firstOrder == null) > Convert.ToDateTime("12:00:00"))
+                        if (staff.Partial == 1 && (Convert.ToDateTime(order.StartTime) > Convert.ToDateTime("12:00:00") || getEndTime(order, serviceAccess.getServiceById(serv.ServiceID), Convert.ToDateTime(order.StartTime), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)) > Convert.ToDateTime("12:00:00")))
                             rows[1] = "No - Not working at this time";
                         // staff lunches - unavailable
-                        else if (Convert.ToDateTime(order.StartTime) >= Convert.ToDateTime(staff.StartLunch) && getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), order == firstOrder || firstOrder == null) <= Convert.ToDateTime(staff.EndLunch))
+                        else if (Convert.ToDateTime(order.StartTime) >= Convert.ToDateTime(staff.StartLunch) && getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)) <= Convert.ToDateTime(staff.EndLunch))
                             rows[1] = "No - On Lunch";
                         else
                         {
@@ -378,7 +387,7 @@ namespace SSD_CW_20_21.gui
                                 {
                                     if (Convert.ToDateTime(order.Date) == date)
                                     {
-                                        if (Convert.ToDateTime(order.StartTime) >= start && getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), order == firstOrder || firstOrder == null) <= end)
+                                        if (Convert.ToDateTime(order.StartTime) >= start && getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)) <= end)
                                             rows[1] = $"No - Booking with {dogAccess.getDogById(order.DogId).Name}";
                                     }
                                 }
@@ -420,7 +429,7 @@ namespace SSD_CW_20_21.gui
 
         private void displayBookingSlots()
         {
-            object[] arr = { dgvRoomOne, dgvRoomTwo, dgvRoomThree };
+            DataGridView[] arr = { dgvRoomOne, dgvRoomTwo, dgvRoomThree };
             int roomID = 0;
             foreach (DataGridView dgv in arr)
             {
@@ -465,10 +474,8 @@ namespace SSD_CW_20_21.gui
                         DateTime counter = new DateTime(Convert.ToInt32(date[2]), Convert.ToInt32(date[1]), Convert.ToInt32(date[0]), 09, 00, 00);
 
                         // actual end time
-                        List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-                        Orders firstOrder = order;
-                        if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-                        string[] endTime = CleanTime(getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), order == firstOrder || firstOrder == null).ToShortTimeString()).Split(':');
+                        Orders firstOrder = getFirstOrder(order);
+                        string[] endTime = CleanTime(getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToShortTimeString()).Split(':');
                         DateTime end = new DateTime(Convert.ToInt32(date[2]), Convert.ToInt32(date[1]), Convert.ToInt32(date[0]), Convert.ToInt32(endTime[0]), Convert.ToInt32(CleanTime(endTime[1])), 00);
 
                         // actual start time
@@ -502,11 +509,8 @@ namespace SSD_CW_20_21.gui
             if (order.Nails == 1) min = min.AddMinutes(Globals.extraNailsMinute);
             if (order.Teeth == 1) min = min.AddMinutes(Globals.extraTeethMinute);
             if (order.Ears == 1) min = min.AddMinutes(Globals.extraEarsMinute);
-            if (add) // if we are adding a record
-            {
-                List<Orders> tempOrders = orderAccess.getAllOrders().FindAll(e => e.DogId == order.DogId);
-                if (tempOrders.Count == 0) min = min.AddMinutes(Globals.firstTimeMinute);
-            }
+            Orders firstOrder = getFirstOrder(order);
+            if ((mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && add && firstOrder == null)) min = min.AddMinutes(Globals.firstTimeMinute);
             return min;
         }
 
@@ -518,9 +522,8 @@ namespace SSD_CW_20_21.gui
             if (odr.Nails == 1) min = min.AddMinutes(Globals.extraNailsMinute);
             if (odr.Teeth == 1) min = min.AddMinutes(Globals.extraTeethMinute);
             if (odr.Ears == 1) min = min.AddMinutes(Globals.extraEarsMinute);
-            List<Orders> tempOrders = orderAccess.getAllOrders().FindAll(e => e.DogId == odr.DogId);
-            if (!add && tempOrders.Count == 1) min = min.AddMinutes(Globals.firstTimeMinute);
-            else if (tempOrders.Count == 0) min = min.AddMinutes(Globals.firstTimeMinute);
+            Orders firstOrder = getFirstOrder(odr);
+            if ((mode != "add" && odr.Id == firstOrder.Id) || (mode == "add" && add && firstOrder == null)) min = min.AddMinutes(Globals.firstTimeMinute);
             return min;
         }
 
@@ -528,10 +531,8 @@ namespace SSD_CW_20_21.gui
         {
             if (obj.Checked && order.StartTime != null)
             {
-                List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-                Orders firstOrder = order;
-                if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-                DateTime end = getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), order == firstOrder || firstOrder == null);
+                Orders firstOrder = getFirstOrder(order);
+                DateTime end = getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null));
                 if (end.Hour >= 17)
                 {
                     MessageBox.Show($"You cannot add the Extra {obj.Text} as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -554,10 +555,8 @@ namespace SSD_CW_20_21.gui
         {
             if (obj.Text != "" && order.StartTime != null)
             {
-                List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-                Orders firstOrder = order;
-                if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-                DateTime end = getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), order == firstOrder || firstOrder == null);
+                Orders firstOrder = getFirstOrder(order);
+                DateTime end = getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null));
                 if (end.Hour >= 17)
                 {
                     MessageBox.Show($"You cannot pick this service as as it finishes after closing time", "Cannot add extra", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -574,7 +573,7 @@ namespace SSD_CW_20_21.gui
             return true;
         }
         
-        private void dgvCellMouseClick(DataGridView dgv, DataGridViewCellMouseEventArgs e)
+        private bool dgvCellMouseClick(DataGridView dgv, DataGridViewCellMouseEventArgs e)
         {
             int orderID = Convert.ToInt32(dgv.Columns[e.ColumnIndex].Tag.ToString());
             order = orderID != -1 ? orderAccess.getOrderById(orderID) : null;
@@ -584,21 +583,19 @@ namespace SSD_CW_20_21.gui
                 MessageBox.Show("During this timeslot, there is no order appointment taking place", "No Appointments", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnUpdate.Enabled = false;
                 btnUpdate.Text = "";
+                return false;
             }
             else
             {
-                List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-                Orders firstOrder = order;
-                if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-
-                txtEndtime.Text = CleanTime(getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime(order.StartTime), order == firstOrder || firstOrder == null).ToShortTimeString());
+                Orders firstOrder = getFirstOrder(order);
+                txtEndtime.Text = CleanTime(getEndTime(order, serviceAccess.getServiceById(order.ServiceID), Convert.ToDateTime($"{order.Date} {order.StartTime}"), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToShortTimeString());
                 txtStaff.Text = staffAccess.getStaffById(order.StaffId).Name;
                 checkEars.Checked = order.Ears == 1 ? true : false;
                 checkTeeth.Checked = order.Teeth == 1 ? true : false;
                 checkNails.Checked = order.Nails == 1 ? true : false;
                 txtDate.Text = order.Date;
                 txtTime.Text = CleanTime(order.StartTime);
-                txtCost.Text = $"£{Globals.calcCost(order, serviceAccess.getServiceById(order.ServiceID), order == firstOrder || firstOrder == null).ToString()}";
+                txtCost.Text = $"£{Globals.calcCost(order, serviceAccess.getServiceById(order.ServiceID), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToString()}";
                 cboxPaid.Checked = order.Paid == 1 ? true : false;
                 Customer owner = custAccess.getOwnerById(dogAccess.getDogById(order.DogId).OwnerId);
                 cboxCust.Text = $"{owner.Id} - {owner.Forename} {owner.Surname}";
@@ -609,21 +606,18 @@ namespace SSD_CW_20_21.gui
 
                 btnUpdate.Enabled = true;
                 btnUpdate.Text = "Edit Booking";
-                
+                return true;
             }
         }
 
         private bool checkRoomValid(int roomNo)
         {
-            List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-            Orders firstOrder = order;
-            if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-
+            Orders firstOrder = getFirstOrder(order);
             List<Orders> tempOrders = orderAccess.getAllOrders().FindAll(e => {
-                return e.RoomID == roomNo && Convert.ToDateTime(e.StartTime) >= Convert.ToDateTime(txtTime.Text) && Convert.ToDateTime(getEndTime(e, serviceAccess.getServiceById(e.ServiceID), Convert.ToDateTime(e.StartTime), e == firstOrder || firstOrder == null)) <= Convert.ToDateTime(txtEndtime.Text) && e.Date == txtDate.Text;
+                return e.RoomID == roomNo && Convert.ToDateTime(e.StartTime) >= Convert.ToDateTime(txtTime.Text) && Convert.ToDateTime(getEndTime(e, serviceAccess.getServiceById(e.ServiceID), Convert.ToDateTime(e.StartTime), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null))) <= Convert.ToDateTime(txtEndtime.Text) && e.Date == txtDate.Text;
             });
             if (tempOrders.Count > 0) return false;
-            else return true;
+            return true;
         }
         #endregion
 
@@ -649,16 +643,17 @@ namespace SSD_CW_20_21.gui
                     return;
                 }
 
+                if (DateSystem.IsPublicHoliday(dtpRoomView.Value, CountryCode.GB))
+                {
+                    MessageBox.Show("You cannot make a booking for a public holiday as we are not open", "Not Open", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 DateTime end = DateTime.Today.AddDays(7 * 3);
-                int ordersBeforeEnd = orders.FindAll(odr => Convert.ToDateTime(odr.Date) >= end).Count;
+                int ordersBeforeEnd = orders.FindAll(odr => Convert.ToDateTime(odr.Date) <= end).Count;
                 // allow for override "3 weeks in advance" if there are less than 21 bookings within next 3 weeks (allows for 1 booking per day for 3 weeks)
                 if (dtpRoomView.Value < end && ordersBeforeEnd >= 21)
                 {
-                    if (dtpRoomView.Value <= DateTime.Today)
-                    {
-                        MessageBox.Show("You cannot add a booking for today or any day before", "Cannot add booking", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
                     MessageBox.Show("You can only create a booking 3 weeks in advance", "Cannot make booking", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -666,6 +661,12 @@ namespace SSD_CW_20_21.gui
             }
             else
             {
+                if (orderAccess.getAllOrders().Find(o => o.DogId == order.DogId && o.Date == txtDate.Text) != null)
+                {
+                    MessageBox.Show("This dog is already booked in for that day", "Cannot add booking", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 if (txtTime.Text == string.Empty)
                 {
                     MessageBox.Show("Select the start time for the booking", "Select Start Time", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -692,12 +693,18 @@ namespace SSD_CW_20_21.gui
                     return;
                 }
 
-                DialogResult opt = MessageBox.Show("Are you sure these details are correct?", "Add Order?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                Dog dog = dogAccess.getDogById(Convert.ToInt32(cboxDog.Text.Replace(" ", "").Split('-')[0]));
+                Staff staff = staffAccess.getStaffById(staffAccess.getStaffByName(txtStaff.Text.Replace(" ", "").Split('-')[0]).Id);
+                string ears = checkEars.Checked ? "Yes" : "No";
+                string nails = checkNails.Checked ? "Yes" : "No";
+                string teeth = checkTeeth.Checked ? "Yes" : "No";
+
+                DialogResult opt = MessageBox.Show($"Are you sure these details are correct?\nDog: {dog.Name}\nDate: {txtDate.Text}\nStartTime: {txtTime.Text}\nStaff: {staff.Name}\nService: {serv.Description}\nEars: {ears}\nNails: {nails}\nTeeth: {teeth}", "Add Order?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (opt == DialogResult.Yes)
                 {
                     order.Id = orderAccess.getAllOrders().Count + 1;
-                    order.DogId = Convert.ToInt32(cboxDog.Text.Replace(" ", "").Split('-')[0]);
-                    order.StaffId = staffAccess.getStaffByName(txtStaff.Text.Replace(" ", "").Split('-')[0]).Id;
+                    order.DogId = dog.Id;
+                    order.StaffId = staff.Id;
                     order.Cancelled = 0;
                     order.Paid = cboxPaid.Checked ? 1 : 0;
                     order.Date = txtDate.Text;
@@ -734,33 +741,27 @@ namespace SSD_CW_20_21.gui
         {
             checkValidEndTime(checkNails);
             order.Nails = checkNails.Checked ? 1 : 0;
-            List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-            Orders firstOrder = order;
-            if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-            txtEndtime.Text = order.StartTime != null ? CleanTime(getEndTime(order, serv, Convert.ToDateTime(order.StartTime), order == firstOrder || firstOrder == null).ToShortTimeString()) : "";
-            txtCost.Text = $"£{Globals.calcCost(order, serv, order == firstOrder || firstOrder == null).ToString()}";
+            Orders firstOrder = getFirstOrder(order);
+            txtEndtime.Text = order.StartTime != null ? CleanTime(getEndTime(order, serv, Convert.ToDateTime(order.StartTime), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToShortTimeString()) : "";
+            txtCost.Text = $"£{Globals.calcCost(order, serv, (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToString()}";
         }
 
         private void checkTeeth_CheckedChanged(object sender, EventArgs e)
         {
             checkValidEndTime(checkTeeth);
             order.Teeth = checkTeeth.Checked ? 1 : 0;
-            List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-            Orders firstOrder = order;
-            if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-            txtEndtime.Text = order.StartTime != null ? CleanTime(getEndTime(order, serv, Convert.ToDateTime(order.StartTime), order == firstOrder || firstOrder == null).ToShortTimeString()) : "";
-            txtCost.Text = $"£{Globals.calcCost(order, serv, order == firstOrder || firstOrder == null).ToString()}";
+            Orders firstOrder = getFirstOrder(order);
+            txtEndtime.Text = order.StartTime != null ? CleanTime(getEndTime(order, serv, Convert.ToDateTime(order.StartTime), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToShortTimeString()) : "";
+            txtCost.Text = $"£{Globals.calcCost(order, serv, (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToString()}";
         }
 
         private void checkEars_CheckedChanged(object sender, EventArgs e)
         {
             checkValidEndTime(checkEars);
             order.Ears = checkEars.Checked ? 1 : 0;
-            List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-            Orders firstOrder = order;
-            if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-            txtEndtime.Text = order.StartTime != null ? CleanTime(getEndTime(order, serv, Convert.ToDateTime(order.StartTime), order == firstOrder || firstOrder == null).ToShortTimeString()) : "";
-            txtCost.Text = $"£{Globals.calcCost(order, serv, order == firstOrder || firstOrder == null).ToString()}";
+            Orders firstOrder = getFirstOrder(order);
+            txtEndtime.Text = order.StartTime != null ? CleanTime(getEndTime(order, serv, Convert.ToDateTime(order.StartTime), (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToShortTimeString()) : "";
+            txtCost.Text = $"£{Globals.calcCost(order, serv, (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToString()}";
         }
 
         private void btnUpdate_Click(object sender, EventArgs ev)
@@ -835,7 +836,10 @@ namespace SSD_CW_20_21.gui
             {
                 order.Cancelled = 1;
                 if (orderAccess.updateOrder(order))
+                {
+                    changeMode("view");
                     MessageBox.Show("This booking has been cancelled. It will now be refunded the amount that has already been paid for", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -883,11 +887,9 @@ namespace SSD_CW_20_21.gui
                 string content = CleanTime(Convert.ToString(dgvSelect.Rows[e.RowIndex].Cells[0].Value));
                 string[] times = content.Split(':');
                 string[] dates = dtpRoomView.Value.ToShortDateString().Split('/');
-                List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-                Orders firstOrder = order;
-                if (firstOrders.Count > 0) firstOrder = firstOrders[0];
+                Orders firstOrder = getFirstOrder(order);
                 DateTime start = new DateTime(int.Parse(dates[2]), int.Parse(dates[1]), int.Parse(dates[0]), int.Parse(times[0]), int.Parse(times[1]), 0);
-                DateTime end = getEndTime(order, serv, start, order == firstOrder || firstOrder == null);
+                DateTime end = getEndTime(order, serv, start, (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null));
                 txtTime.Text = CleanTime(start.ToShortTimeString());
                 txtEndtime.Text = CleanTime(end.ToShortTimeString());
 
@@ -917,8 +919,7 @@ namespace SSD_CW_20_21.gui
             }
             if (e.Button == MouseButtons.Left)
             {
-                dgvCellMouseClick(dgvRoomOne, e);
-                dgvCellMouseClick(dgvRoomOne, e);
+                if (dgvCellMouseClick(dgvRoomOne, e)) dgvCellMouseClick(dgvRoomOne, e);
             }
         }
 
@@ -930,8 +931,7 @@ namespace SSD_CW_20_21.gui
             }
             if (e.Button == MouseButtons.Left)
             {
-                dgvCellMouseClick(dgvRoomTwo, e);
-                dgvCellMouseClick(dgvRoomTwo, e);
+                if (dgvCellMouseClick(dgvRoomTwo, e)) dgvCellMouseClick(dgvRoomTwo, e);
             }
         }
 
@@ -943,18 +943,15 @@ namespace SSD_CW_20_21.gui
             }
             if (e.Button == MouseButtons.Left)
             {
-                dgvCellMouseClick(dgvRoomThree, e);
-                dgvCellMouseClick(dgvRoomThree, e);
+                if (dgvCellMouseClick(dgvRoomThree, e)) dgvCellMouseClick(dgvRoomThree, e);
             }
         }
 
         private void cboxServices_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (checkValidEndTime(cboxServices)) serv = serviceAccess.getServiceById(getIdFromString(cboxServices.Text));
-            List<Orders> firstOrders = orderAccess.getAllOrders().FindAll(o => dogAccess.getDogById(o.DogId).OwnerId == dogAccess.getDogById(order.DogId).OwnerId);
-            Orders firstOrder = order;
-            if (firstOrders.Count > 0) firstOrder = firstOrders[0];
-            txtCost.Text = $"£{Globals.calcCost(order, serv, order == firstOrder || firstOrder == null).ToString()}";
+            Orders firstOrder = getFirstOrder(order);
+            txtCost.Text = $"£{Globals.calcCost(order, serv, (mode != "add" && order.Id == firstOrder.Id) || (mode == "add" && firstOrder == null)).ToString()}";
             order.ServiceID = serv.ServiceID;
         }
 
@@ -966,7 +963,13 @@ namespace SSD_CW_20_21.gui
 
         private void cboxDog_SelectedIndexChanged(object sender, EventArgs e)
         {
-            order.DogId = getIdFromString(cboxDog.Text);
+            int dogID = getIdFromString(cboxDog.Text);
+            order.DogId = dogID;
+            if (orderAccess.getAllOrders().Find(o => o.DogId == dogID && o.Date == txtDate.Text) != null && mode == "add")
+            {
+                MessageBox.Show("This dog is already booked in for that day", "Cannot add booking", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
         }
 
         private void dgvRoomOne_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)

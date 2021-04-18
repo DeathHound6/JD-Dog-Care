@@ -32,7 +32,7 @@ namespace SSD_CW_20_21.gui
             populateListBox();
             cboxSearch.SelectedIndex = 0;
             dtpDOB.MaxDate = DateTime.Today.AddDays(7 * -8);
-            dtpDOB.MinDate = Convert.ToDateTime("01/01/1753 00:00:00");
+            dtpDOB.MinDate = Convert.ToDateTime("01/01/1990 00:00:00");
 
             changeMode("view");
         }
@@ -342,6 +342,7 @@ namespace SSD_CW_20_21.gui
                 btnCancel.Text = "Cancel New Dog";
                 btnDelete.Text = "";
                 btnUpdate.Text = "";
+                dtpDOB.Value = dtpDOB.MaxDate;
 
                 mode = newMode;
             }
